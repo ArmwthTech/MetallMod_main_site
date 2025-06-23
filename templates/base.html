@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="{{ lang }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title or 'МеталлМод' }}</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- Подключение шрифтов -->
+    <link href="https://fonts.googleapis.com/css?family=Arial:400,700&display=swap" rel="stylesheet">
+    <link href="https://fonts-online.ru/fonts/baron-neue" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="/static/css/style.css"> -->
+    <link rel="icon" type="image/png" href="/static/logo-favicon.png">
+    <style>
+      html {
+        scroll-padding-top: 100px; /* Отступ для 'прилипающей' шапки */
+      }
+      .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.8s cubic-bezier(.4,0,.2,1), transform 0.8s cubic-bezier(.4,0,.2,1); }
+      .fade-in.visible { opacity: 1; transform: none; }
+      .slide-up { opacity: 0; transform: translateY(60px) scale(0.98); transition: opacity 0.8s, transform 0.8s; }
+      .slide-up.visible { opacity: 1; transform: none; }
+      .scale-in { opacity: 0; transform: scale(0.92); transition: opacity 0.8s, transform 0.8s; }
+      .scale-in.visible { opacity: 1; transform: scale(1); }
+    </style>
+</head>
+<body class="bg-[#F5F5F5] text-[#123392] font-sans">
+    <!-- Toast notifications -->
+    <div id="toast-container" class="fixed top-6 right-6 z-[100] flex flex-col gap-3 items-end"></div>
+    <header class="bg-white shadow-lg sticky top-0 z-50 py-6 px-4">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-4 cursor-pointer" id="logo-scroll-top">
+                <img src="/static/logo.jpg" alt="Логотип" class="h-12 w-12 object-contain rounded-full" style="min-width:48px;">
+                <span class="text-3xl font-extrabold tracking-tight" style="font-family: 'Baron Neue', Arial, sans-serif; text-shadow: 0 0 2px #fff, 0 0 6px #fff;">
+                    <span class="text-[#123392]">Металл</span><span class="text-[#ff590d]">Мод</span>
+                </span>
+            </div>
+            <nav class="flex flex-wrap gap-6 text-lg font-medium items-center justify-start ml-8" id="main-nav">
+                <a href="#services" class="hover:text-[#ff590d] transition-colors">Услуги</a>
+                <a href="#portfolio" class="hover:text-[#ff590d] transition-colors">Портфолио</a>
+                <a href="#steps" class="hover:text-[#ff590d] transition-colors">Этапы</a>
+                <a href="#reviews" class="hover:text-[#ff590d] transition-colors">Отзывы</a>
+                <a href="#contacts" class="hover:text-[#ff590d] transition-colors">Контакты</a>
+            </nav>
+            <div class="flex flex-col md:flex-row items-center justify-center md:justify-end gap-x-4 gap-y-2 mt-2 md:mt-0 flex-1">
+                <!-- Телефон и часы -->
+                <div class="text-center md:text-right">
+                    <a href="tel:+79995274210" class="text-base font-bold hover:text-[#ff590d] transition-colors flex items-center justify-center md:justify-end gap-1.5">
+                        <i class="fa fa-phone text-base"></i>+7 (999) 527-42-10
+                    </a>
+                    <div class="text-xs text-gray-500 mt-0.5">Пн–Пт 9:00–18:00</div>
+                </div>
+            
+                <!-- Кнопки -->
+                <div class="flex gap-2">
+                    <button id="header-km-modal-btn" class="flex-1 bg-[#ff590d] hover:bg-orange-600 text-white px-3 py-1.5 rounded-xl font-semibold shadow-md transition whitespace-nowrap text-xs md:text-sm flex items-center justify-center">Оставить заявку</button>
+                    <a href="https://t.me/metallmod_bot" target="_blank" class="flex-1 bg-[#123392] hover:bg-blue-900 text-white px-3 py-1.5 rounded-xl font-semibold shadow-md flex items-center justify-center gap-1.5 transition text-xs md:text-sm">
+                        <i class="fab fa-telegram-plane text-base"></i> Telegram
+                    </a>
+                </div>
+                <!-- Язык -->
+                <div class="flex items-center gap-1 text-sm font-semibold">
+                    <a href="?lang=ru" class="hover:text-[#ff590d] transition-colors {{ 'font-bold underline' if lang == 'ru' else '' }}">RU</a>
+                    <span class="opacity-50">|</span>
+                    <a href="?lang=en" class="hover:text-[#ff590d] transition-colors {{ 'font-bold underline' if lang == 'en' else '' }}">EN</a>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main class="min-h-[70vh]">
+        {% block content %}{% endblock %}
+    </main>
+    {% block footer %}
+    <footer class="bg-[#123392] text-white py-10 px-4 mt-16">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start gap-8">
+            <div class="flex flex-col gap-3 mb-6 md:mb-0">
+                <div class="flex items-center gap-3">
+                    <img src="/static/logo.jpg" alt="Логотип" class="h-10 w-10 object-contain rounded-full" style="min-width:40px;">
+                    <span class="text-2xl font-extrabold tracking-tight" style="font-family: 'Baron Neue', Arial, sans-serif; text-shadow: 0 0 2px #fff, 0 0 6px #fff;">
+                        <span class="text-[#123392]">Металл</span><span class="text-[#ff590d]">Мод</span>
+                    </span>
+                </div>
+                <span class="text-sm opacity-80">Профессиональная разработка чертежей КМД для металлоконструкций любой сложности</span>
+            </div>
+            <div class="flex flex-col gap-2 text-lg font-medium" id="footer-nav">
+                <a href="/#services" class="footer-anchor hover:text-[#ff590d] transition-colors">Услуги</a>
+                <a href="/#portfolio" class="footer-anchor hover:text-[#ff590d] transition-colors">Портфолио</a>
+                <a href="/#steps" class="footer-anchor hover:text-[#ff590d] transition-colors">Этапы</a>
+                <a href="/#reviews" class="footer-anchor hover:text-[#ff590d] transition-colors">Отзывы</a>
+                <a href="/#contacts" class="footer-anchor hover:text-[#ff590d] transition-colors">Контакты</a>
+            </div>
+            <div class="flex flex-col gap-2 text-lg">
+                <div class="flex items-center gap-2"><i class="fa fa-map-marker-alt"></i> Свердловская область,<br>г. Екатеринбург, Первомайская 56</div>
+                <div class="flex items-center gap-2"><i class="fa fa-phone"></i> <a href="tel:+79995274210" target="_blank" class="hover:text-[#ff590d] transition-colors"> +7 (999) 527-42-10</a></div>
+                <div class="flex items-center gap-2"><i class="fa fa-envelope"></i> <a href="mailto:info@metallmod.ru" target="_blank" class="hover:text-[#ff590d] transition-colors"> info@metallmod.ru</a></div>
+                <div class="flex items-center gap-2"><i class="fab fa-telegram-plane"></i> <a href="https://t.me/metallmod_bot" target="_blank" class="hover:text-[#ff590d] transition-colors">Telegram</a></div>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto mt-8 border-t border-white/20 pt-6 text-center text-sm opacity-70" id="footer-year">
+            &copy; <span id="year"></span> МеталлМод. Все права защищены.<br>
+            <a href="/consent" target="_blank" class="underline hover:text-[#ff590d] mx-2">Согласие на обработку персональных данных</a> |
+            <a href="/policy" target="_blank" class="underline hover:text-[#ff590d] mx-2">Политика в отношении обработки персональных данных</a>
+        </div>
+    </footer>
+    {% endblock %}
+    <script>
+    // Toast notifications
+    function showToast(message, type = 'success', timeout = 3500) {
+        const container = document.getElementById('toast-container');
+        const toast = document.createElement('div');
+        toast.className = `flex items-center gap-3 px-6 py-4 rounded-2xl shadow-xl text-lg font-semibold animate-toast-in ${type === 'success' ? 'bg-green-500 text-white' : 'bg-red-500 text-white'}`;
+        toast.innerHTML = type === 'success'
+            ? `<i class='fa fa-check-circle text-2xl'></i> <span>${message}</span>`
+            : `<i class='fa fa-times-circle text-2xl'></i> <span>${message}</span>`;
+        container.appendChild(toast);
+        setTimeout(() => {
+            toast.classList.add('opacity-0');
+            setTimeout(() => toast.remove(), 400);
+        }, timeout);
+    }
+    // Анимация появления toast
+    const style = document.createElement('style');
+    style.innerHTML = `@keyframes toast-in { from { opacity: 0; transform: translateY(-20px);} to { opacity: 1; transform: none;} } .animate-toast-in { animation: toast-in 0.4s cubic-bezier(.4,0,.2,1); }`;
+    document.head.appendChild(style);
+    // Scroll reveal для всех .reveal
+    document.addEventListener('DOMContentLoaded', function() {
+      const revealEls = document.querySelectorAll('.reveal');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15 });
+      revealEls.forEach(el => observer.observe(el));
+    });
+    // Плавный scroll по якорям и к верху по клику на логотип (добавляю футер)
+    (function(){
+        // Логотип — скролл вверх
+        var logo = document.getElementById('logo-scroll-top');
+        if (logo) {
+            logo.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.scrollTo({top: 0, behavior: 'smooth'});
+            });
+        }
+        // Навигация — плавный scroll
+        var nav = document.getElementById('main-nav');
+        if (nav) {
+            nav.querySelectorAll('a[href^="#"]').forEach(function(link) {
+                link.addEventListener('click', function(e) {
+                    var targetId = this.getAttribute('href').slice(1);
+                    var target = document.getElementById(targetId);
+                    if (target) {
+                        e.preventDefault();
+                        target.scrollIntoView({behavior: 'smooth'});
+                    }
+                });
+            });
+        }
+        // Футер — плавный scroll
+        var footerNav = document.getElementById('footer-nav');
+        if (footerNav) {
+            footerNav.querySelectorAll('a.footer-anchor').forEach(function(link) {
+                link.addEventListener('click', function(e) {
+                    var href = this.getAttribute('href');
+                    if (window.location.pathname !== '/' && href.startsWith('/#')) {
+                        // Не главная — переход на главную с якорем
+                        window.location.href = href;
+                        return;
+                    }
+                    if (window.location.pathname === '/' && href.startsWith('/#')) {
+                        var targetId = href.slice(2);
+                        var target = document.getElementById(targetId);
+                        if (target) {
+                            e.preventDefault();
+                            target.scrollIntoView({behavior: 'smooth'});
+                        }
+                    }
+                });
+            });
+        }
+    })();
+    // Динамический год в футере
+    (function(){
+        var yearSpan = document.getElementById('year');
+        if (yearSpan) {
+            yearSpan.textContent = new Date().getFullYear();
+        }
+    })();
+    // Открытие модального окна по кнопке в хедере
+    document.addEventListener('DOMContentLoaded', function() {
+      var headerBtn = document.getElementById('header-km-modal-btn');
+      var modal = document.getElementById('km-modal');
+      if (headerBtn && modal) {
+        headerBtn.onclick = function() { modal.classList.remove('hidden'); };
+      }
+    });
+    </script>
+</body>
+</html> 

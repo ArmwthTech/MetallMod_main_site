@@ -1,0 +1,612 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="hero bg-white py-20 mb-16 shadow-none rounded-b-3xl flex flex-col items-center justify-center text-center relative overflow-hidden">
+    <h1 class="text-5xl md:text-7xl font-extrabold mb-8 text-[#123392] leading-tight z-10">{{ _('Профессиональные чертежи КМД за 5 дней')|safe }}</h1>
+    <div class="z-10 px-4 md:px-8">
+      <p class="text-2xl md:text-3xl text-gray-700 mb-6 text-left">{{ _('Разрабатываем точные чертежи металлоконструкций любой сложности для строительных компаний и инженерных проектов') }}</p>
+      <div class="flex flex-col md:flex-row gap-6 z-10 mb-10">
+        <div class="flex-1 bg-black/60 rounded-2xl p-8 flex items-center gap-4 shadow-xl min-w-[220px]">
+          <span class="inline-block w-3 h-3 bg-[#ff590d] rounded-sm"></span>
+          <span class="text-2xl font-extrabold text-white">ОТ 700 Р/ТОННА</span>
+        </div>
+        <div class="flex-1 bg-black/60 rounded-2xl p-8 flex items-center gap-4 shadow-xl min-w-[220px]">
+          <span class="inline-block w-3 h-3 bg-[#ff590d] rounded-sm"></span>
+          <span class="text-2xl font-extrabold text-white">ОТ 5 РАБОЧИХ ДНЕЙ</span>
+        </div>
+        <div class="flex-1 bg-black/60 rounded-2xl p-8 flex items-center gap-4 shadow-xl min-w-[220px]">
+          <span class="inline-block w-3 h-3 bg-[#ff590d] rounded-sm"></span>
+          <span class="text-2xl font-extrabold text-white">РАСЧЕТ ЗА 1 ДЕНЬ</span>
+        </div>
+      </div>
+    </div>
+    <div class="flex flex-col sm:flex-row gap-6 justify-center mb-4 z-10">
+        <button id="open-km-modal" class="bg-[#ff590d] hover:bg-orange-600 transition px-12 py-5 rounded-2xl text-2xl font-bold shadow-xl focus:outline-none focus:ring-4 focus:ring-[#ff590d]/30 text-white">Отправить КМ на расчет</button>
+        <a href="#" class="bg-[#123392] hover:bg-blue-900 transition px-12 py-5 rounded-2xl text-2xl font-bold text-white flex items-center gap-3 shadow-xl border border-[#123392] focus:outline-none focus:ring-4 focus:ring-[#123392]/20"><i class="fab fa-telegram-plane text-3xl"></i>{{ _('Написать в Telegram') }}</a>
+    </div>
+    <!-- Картинка-подложка -->
+    <img src="/static/uploads/portfolio_img/1624569746_razrabotka-variantov-mostovogo-sooruzheniya.jpg" alt="КМД чертеж" class="absolute inset-0 w-full h-full object-cover opacity-20 pointer-events-none select-none z-0" style="max-height: 100%;">
+</section>
+
+<section class="advantages mb-20">
+  <h2 class="text-4xl font-extrabold mb-12 text-center text-[#123392]">Почему нас выбирают?</h2>
+  <div class="flex flex-nowrap gap-10 overflow-x-auto justify-center">
+    <!-- Карточка 1 -->
+    <div class="bg-white rounded-3xl shadow-xl w-72 min-h-[260px] grid grid-rows-[80px_64px_48px] px-8 py-10 border-t-4 border-[#ff590d]">
+      <div class="flex items-center justify-center">
+        <i class="fa fa-check-circle text-5xl text-[#123392]"></i>
+      </div>
+      <div class="flex items-center justify-center h-16">
+        <span class="text-3xl font-bold text-[#123392] text-center">100+</span>
+      </div>
+      <div class="flex items-start justify-center">
+        <span class="text-lg text-gray-500 text-center">Более 100 реализованных проектов</span>
+      </div>
+    </div>
+    <!-- Карточка 2 -->
+    <div class="bg-white rounded-3xl shadow-xl w-72 min-h-[260px] grid grid-rows-[80px_64px_48px] px-8 py-10 border-t-4 border-[#ff590d]">
+      <div class="flex items-center justify-center">
+        <i class="fa fa-clock text-5xl text-[#123392]"></i>
+      </div>
+      <div class="flex items-center justify-center h-16">
+        <span class="text-3xl font-bold text-[#123392] text-center">от 5 дней</span>
+      </div>
+      <div class="flex items-start justify-center">
+        <span class="text-lg text-gray-500 text-center">на разработку</span>
+      </div>
+    </div>
+    <!-- Карточка 3 -->
+    <div class="bg-white rounded-3xl shadow-xl w-72 min-h-[260px] grid grid-rows-[80px_64px_48px] px-8 py-10 border-t-4 border-[#ff590d]">
+      <div class="flex items-center justify-center">
+        <i class="fa fa-shield-alt text-5xl text-[#123392]"></i>
+      </div>
+      <div class="flex items-center justify-center h-16">
+        <span class="text-xl font-bold text-[#123392] text-center leading-tight">Гарантия качества<br>и соблюдение сроков</span>
+      </div>
+      <div class="flex items-start justify-center">
+        <span class="text-base text-gray-500 text-center">указанных в договоре</span>
+      </div>
+    </div>
+    <!-- Карточка 4 -->
+    <div class="bg-white rounded-3xl shadow-xl w-72 min-h-[260px] grid grid-rows-[80px_64px_48px] px-8 py-10 border-t-4 border-[#ff590d]">
+      <div class="flex items-center justify-center">
+        <i class="fa fa-users text-5xl text-[#123392]"></i>
+      </div>
+      <div class="flex items-center justify-center h-16">
+        <span class="text-3xl font-bold text-[#123392] text-center">&gt; 90% клиентов</span>
+      </div>
+      <div class="flex items-start justify-center">
+        <span class="text-lg text-gray-500 text-center">обращаются повторно</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="services" class="mb-20 px-4 md:px-8">
+    <h2 class="text-4xl font-extrabold mb-12 text-center text-[#123392]">{{ _('Наши услуги') }}</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 justify-center">
+        <div class="bg-white rounded-3xl shadow-xl p-8 flex flex-col items-center border-t-4 border-[#123392] text-center">
+            <i class="fa fa-drafting-compass text-4xl text-[#ff590d] mb-4"></i>
+            <div class="text-2xl font-bold mb-2">{{ _('Разработка КМД') }}</div>
+            <div class="text-gray-600 text-lg">{{ _('Полный комплект чертежей конструкций металлических деталей по вашим проектам и спецификациям') }}</div>
+        </div>
+        <div class="bg-white rounded-3xl shadow-xl p-8 flex flex-col items-center border-t-4 border-[#123392] text-center">
+            <i class="fa fa-tools text-4xl text-[#ff590d] mb-4"></i>
+            <div class="text-2xl font-bold mb-2">{{ _('Адаптация проектов') }}</div>
+            <div class="text-gray-600 text-lg">{{ _('Доработка и адаптация существующих проектов под новые требования и стандарты') }}</div>
+        </div>
+        <div class="bg-white rounded-3xl shadow-xl p-8 flex flex-col items-center border-t-4 border-[#123392] text-center">
+            <i class="fa fa-cubes text-4xl text-[#ff590d] mb-4"></i>
+            <div class="text-2xl font-bold mb-2">{{ _('BIM-моделирование') }}</div>
+            <div class="text-gray-600 text-lg">{{ _('Создание информационных 3D-моделей металлоконструкций с полной детализацией') }}</div>
+        </div>
+        <div class="bg-white rounded-3xl shadow-xl p-8 flex flex-col items-center border-t-4 border-[#123392] text-center">
+            <i class="fa fa-clipboard-check text-4xl text-[#ff590d] mb-4"></i>
+            <div class="text-2xl font-bold mb-2">{{ _('Проверка по ГОСТ') }}</div>
+            <div class="text-gray-600 text-lg">{{ _('Экспертиза и корректировка проектов на соответствие актуальным нормативам и стандартам') }}</div>
+        </div>
+    </div>
+</section>
+
+<!-- Блок с текстами -->
+<section class="mb-10">
+    <div class="max-w-2xl mx-auto text-center">
+        <h2 class="text-3xl md:text-4xl font-extrabold mb-4 text-[#123392]">Подготовим расчет стоимости и сроков за 1 рабочий день</h2>
+        <div class="text-xl md:text-2xl text-gray-700 mb-2">Позвоните для консультации</div>
+        <div class="text-lg text-gray-500 mb-2">*Работаем по будням с 9 до 18*</div>
+        <div class="text-xl font-bold text-[#ff590d] mb-2">Оставьте заявку, и менеджер свяжется с вами в течение 30 минут</div>
+        <div class="text-2xl font-extrabold text-[#123392]">+7 4922 22-19-12</div>
+    </div>
+</section>
+
+<section class="flex flex-col lg:flex-row gap-10 justify-center items-start mb-20">
+    <div class="mini-calc max-w-md w-full bg-white rounded-3xl shadow-2xl p-10 border-t-4 border-[#123392] mb-10 lg:mb-0">
+        <h2 class="text-2xl font-bold mb-8 text-center flex items-center gap-3 text-[#123392]"><i class="fa fa-balance-scale"></i> {{ _('Мини-калькулятор') }}</h2>
+        <form id="miniCalcForm" class="flex flex-col gap-6" action="#">
+            <div class="flex items-center gap-3 bg-gray-100 rounded-xl px-4 py-4">
+                <i class="fa fa-weight-hanging"></i>
+                <input type="number" name="tons" min="1" step="1" placeholder="{{ _('Тоннаж, т') }}" required class="bg-transparent outline-none flex-1 text-lg">
+            </div>
+            <div class="flex items-center gap-3 bg-gray-100 rounded-xl px-4 py-4">
+                <i class="fa fa-layer-group"></i>
+                <select name="difficulty" required class="bg-transparent outline-none flex-1 text-lg">
+                    <option value="1.8">{{ _('Обычная сложность') }}</option>
+                    <option value="2">{{ _('Средняя сложность') }}</option>
+                    <option value="2.3">{{ _('Высокая сложность') }}</option>
+                </select>
+            </div>
+            <button type="submit" class="bg-[#ff590d] hover:bg-orange-600 transition px-10 py-4 rounded-2xl text-xl font-bold text-white shadow-lg flex items-center gap-2 justify-center focus:outline-none focus:ring-4 focus:ring-[#ff590d]/30"><i class="fa fa-equals"></i> {{ _('Рассчитать') }}</button>
+        </form>
+        <div id="miniCalcResult" class="mt-6 text-center">
+            <!-- Здесь будет результат -->
+        </div>
+    </div>
+    <div class="calc-form max-w-md w-full bg-white rounded-3xl shadow-2xl p-10 border-t-4 border-[#ff590d]">
+        <h2 class="text-2xl font-bold mb-8 text-center flex items-center gap-3 text-[#123392]"><i class="fa fa-clipboard-list text-[#ff590d]"></i> {{ _('Оставить заявку') }}</h2>
+        <form id="calcForm" method="post" enctype="multipart/form-data" action="#" class="flex flex-col gap-6">
+            <div class="flex items-center gap-3 bg-gray-100 rounded-xl px-4 py-4">
+                <i class="fa fa-user"></i>
+                <input type="text" name="name" placeholder="{{ _('Имя') }}" required class="bg-transparent outline-none flex-1 text-lg">
+            </div>
+            <div class="flex items-center gap-3 bg-gray-100 rounded-xl px-4 py-4">
+                <i class="fa fa-phone"></i>
+                <input type="tel" name="phone" placeholder="{{ _('Телефон') }}" pattern="^\+?\d{10,15}$" required class="bg-transparent outline-none flex-1 text-lg">
+            </div>
+            <div class="flex items-center gap-3 bg-gray-100 rounded-xl px-4 py-4">
+                <i class="fa fa-envelope"></i>
+                <input type="email" name="email" placeholder="{{ _('Почта') }}" required class="bg-transparent outline-none flex-1 text-lg">
+            </div>
+            <div class="flex items-center gap-3 bg-gray-100 rounded-xl px-4 py-4">
+                <i class="fa fa-link"></i>
+                <input type="url" name="km_link" placeholder="{{ _('Укажите ссылку на разработанный КМ') }}" class="bg-transparent outline-none flex-1 text-lg">
+            </div>
+            <div class="flex items-center gap-3">
+                <input type="checkbox" name="consent" required class="accent-[#ff590d] w-5 h-5">
+                <label class="text-sm text-gray-700">Даю <a href="/consent" target="_blank" class="underline text-[#ff590d]">Согласие на обработку персональных данных</a> и принимаю <a href="/policy" target="_blank" class="underline text-[#ff590d]">Политику в отношении обработки персональных данных</a></label>
+            </div>
+            <button type="submit" class="bg-[#ff590d] hover:bg-orange-600 transition px-10 py-4 rounded-2xl text-xl font-bold text-white shadow-lg flex items-center gap-2 justify-center focus:outline-none focus:ring-4 focus:ring-[#ff590d]/30"><i class="fa fa-paper-plane"></i> {{ _('Оставить заявку') }}</button>
+        </form>
+    </div>
+</section>
+
+<!-- В состав чертежей входит -->
+<section class="mb-20">
+    <h2 class="text-4xl font-extrabold mb-10 text-center text-[#123392]">В состав чертежей входит</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-5xl mx-auto">
+        <div class="bg-white rounded-2xl shadow-xl p-8 flex flex-col items-center border-t-4 border-[#ff590d]">
+            <i class="fa fa-file-alt text-4xl text-[#123392] mb-4"></i>
+            <div class="text-xl font-bold mb-2">Общие данные</div>
+            <div class="text-gray-600 text-center">Пояснительная записка, спецификации, ведомости</div>
+        </div>
+        <div class="bg-white rounded-2xl shadow-xl p-8 flex flex-col items-center border-t-4 border-[#ff590d]">
+            <i class="fa fa-project-diagram text-4xl text-[#123392] mb-4"></i>
+            <div class="text-xl font-bold mb-2">Сборочные чертежи</div>
+            <div class="text-gray-600 text-center">Общий вид, схемы расположения элементов, монтажные схемы</div>
+        </div>
+        <div class="bg-white rounded-2xl shadow-xl p-8 flex flex-col items-center border-t-4 border-[#ff590d]">
+            <i class="fa fa-cogs text-4xl text-[#123392] mb-4"></i>
+            <div class="text-xl font-bold mb-2">Деталировка</div>
+            <div class="text-gray-600 text-center">Чертежи деталей, спецификации металла, ведомости расхода</div>
+        </div>
+        <div class="bg-white rounded-2xl shadow-xl p-8 flex flex-col items-center border-t-4 border-[#ff590d]">
+            <i class="fa fa-list-alt text-4xl text-[#123392] mb-4"></i>
+            <div class="text-xl font-bold mb-2">Ведомости и спецификации</div>
+            <div class="text-gray-600 text-center">Ведомости деталей, метизов, спецификации изделий и материалов</div>
+        </div>
+    </div>
+</section>
+
+<!-- СТОИМОСТЬ -->
+<section class="mb-20">
+    <h2 class="text-4xl font-extrabold mb-10 text-center text-[#123392]">Стоимость</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
+        <div class="bg-white rounded-2xl shadow-xl p-8 flex flex-col items-center border-t-4 border-[#ff590d]">
+            <div class="w-16 h-16 flex items-center justify-center rounded-full bg-[#ff590d]/10 mb-4 shadow"><i class="fa fa-balance-scale text-3xl text-[#ff590d]"></i></div>
+            <div class="text-3xl font-extrabold text-[#123392] mb-2">от 600 р/тонна</div>
+            <div class="text-gray-600 text-center">Проекты 10–200 тонн</div>
+        </div>
+        <div class="bg-white rounded-2xl shadow-xl p-8 flex flex-col items-center border-t-4 border-[#ff590d]">
+            <div class="w-16 h-16 flex items-center justify-center rounded-full bg-[#123392]/10 mb-4 shadow"><i class="fa fa-stairs text-3xl text-[#123392]"></i></div>
+            <div class="text-3xl font-extrabold text-[#123392] mb-2">от 650 р/тонна</div>
+            <div class="text-gray-600 text-center">Легкие конструкции (лестницы, площадки)</div>
+        </div>
+        <div class="bg-white rounded-2xl shadow-xl p-8 flex flex-col items-center border-t-4 border-[#ff590d]">
+            <div class="w-16 h-16 flex items-center justify-center rounded-full bg-[#ff590d]/10 mb-4 shadow"><i class="fa fa-cogs text-3xl text-[#ff590d]"></i></div>
+            <div class="text-3xl font-extrabold text-[#123392] mb-2">от 700 р/тонна</div>
+            <div class="text-gray-600 text-center">Сложные/нестандартные конструкции</div>
+        </div>
+        <div class="bg-white rounded-2xl shadow-xl p-8 flex flex-col items-center border-t-4 border-[#ff590d]">
+            <div class="w-16 h-16 flex items-center justify-center rounded-full bg-[#123392]/10 mb-4 shadow"><i class="fa fa-warehouse text-3xl text-[#123392]"></i></div>
+            <div class="text-3xl font-extrabold text-[#123392] mb-2">от 250 р/тонна</div>
+            <div class="text-gray-600 text-center">Простые сооружения &gt;200 тонн</div>
+        </div>
+    </div>
+</section>
+
+<!-- Форма выдачи КМД -->
+<section class="mb-20">
+    <h2 class="text-4xl font-extrabold mb-10 text-center text-[#123392]">Форма выдачи КМД</h2>
+    <div class="max-w-6xl mx-auto bg-white rounded-3xl shadow-2xl p-8 border-t-4 border-[#ff590d]">
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 justify-center items-stretch">
+            <div class="flex flex-col items-center text-center gap-4">
+                <div class="w-24 h-24 flex items-center justify-center rounded-full bg-[#123392]/10 mb-2 shadow-lg"><i class="fa fa-file-pdf text-5xl text-[#ff590d]"></i></div>
+                <div class="text-xl font-bold">PDF</div>
+                <div class="text-gray-600 text-base">Для просмотра и печати</div>
+            </div>
+            <div class="flex flex-col items-center text-center gap-4">
+                <div class="w-24 h-24 flex items-center justify-center rounded-full bg-[#123392]/10 mb-2 shadow-lg"><i class="fa fa-file-archive text-5xl text-[#123392]"></i></div>
+                <div class="text-xl font-bold">DWG</div>
+                <div class="text-gray-600 text-base">Для производства (AutoCAD)</div>
+            </div>
+            <div class="flex flex-col items-center text-center gap-4">
+                <div class="w-24 h-24 flex items-center justify-center rounded-full bg-[#ff590d]/10 mb-2 shadow-lg"><i class="fa fa-file-archive text-5xl text-[#ff590d]"></i></div>
+                <div class="text-xl font-bold">DXF</div>
+                <div class="text-gray-600 text-base">Для станков и ЧПУ</div>
+            </div>
+            <div class="flex flex-col items-center text-center gap-4">
+                <div class="w-24 h-24 flex items-center justify-center rounded-full bg-[#123392]/10 mb-2 shadow-lg"><i class="fa fa-file-image text-5xl text-[#123392]"></i></div>
+                <div class="text-xl font-bold">JPG/PNG</div>
+                <div class="text-gray-600 text-base">Для быстрой отправки и просмотра</div>
+            </div>
+            <div class="flex flex-col items-center text-center gap-4">
+                <div class="w-24 h-24 flex items-center justify-center rounded-full bg-[#ff590d]/10 mb-2 shadow-lg"><i class="fa fa-file-excel text-5xl text-[#ff590d]"></i></div>
+                <div class="text-xl font-bold">Excel</div>
+                <div class="text-gray-600 text-base">Спецификации и ведомости</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- НАШИ ВЫПОЛНЕННЫЕ ПРОЕКТЫ -->
+<section id="portfolio" class="mb-24">
+    <h2 class="text-4xl font-extrabold mb-12 text-center text-[#123392]">НАШИ ВЫПОЛНЕННЫЕ ПРОЕКТЫ</h2>
+    <div class="relative">
+        <div id="portfolio-slider-wrapper" class="relative">
+            <div id="portfolio-slider" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-center">
+                {% for item in portfolio_items %}
+                <div class="portfolio-item bg-white rounded-3xl shadow-2xl p-4 flex flex-col items-center border-t-4 border-[#ff590d] hover:scale-105 transition-transform cursor-pointer" data-title="{{ item.title }}" data-description="{{ item.description }}" data-images="{{ item.image_paths|default('[]') }}">
+                    {% set images = item.image_paths|from_json if item.image_paths else [] %}
+                    {% if images %}
+                    <img src="{{ images[0] }}" alt="{{ item.title }}" class="rounded-xl w-full h-48 object-cover mb-4 shadow-md">
+                    {% elif item.image_path %}
+                    <img src="{{ item.image_path }}" alt="{{ item.title }}" class="rounded-xl w-full h-48 object-cover mb-4 shadow-md">
+                    {% endif %}
+                    <div class="portfolio-desc text-xl font-bold text-[#123392] text-center">{{ item.title }}</div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div id="portfolio-dots" class="flex justify-center gap-2 mt-4"></div>
+    </div>
+</section>
+
+<!-- Модальное окно портфолио -->
+<div id="portfolio-modal" class="fixed inset-0 bg-black/60 z-50 flex items-center justify-center hidden">
+    <div class="relative bg-white rounded-3xl shadow-2xl max-w-4xl w-full mx-4 flex flex-col md:flex-row overflow-hidden animate-fade-in">
+        <button id="portfolio-modal-close" class="absolute top-4 right-4 text-3xl text-gray-400 hover:text-[#ff590d] transition-colors focus:outline-none">&times;</button>
+        <div class="flex-1 p-8 flex flex-col justify-center min-w-[250px]">
+            <div id="portfolio-modal-title" class="text-2xl font-extrabold mb-4 text-[#123392]"></div>
+            <div id="portfolio-modal-description" class="text-gray-700 text-lg"></div>
+        </div>
+        <div class="flex-1 bg-gray-50 flex flex-col items-center justify-center p-8 min-w-[300px]">
+            <div class="relative w-full max-w-md">
+                <img id="portfolio-modal-image" src="" alt="" class="rounded-xl w-full h-72 object-contain shadow-md bg-white">
+                <button id="portfolio-modal-prev" class="absolute left-0 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-[#ff590d] text-[#123392] hover:text-white rounded-full w-10 h-10 flex items-center justify-center shadow transition"><i class="fa fa-chevron-left"></i></button>
+                <button id="portfolio-modal-next" class="absolute right-0 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-[#ff590d] text-[#123392] hover:text-white rounded-full w-10 h-10 flex items-center justify-center shadow transition"><i class="fa fa-chevron-right"></i></button>
+            </div>
+            <div id="portfolio-modal-dots" class="flex justify-center gap-2 mt-4"></div>
+        </div>
+    </div>
+</div>
+
+<section id="steps" class="mb-24">
+    <h2 class="text-4xl font-extrabold mb-12 text-center text-[#123392]">{{ _('Как мы работаем') }}</h2>
+    <div class="flex flex-wrap justify-center gap-10">
+        <div class="bg-white rounded-3xl shadow-xl p-8 flex flex-col items-center min-w-[200px] border-t-4 border-[#123392]">
+            <span class="text-4xl font-extrabold text-[#ff590d] mb-2">1</span>
+            <span class="text-xl font-bold mb-2">{{ _('Заявка') }}</span>
+            <span class="text-gray-600 text-center">{{ _('Оставьте заявку через сайт или Telegram-бот с описанием проекта') }}</span>
+        </div>
+        <div class="bg-white rounded-3xl shadow-xl p-8 flex flex-col items-center min-w-[200px] border-t-4 border-[#123392]">
+            <span class="text-4xl font-extrabold text-[#ff590d] mb-2">2</span>
+            <span class="text-xl font-bold mb-2">{{ _('Обсуждение') }}</span>
+            <span class="text-gray-600 text-center">{{ _('Согласовываем технические детали и требования к проекту') }}</span>
+        </div>
+        <div class="bg-white rounded-3xl shadow-xl p-8 flex flex-col items-center min-w-[200px] border-t-4 border-[#123392]">
+            <span class="text-4xl font-extrabold text-[#ff590d] mb-2">3</span>
+            <span class="text-xl font-bold mb-2">{{ _('Оплата') }}</span>
+            <span class="text-gray-600 text-center">{{ _('Заключаем договор и вносите предоплату 50% от стоимости') }}</span>
+        </div>
+        <div class="bg-white rounded-3xl shadow-xl p-8 flex flex-col items-center min-w-[200px] border-t-4 border-[#123392]">
+            <span class="text-4xl font-extrabold text-[#ff590d] mb-2">4</span>
+            <span class="text-xl font-bold mb-2">{{ _('Разработка') }}</span>
+            <span class="text-gray-600 text-center">{{ _('Выполняем проектирование согласно техническому заданию') }}</span>
+        </div>
+        <div class="bg-white rounded-3xl shadow-xl p-8 flex flex-col items-center min-w-[200px] border-t-4 border-[#123392]">
+            <span class="text-4xl font-extrabold text-[#ff590d] mb-2">5</span>
+            <span class="text-xl font-bold mb-2">{{ _('Сдача проекта') }}</span>
+            <span class="text-gray-600 text-center">{{ _('Передаем готовые чертежи и документацию после финальной оплаты') }}</span>
+        </div>
+    </div>
+</section>
+
+<section id="reviews" class="mb-24">
+    <h2 class="text-4xl font-extrabold mb-12 text-center text-[#123392]">{{ _('Отзывы наших клиентов') }}</h2>
+    <div class="relative">
+        <div id="reviews-slider-wrapper" class="relative">
+            <div id="reviews-slider" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-center opacity-100 transition-opacity duration-500">
+                {% for review in reviews %}
+                <div class="review-item bg-white rounded-2xl shadow-xl p-5 flex flex-col items-center border-t-4 border-[#ff590d] hover:scale-105 transition-transform w-96 max-w-md h-64 min-h-64 max-h-64 mx-auto">
+                    {% if review.logo_path %}
+                    <img src="{{ review.logo_path }}" alt="logo" class="review-logo rounded-full w-12 h-12 object-contain mb-3 border-2 border-[#123392] shadow-md">
+                    {% endif %}
+                    <div class="review-text text-base italic mb-2 text-[#123392] text-center">{{ review.text }}</div>
+                    <div class="text-gray-500 flex items-center gap-2 text-sm mt-auto"><i class="fa fa-user-tie"></i> {{ review.client_name }}</div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div id="reviews-dots" class="flex justify-center gap-2 mt-4"></div>
+    </div>
+</section>
+
+<section id="contacts" class="mb-24">
+    <h2 class="text-4xl font-extrabold mb-12 text-center text-[#123392]">{{ _('Контакты') }}</h2>
+    <div class="max-w-3xl mx-auto bg-white rounded-3xl shadow-xl p-10 text-lg border-t-4 border-[#123392] flex flex-col items-start mb-8">
+        <div class="flex flex-col md:flex-row md:items-center md:gap-12 w-full">
+            <div class="flex-1 mb-6 md:mb-0">
+                <div class="flex items-center gap-3 mb-4 text-2xl font-bold text-[#123392]"><i class="fa fa-map-marker-alt text-[#ff590d]"></i> Свердловская область,<br>г. Екатеринбург, Первомайская 56</div>
+                <div class="flex items-center gap-3 mb-2"><i class="fa fa-phone text-[#ff590d]"></i> <a href="tel:+79995274210" class="hover:text-[#ff590d] font-semibold">+7 (999) 527-42-10</a></div>
+                <div class="flex items-center gap-3 mb-2"><i class="fa fa-envelope text-[#ff590d]"></i> <a href="mailto:info@metallmod.ru" class="hover:text-[#ff590d] font-semibold">info@metallmod.ru</a></div>
+                <div class="flex items-center gap-3 mb-2"><i class="fa fa-clock text-[#ff590d]"></i> <span class="font-semibold">Пн-Пт: 9:00 — 18:00</span></div>
+                <div class="text-gray-400 text-sm mt-2">Поддержка: 24/7</div>
+            </div>
+            <div class="flex flex-col gap-4 w-full md:w-auto">
+                <a href="#calcForm" class="bg-[#ff590d] hover:bg-orange-600 transition px-8 py-4 rounded-2xl text-xl font-bold text-white shadow-lg flex items-center gap-2 justify-center"><i class="fa fa-paper-plane"></i> Оставить заявку</a>
+            </div>
+        </div>
+    </div>
+    <div class="w-screen flex justify-center items-center relative left-1/2 right-1/2 -translate-x-1/2" style="left:50%;right:50%;transform:translateX(-50%);">
+        <div id="yandex-map" class="rounded-3xl shadow-md w-full h-[320px] md:h-[480px]"></div>
+    </div>
+</section>
+
+<div id="popup-overlay" style="display:none;" class="fixed inset-0 bg-black/40 z-50 flex items-center justify-center">
+    <div class="relative bg-white rounded-3xl shadow-2xl p-10 max-w-sm w-full mx-4 text-center border-t-4 border-[#ff590d] animate-fade-in">
+        <button id="popup-close" class="absolute top-4 right-4 text-3xl text-gray-400 hover:text-[#ff590d] transition-colors focus:outline-none">&times;</button>
+        <h3 class="text-2xl font-extrabold mb-6 text-[#123392] flex items-center gap-3 justify-center"><i class="fa fa-gift text-[#ff590d] text-3xl"></i> {{ _('Напиши нам о своем проекте и получи 10% скидку на первый заказ!') }}</h3>
+        <form id="popupForm" action="#" class="flex flex-col gap-6">
+            <input type="email" name="email" placeholder="Email" required class="bg-gray-100 rounded-xl px-5 py-4 outline-none text-lg">
+            <button type="submit" class="bg-[#ff590d] hover:bg-orange-600 transition px-8 py-4 rounded-2xl text-xl font-bold text-white shadow-lg flex items-center gap-2 justify-center focus:outline-none focus:ring-4 focus:ring-[#ff590d]/30"><i class="fa fa-percent"></i> {{ _('Получить скидку') }}</button>
+        </form>
+    </div>
+</div>
+
+<!-- Модальное окно для отправки КМ на расчет -->
+<div id="km-modal" class="fixed inset-0 bg-black/90 z-50 flex items-center justify-center hidden">
+  <div class="relative bg-white rounded-3xl shadow-2xl max-w-lg w-full mx-4 p-10 flex flex-col animate-fade-in">
+    <button id="close-km-modal" class="absolute top-4 right-4 text-3xl text-gray-400 hover:text-[#ff590d] transition-colors focus:outline-none">&times;</button>
+    <div class="mb-6 text-center">
+      <div class="text-2xl md:text-3xl font-extrabold leading-tight mb-2">
+        ОТПРАВЬТЕ КМ ИЛИ ИНУЮ<br>
+        <span class="text-[#ff590d]">ТЕХНИЧЕСКУЮ ИНФОРМАЦИЮ</span><br>
+        ПО ПРОЕКТУ
+      </div>
+      <div class="text-base md:text-lg text-gray-700 mt-2">
+        получите расчет вашего проекта<br>в течение <span class="font-bold text-[#ff590d]">24 часов</span>
+      </div>
+    </div>
+    <form class="flex flex-col gap-6">
+      <input type="text" placeholder="Имя" class="border-b border-gray-300 py-2 px-0 focus:outline-none focus:border-[#ff590d] text-lg" />
+      <input type="tel" placeholder="+7 (999) 999-99-99" class="border-b border-gray-300 py-2 px-0 focus:outline-none focus:border-[#ff590d] text-lg" />
+      <input type="email" placeholder="Почта" class="border-b border-gray-300 py-2 px-0 focus:outline-none focus:border-[#ff590d] text-lg" />
+      <input type="url" placeholder="Укажите ссылку на разработанный КМ" class="border-b border-gray-300 py-2 px-0 focus:outline-none focus:border-[#ff590d] text-lg" />
+      <div class="flex items-start gap-2">
+        <input type="checkbox" id="consent" class="accent-[#ff590d] w-5 h-5 mt-1" required />
+        <label for="consent" class="text-sm text-gray-700">Даю <a href="/consent" target="_blank" class="underline text-[#ff590d]">Согласие на обработку персональных данных</a> и принимаю <a href="/policy" target="_blank" class="underline text-[#ff590d]">Политику в отношении обработки персональных данных</a></label>
+      </div>
+      <button type="submit" class="bg-[#ff590d] hover:bg-orange-600 transition w-full py-4 rounded-2xl text-xl font-bold text-white shadow-lg flex items-center gap-2 justify-center focus:outline-none focus:ring-4 focus:ring-[#ff590d]/30 mt-2">Отправить</button>
+    </form>
+  </div>
+</div>
+
+<script type="text/javascript" src="https://api-maps.yandex.ru/2.1/?lang=ru_RU"></script>
+<script>
+// Popup при попытке ухода со страницы
+let popupShown = false;
+window.addEventListener('mouseout', function(e) {
+    if (!popupShown && e.relatedTarget == null) {
+        document.getElementById('popup-overlay').style.display = 'flex';
+        popupShown = true;
+    }
+});
+document.getElementById('popup-close').onclick = function() {
+    document.getElementById('popup-overlay').style.display = 'none';
+};
+// Онлайн-форма расчета
+if (document.getElementById('calcForm')) {
+    document.getElementById('calcForm').onsubmit = async function(e) {
+        e.preventDefault();
+        var form = document.getElementById('calcForm');
+        var formData = new FormData(form);
+        showToast('{{ _('Отправка...') }}', 'success');
+        try {
+            let resp = await fetch('/send-calc-form', {
+                method: 'POST',
+                body: formData
+            });
+            let data = await resp.json();
+            if (data.success) {
+                showToast(data.message, 'success');
+                form.reset();
+            } else {
+                showToast(data.message || 'Ошибка отправки', 'error');
+            }
+        } catch (err) {
+            showToast('Ошибка отправки', 'error');
+        }
+    };
+}
+// Мини-калькулятор
+if (document.getElementById('miniCalcForm')) {
+    document.getElementById('miniCalcForm').onsubmit = function(e) {
+        e.preventDefault();
+        var tons = parseFloat(this.tons.value);
+        var coeff = parseFloat(this.difficulty.value);
+        var price = Math.round(tons * coeff * 2500);
+        var discount = Math.round(price * 0.9);
+        document.getElementById('miniCalcResult').innerHTML =
+            `<div class='text-xl font-bold text-[#123392] mb-2'>{{ _('Полная стоимость') }}: <span class='text-black'>${price} ₽</span></div>` +
+            `<div class='text-lg font-semibold text-green-600'>{{ _('С учётом скидки 10% для первого заказа') }}: <span class='text-black'>${discount} ₽</span></div>`;
+    };
+}
+// Popup-скидка
+if (document.getElementById('popupForm')) {
+    document.getElementById('popupForm').onsubmit = async function(e) {
+        e.preventDefault();
+        var form = document.getElementById('popupForm');
+        var formData = new FormData(form);
+        showToast('{{ _('Отправка...') }}', 'success');
+        try {
+            let resp = await fetch('/popup-email', {
+                method: 'POST',
+                body: formData
+            });
+            let data = await resp.json();
+            showToast(data.message, data.success ? 'success' : 'error');
+            if (data.success) form.reset();
+        } catch (err) {
+            showToast('Ошибка отправки', 'error');
+        }
+    };
+}
+// Яндекс.Карта с точным адресом и popup
+if (document.getElementById('yandex-map')) {
+    ymaps.ready(function () {
+        var map = new ymaps.Map('yandex-map', {
+            center: [56.843275, 60.626454],
+            zoom: 16,
+            controls: ['zoomControl', 'fullscreenControl']
+        });
+        var placemark = new ymaps.Placemark([56.843275, 60.626454], {
+            balloonContent: '<b>МеталлМод</b><br>Екатеринбург, Первомайская 56<br>+7 (999) 527-42-10',
+            hintContent: 'МеталлМод'
+        }, {
+            preset: 'islands#orangeIcon',
+            iconColor: '#ff590d'
+        });
+        map.geoObjects.add(placemark);
+        map.behaviors.disable('scrollZoom');
+    });
+}
+// Новый fade-слайдер отзывов: fade-анимация для всей тройки, индикаторы, автосмена, без багов
+(function(){
+    var slider = document.getElementById('reviews-slider');
+    var wrapper = document.getElementById('reviews-slider-wrapper');
+    if (!slider || !wrapper) return;
+    var items = Array.from(slider.children);
+    function getPerPage() {
+        if (window.innerWidth < 768) return 1;
+        if (window.innerWidth < 1024) return 2;
+        return 3;
+    }
+    var perPage = getPerPage();
+    var current = 0;
+    var dotsContainer = document.getElementById('reviews-dots');
+    function renderPage(fade) {
+        perPage = getPerPage();
+        var totalPages = Math.ceil(items.length/perPage);
+        var start = current*perPage;
+        var end = start+perPage;
+        // Скрываем все
+        items.forEach(function(item, i){
+            item.style.display = (i >= start && i < end) ? '' : 'none';
+        });
+        // Индикаторы
+        dotsContainer.innerHTML = '';
+        for (let i=0; i<totalPages; i++) {
+            var dot = document.createElement('button');
+            dot.className = 'w-3 h-3 rounded-full ' + (i===current ? 'bg-[#ff590d]' : 'bg-gray-300') + ' transition';
+            dot.style.outline = 'none';
+            dot.onclick = function(){ fadeTo(i); };
+            dotsContainer.appendChild(dot);
+        }
+    }
+    function fadeTo(page) {
+        if (page === current) return;
+        slider.style.opacity = '0';
+        setTimeout(function(){
+            current = page;
+            renderPage(false);
+            slider.style.opacity = '1';
+        }, 500);
+    }
+    function showNext() {
+        var totalPages = Math.ceil(items.length/perPage);
+        fadeTo((current+1)%totalPages);
+    }
+    var interval = setInterval(showNext, 30000);
+    window.addEventListener('resize', function(){
+        perPage = getPerPage();
+        current = 0;
+        renderPage(false);
+    });
+    // Первый рендер
+    slider.style.opacity = '1';
+    renderPage(false);
+})();
+// Portfolio modal logic
+(function() {
+    const modal = document.getElementById('portfolio-modal');
+    const closeBtn = document.getElementById('portfolio-modal-close');
+    const imgEl = document.getElementById('portfolio-modal-image');
+    const titleEl = document.getElementById('portfolio-modal-title');
+    const descEl = document.getElementById('portfolio-modal-description');
+    const prevBtn = document.getElementById('portfolio-modal-prev');
+    const nextBtn = document.getElementById('portfolio-modal-next');
+    const dotsEl = document.getElementById('portfolio-modal-dots');
+    let images = [], current = 0;
+    function show(idx) {
+        if (!images.length) return;
+        imgEl.src = images[idx];
+        dotsEl.innerHTML = '';
+        images.forEach((_, i) => {
+            const dot = document.createElement('button');
+            dot.className = 'w-3 h-3 rounded-full ' + (i === idx ? 'bg-[#ff590d]' : 'bg-gray-300') + ' mx-1';
+            dot.onclick = () => { current = i; show(current); };
+            dotsEl.appendChild(dot);
+        });
+    }
+    document.querySelectorAll('.portfolio-item').forEach(item => {
+        item.onclick = function() {
+            titleEl.textContent = item.dataset.title;
+            descEl.textContent = item.dataset.description;
+            try {
+                images = JSON.parse(item.dataset.images);
+            } catch { images = []; }
+            if (!images.length && item.querySelector('img')) images = [item.querySelector('img').src];
+            current = 0;
+            show(current);
+            modal.classList.remove('hidden');
+        };
+    });
+    closeBtn.onclick = () => modal.classList.add('hidden');
+    prevBtn.onclick = () => { if (images.length) { current = (current-1+images.length)%images.length; show(current); } };
+    nextBtn.onclick = () => { if (images.length) { current = (current+1)%images.length; show(current); } };
+    modal.onclick = e => { if (e.target === modal) modal.classList.add('hidden'); };
+    document.addEventListener('keydown', e => { if (!modal.classList.contains('hidden')) { if (e.key === 'Escape') modal.classList.add('hidden'); if (e.key === 'ArrowLeft') prevBtn.click(); if (e.key === 'ArrowRight') nextBtn.click(); } });
+})();
+// Открытие/закрытие модального окна КМ
+document.addEventListener('DOMContentLoaded', function() {
+  var openBtn = document.getElementById('open-km-modal');
+  var modal = document.getElementById('km-modal');
+  var closeBtn = document.getElementById('close-km-modal');
+  if (openBtn && modal && closeBtn) {
+    openBtn.onclick = function() { modal.classList.remove('hidden'); };
+    closeBtn.onclick = function() { modal.classList.add('hidden'); };
+    modal.onclick = function(e) {
+      if (e.target === modal) modal.classList.add('hidden');
+    };
+  }
+});
+</script>
+{% endblock %} 

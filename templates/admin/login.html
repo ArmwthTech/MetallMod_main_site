@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="flex min-h-screen items-center justify-center bg-[#F5F5F5] py-12 px-4">
+    <form method="post" action="/admin/login" class="bg-white rounded-2xl shadow-2xl p-10 w-full max-w-md flex flex-col gap-6 border-t-4 border-[#ff590d]" id="adminLoginForm">
+        <div class="text-2xl font-extrabold text-[#123392] mb-2 flex items-center gap-3 justify-center"><i class="fa fa-user-shield text-[#ff590d]"></i> Вход в админку</div>
+        <div class="flex items-center gap-3 bg-gray-100 rounded-xl px-4 py-4">
+            <i class="fa fa-user"></i>
+            <input type="text" name="login" placeholder="Логин" required class="bg-transparent outline-none flex-1 text-lg">
+        </div>
+        <div class="flex items-center gap-3 bg-gray-100 rounded-xl px-4 py-4">
+            <i class="fa fa-lock"></i>
+            <input type="password" name="password" placeholder="Пароль" required class="bg-transparent outline-none flex-1 text-lg">
+        </div>
+        <button type="submit" class="bg-[#ff590d] hover:bg-orange-600 transition px-8 py-4 rounded-2xl text-xl font-bold text-white shadow-lg flex items-center gap-2 justify-center"><i class="fa fa-sign-in-alt"></i> Войти</button>
+    </form>
+</div>
+<script>
+// Toast для ошибок авторизации (пример, интеграция зависит от backend)
+{% if error %}
+setTimeout(function(){ showToast('{{ error }}', 'error'); }, 300);
+{% endif %}
+</script>
+{% endblock %} 

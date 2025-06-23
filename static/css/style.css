@@ -1,0 +1,257 @@
+body {
+    font-family: 'Arial', 'Baron Neue', sans-serif;
+    background: #F5F5F5;
+    color: #123392;
+    margin: 0;
+    padding: 0;
+}
+
+header,
+footer {
+    background: #123392;
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+}
+
+.btn-orange {
+    background: #ff590d;
+    color: #fff;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 4px;
+    font-size: 1.1em;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.btn-blue {
+    background: #123392;
+    color: #fff;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 4px;
+    font-size: 1.1em;
+    cursor: pointer;
+}
+
+.hero {
+    background: #123392;
+    color: #fff;
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.calc-form {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(18, 51, 146, 0.05);
+    max-width: 400px;
+    margin: 40px auto;
+    padding: 32px 24px;
+}
+
+.calc-form h2 {
+    margin-top: 0;
+    margin-bottom: 24px;
+    color: #123392;
+}
+
+.calc-form form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.calc-form input[type="text"],
+.calc-form input[type="tel"],
+.calc-form input[type="file"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+}
+
+.calc-form button {
+    margin-top: 12px;
+}
+
+#formMsg {
+    margin-top: 16px;
+    color: #28a745;
+    font-weight: bold;
+}
+
+@media (max-width: 600px) {
+    .calc-form {
+        padding: 16px 8px;
+        max-width: 98vw;
+    }
+}
+
+.steps-list {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin: 32px 0 24px 0;
+    flex-wrap: wrap;
+}
+
+.step-card {
+    background: #F5F5F5;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(18, 51, 146, 0.04);
+    padding: 24px 20px;
+    min-width: 120px;
+    text-align: center;
+    font-size: 1.1em;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.step-num {
+    background: #123392;
+    color: #fff;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.contacts-block {
+    display: flex;
+    gap: 32px;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    margin: 32px 0;
+}
+
+.contacts-info {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(18, 51, 146, 0.05);
+    padding: 24px 32px;
+    min-width: 220px;
+    font-size: 1.1em;
+}
+
+.contacts-info button {
+    margin-top: 18px;
+}
+
+.contacts-map iframe {
+    border-radius: 8px;
+    border: none;
+}
+
+@media (max-width: 900px) {
+    .steps-list {
+        gap: 10px;
+    }
+
+    .contacts-block {
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+    }
+
+    .contacts-info {
+        min-width: 0;
+        width: 100%;
+        box-sizing: border-box;
+    }
+}
+
+.mini-calc-form {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(18, 51, 146, 0.05);
+    max-width: 400px;
+    margin: 32px auto 0 auto;
+    padding: 24px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.mini-calc-form input,
+.mini-calc-form select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+}
+
+.mini-calc-form button {
+    margin-top: 10px;
+}
+
+#miniCalcResult {
+    margin-top: 14px;
+    color: #123392;
+    font-weight: bold;
+    text-align: center;
+}
+
+#popup-exit {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(18, 51, 146, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.popup-content {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 24px rgba(18, 51, 146, 0.12);
+    padding: 32px 24px;
+    max-width: 340px;
+    text-align: center;
+}
+
+.popup-content h3 {
+    margin-top: 0;
+    color: #123392;
+    margin-bottom: 18px;
+}
+
+.popup-content input[type="email"] {
+    width: 90%;
+    margin-bottom: 12px;
+}
+
+.popup-content button {
+    width: 100%;
+}
+
+#popupMsg {
+    margin-top: 12px;
+    color: #28a745;
+    font-weight: bold;
+}
+
+@media (max-width: 600px) {
+    .mini-calc-form {
+        padding: 12px 4px;
+        max-width: 98vw;
+    }
+
+    .popup-content {
+        padding: 16px 4px;
+        max-width: 98vw;
+    }
+}

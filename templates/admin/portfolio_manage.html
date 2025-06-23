@@ -1,0 +1,135 @@
+{% extends 'admin/admin_base.html' %}
+{% block admin_title %}Управление портфолио{% endblock %}
+{% block admin_content %}
+<div class="max-w-2xl mx-auto mb-12">
+    <form method="post" action="/admin/portfolio/add" enctype="multipart/form-data" class="bg-white rounded-2xl shadow-xl p-8 flex flex-col gap-6 border-t-4 border-[#ff590d]" id="portfolioAddForm">
+        <div class="text-xl font-bold text-[#123392] mb-2 flex items-center gap-2"><i class="fa fa-plus-circle text-[#ff590d]"></i> Добавить проект</div>
+        <input type="text" name="title" placeholder="Название" required class="bg-gray-100 rounded-xl px-4 py-3 outline-none text-lg">
+        <input type="text" name="description" placeholder="Описание" class="bg-gray-100 rounded-xl px-4 py-3 outline-none text-lg">
+        <label class="block text-left">Фотографии проекта:
+            <input type="file" name="images" accept="image/*" class="mt-1" multiple id="imagesInput">
+            <div id="drop-area" class="mt-2 p-4 border-2 border-dashed border-[#123392] rounded-xl text-center text-[#123392] cursor-pointer">Перетащите файлы сюда или кликните для выбора</div>
+            <div id="preview-area" class="flex flex-wrap gap-2 mt-2"></div>
+        </label>
+        <button type="submit" class="bg-[#ff590d] hover:bg-orange-600 transition px-8 py-3 rounded-xl text-lg font-bold text-white shadow-lg flex items-center gap-2 justify-center"><i class="fa fa-plus"></i> Добавить</button>
+    </form>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    {% for item in items %}
+    <div class="bg-white rounded-2xl shadow-xl p-6 flex flex-col gap-3 border-t-4 border-[#123392]">
+        <div class="flex items-center gap-2 mb-2">
+            <span class="text-lg font-bold text-[#123392]">{{ item.title }}</span>
+        </div>
+        <div class="text-gray-600 text-base mb-2">{{ item.description }}</div>
+        {% if item.image_paths %}
+        <div class="flex flex-col gap-2">
+            <div class="flex flex-wrap gap-2 sortable-images" data-item-id="{{ item.id }}">
+                {% for img in item.image_paths|from_json %}
+                <div class="relative draggable-image" draggable="true" data-img="{{ img }}">
+                    <img src="{{ img }}" alt="img" class="rounded-xl w-24 h-16 object-cover shadow">
+                    <button type="button" class="absolute top-0 right-0 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs delete-image" title="Удалить">&times;</button>
+                </div>
+                {% endfor %}
+            </div>
+            <button class="mt-2 bg-[#ff590d] hover:bg-orange-600 text-white px-4 py-2 rounded-xl font-bold shadow transition save-images-order" data-item-id="{{ item.id }}">Сохранить порядок</button>
+        </div>
+        {% elif item.image_path %}
+        <img src="{{ item.image_path }}" alt="img" class="rounded-xl w-24 h-16 object-cover shadow">
+        {% endif %}
+        <form method="post" action="/admin/portfolio/delete/{{ item.id }}" class="mt-2">
+            <button type="submit" onclick="return confirm('Удалить?')" class="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-lg flex items-center gap-2"><i class="fa fa-trash"></i> Удалить</button>
+        </form>
+    </div>
+    {% endfor %}
+</div>
+<script>
+// Drag-n-drop + preview для добавления
+const dropArea = document.getElementById('drop-area');
+const imagesInput = document.getElementById('imagesInput');
+const previewArea = document.getElementById('preview-area');
+dropArea.addEventListener('click', () => imagesInput.click());
+dropArea.addEventListener('dragover', e => { e.preventDefault(); dropArea.classList.add('bg-blue-50'); });
+dropArea.addEventListener('dragleave', e => { e.preventDefault(); dropArea.classList.remove('bg-blue-50'); });
+dropArea.addEventListener('drop', e => {
+    e.preventDefault();
+    dropArea.classList.remove('bg-blue-50');
+    imagesInput.files = e.dataTransfer.files;
+    showPreviews();
+});
+imagesInput.addEventListener('change', showPreviews);
+function showPreviews() {
+    previewArea.innerHTML = '';
+    Array.from(imagesInput.files).forEach(file => {
+        const reader = new FileReader();
+        reader.onload = e => {
+            const img = document.createElement('img');
+            img.src = e.target.result;
+            img.className = 'w-16 h-16 object-cover rounded shadow';
+            previewArea.appendChild(img);
+        };
+        reader.readAsDataURL(file);
+    });
+}
+
+// Drag-n-drop сортировка и удаление фото для каждого проекта
+function enableSortableImages() {
+    document.querySelectorAll('.sortable-images').forEach(container => {
+        let dragged = null;
+        container.querySelectorAll('.draggable-image').forEach(imgDiv => {
+            imgDiv.ondragstart = e => { dragged = imgDiv; imgDiv.classList.add('opacity-50'); };
+            imgDiv.ondragend = e => { dragged = null; imgDiv.classList.remove('opacity-50'); };
+            imgDiv.ondragover = e => { e.preventDefault(); };
+            imgDiv.ondrop = e => {
+                e.preventDefault();
+                if (dragged && dragged !== imgDiv) {
+                    if (imgDiv.nextSibling === dragged) {
+                        imgDiv.parentNode.insertBefore(dragged, imgDiv);
+                    } else {
+                        imgDiv.parentNode.insertBefore(dragged, imgDiv.nextSibling);
+                    }
+                }
+            };
+        });
+        // Удаление фото
+        container.querySelectorAll('.delete-image').forEach(btn => {
+            btn.onclick = function(e) {
+                e.stopPropagation();
+                const imgDiv = btn.closest('.draggable-image');
+                imgDiv.remove();
+            };
+        });
+    });
+}
+document.addEventListener('DOMContentLoaded', enableSortableImages);
+document.addEventListener('DOMNodeInserted', enableSortableImages);
+
+// Сохранение порядка/состава фото
+function getImagesOrder(container) {
+    return Array.from(container.querySelectorAll('.draggable-image')).map(div => div.dataset.img);
+}
+document.querySelectorAll('.save-images-order').forEach(btn => {
+    btn.onclick = function() {
+        const itemId = btn.dataset.itemId;
+        const container = document.querySelector('.sortable-images[data-item-id="' + itemId + '"]');
+        const newOrder = getImagesOrder(container);
+        if (!confirm('Сохранить новый порядок и состав фото?')) return;
+        fetch(`/admin/portfolio/update_images/${itemId}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ images: newOrder })
+        })
+        .then(resp => resp.json())
+        .then(data => {
+            showToast(data.success ? 'Порядок фото сохранён!' : (data.message || 'Ошибка'), data.success ? 'success' : 'error');
+        })
+        .catch(() => showToast('Ошибка сохранения', 'error'));
+    };
+});
+// Toast для добавления
+if (document.getElementById('portfolioAddForm')) {
+    document.getElementById('portfolioAddForm').onsubmit = function() {
+        setTimeout(function(){ showToast('Проект добавлен!', 'success'); }, 300);
+    };
+}
+</script>
+{% endblock %} 
