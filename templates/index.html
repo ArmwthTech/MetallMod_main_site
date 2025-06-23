@@ -5,23 +5,23 @@
     <div class="z-10 px-4 md:px-8">
       <p class="text-2xl md:text-3xl text-gray-700 mb-6 text-left">{{ _('Разрабатываем точные чертежи металлоконструкций любой сложности для строительных компаний и инженерных проектов') }}</p>
       <div class="flex flex-col md:flex-row gap-6 z-10 mb-10">
-        <div class="flex-1 bg-black/60 rounded-2xl p-8 flex items-center gap-4 shadow-xl min-w-[220px]">
+        <div class="flex-1 bg-black/60 rounded-2xl p-4 md:p-8 flex items-center gap-4 shadow-xl">
           <span class="inline-block w-3 h-3 bg-[#ff590d] rounded-sm"></span>
-          <span class="text-2xl font-extrabold text-white">ОТ 700 Р/ТОННА</span>
+          <span class="text-xl md:text-2xl font-extrabold text-white">ОТ 700 Р/ТОННА</span>
         </div>
-        <div class="flex-1 bg-black/60 rounded-2xl p-8 flex items-center gap-4 shadow-xl min-w-[220px]">
+        <div class="flex-1 bg-black/60 rounded-2xl p-4 md:p-8 flex items-center gap-4 shadow-xl">
           <span class="inline-block w-3 h-3 bg-[#ff590d] rounded-sm"></span>
-          <span class="text-2xl font-extrabold text-white">ОТ 5 РАБОЧИХ ДНЕЙ</span>
+          <span class="text-xl md:text-2xl font-extrabold text-white">ОТ 5 РАБОЧИХ ДНЕЙ</span>
         </div>
-        <div class="flex-1 bg-black/60 rounded-2xl p-8 flex items-center gap-4 shadow-xl min-w-[220px]">
+        <div class="flex-1 bg-black/60 rounded-2xl p-4 md:p-8 flex items-center gap-4 shadow-xl">
           <span class="inline-block w-3 h-3 bg-[#ff590d] rounded-sm"></span>
-          <span class="text-2xl font-extrabold text-white">РАСЧЕТ ЗА 1 ДЕНЬ</span>
+          <span class="text-xl md:text-2xl font-extrabold text-white">РАСЧЕТ ЗА 1 ДЕНЬ</span>
         </div>
       </div>
     </div>
     <div class="flex flex-col sm:flex-row gap-6 justify-center mb-4 z-10">
-        <button id="open-km-modal" class="bg-[#ff590d] hover:bg-orange-600 transition px-12 py-5 rounded-2xl text-2xl font-bold shadow-xl focus:outline-none focus:ring-4 focus:ring-[#ff590d]/30 text-white">Отправить КМ на расчет</button>
-        <a href="#" class="bg-[#123392] hover:bg-blue-900 transition px-12 py-5 rounded-2xl text-2xl font-bold text-white flex items-center gap-3 shadow-xl border border-[#123392] focus:outline-none focus:ring-4 focus:ring-[#123392]/20"><i class="fab fa-telegram-plane text-3xl"></i>{{ _('Написать в Telegram') }}</a>
+        <button id="open-km-modal" class="bg-[#ff590d] hover:bg-orange-600 transition px-6 md:px-12 py-4 md:py-5 rounded-2xl text-xl md:text-2xl font-bold shadow-xl focus:outline-none focus:ring-4 focus:ring-[#ff590d]/30 text-white whitespace-nowrap">Отправить КМ на расчет</button>
+        <a href="https://t.me/metallmod_bot" target="_blank" class="bg-[#123392] hover:bg-blue-900 transition px-6 md:px-12 py-4 md:py-5 rounded-2xl text-xl md:text-2xl font-bold text-white flex items-center gap-3 shadow-xl border border-[#123392] focus:outline-none focus:ring-4 focus:ring-[#123392]/20 whitespace-nowrap"><i class="fab fa-telegram-plane text-2xl md:text-3xl"></i>{{ _('Написать в Telegram') }}</a>
     </div>
     <!-- Картинка-подложка -->
     <img src="/static/uploads/portfolio_img/1624569746_razrabotka-variantov-mostovogo-sooruzheniya.jpg" alt="КМД чертеж" class="absolute inset-0 w-full h-full object-cover opacity-20 pointer-events-none select-none z-0" style="max-height: 100%;">
@@ -29,9 +29,9 @@
 
 <section class="advantages mb-20">
   <h2 class="text-4xl font-extrabold mb-12 text-center text-[#123392]">Почему нас выбирают?</h2>
-  <div class="flex flex-nowrap gap-10 overflow-x-auto justify-center">
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 px-4 max-w-7xl mx-auto">
     <!-- Карточка 1 -->
-    <div class="bg-white rounded-3xl shadow-xl w-72 min-h-[260px] grid grid-rows-[80px_64px_48px] px-8 py-10 border-t-4 border-[#ff590d]">
+    <div class="bg-white rounded-3xl shadow-xl min-h-[260px] grid grid-rows-[80px_64px_48px] px-8 py-10 border-t-4 border-[#ff590d]">
       <div class="flex items-center justify-center">
         <i class="fa fa-check-circle text-5xl text-[#123392]"></i>
       </div>
@@ -43,7 +43,7 @@
       </div>
     </div>
     <!-- Карточка 2 -->
-    <div class="bg-white rounded-3xl shadow-xl w-72 min-h-[260px] grid grid-rows-[80px_64px_48px] px-8 py-10 border-t-4 border-[#ff590d]">
+    <div class="bg-white rounded-3xl shadow-xl min-h-[260px] grid grid-rows-[80px_64px_48px] px-8 py-10 border-t-4 border-[#ff590d]">
       <div class="flex items-center justify-center">
         <i class="fa fa-clock text-5xl text-[#123392]"></i>
       </div>
@@ -55,7 +55,7 @@
       </div>
     </div>
     <!-- Карточка 3 -->
-    <div class="bg-white rounded-3xl shadow-xl w-72 min-h-[260px] grid grid-rows-[80px_64px_48px] px-8 py-10 border-t-4 border-[#ff590d]">
+    <div class="bg-white rounded-3xl shadow-xl min-h-[260px] grid grid-rows-[80px_64px_48px] px-8 py-10 border-t-4 border-[#ff590d]">
       <div class="flex items-center justify-center">
         <i class="fa fa-shield-alt text-5xl text-[#123392]"></i>
       </div>
@@ -67,7 +67,7 @@
       </div>
     </div>
     <!-- Карточка 4 -->
-    <div class="bg-white rounded-3xl shadow-xl w-72 min-h-[260px] grid grid-rows-[80px_64px_48px] px-8 py-10 border-t-4 border-[#ff590d]">
+    <div class="bg-white rounded-3xl shadow-xl min-h-[260px] grid grid-rows-[80px_64px_48px] px-8 py-10 border-t-4 border-[#ff590d]">
       <div class="flex items-center justify-center">
         <i class="fa fa-users text-5xl text-[#123392]"></i>
       </div>
@@ -142,22 +142,22 @@
     </div>
     <div class="calc-form max-w-md w-full bg-white rounded-3xl shadow-2xl p-10 border-t-4 border-[#ff590d]">
         <h2 class="text-2xl font-bold mb-8 text-center flex items-center gap-3 text-[#123392]"><i class="fa fa-clipboard-list text-[#ff590d]"></i> {{ _('Оставить заявку') }}</h2>
-        <form id="calcForm" method="post" enctype="multipart/form-data" action="#" class="flex flex-col gap-6">
+        <form id="calcForm" method="post" enctype="multipart/form-data" action="/send-calc-form" class="flex flex-col gap-6">
             <div class="flex items-center gap-3 bg-gray-100 rounded-xl px-4 py-4">
                 <i class="fa fa-user"></i>
-                <input type="text" name="name" placeholder="{{ _('Имя') }}" required class="bg-transparent outline-none flex-1 text-lg">
+                <input type="text" name="name" placeholder="{{ _('Имя') }}" required minlength="2" maxlength="50" pattern="^[А-Яа-яA-Za-z\-\s]+$" class="bg-transparent outline-none flex-1 text-lg">
             </div>
             <div class="flex items-center gap-3 bg-gray-100 rounded-xl px-4 py-4">
                 <i class="fa fa-phone"></i>
-                <input type="tel" name="phone" placeholder="{{ _('Телефон') }}" pattern="^\+?\d{10,15}$" required class="bg-transparent outline-none flex-1 text-lg">
+                <input type="tel" name="phone" id="calcFormPhone" placeholder="+7 (999) 999-99-99" required pattern="^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$" maxlength="18" class="bg-transparent outline-none flex-1 text-lg">
             </div>
             <div class="flex items-center gap-3 bg-gray-100 rounded-xl px-4 py-4">
                 <i class="fa fa-envelope"></i>
-                <input type="email" name="email" placeholder="{{ _('Почта') }}" required class="bg-transparent outline-none flex-1 text-lg">
+                <input type="email" name="email" placeholder="{{ _('Почта') }}" required maxlength="100" class="bg-transparent outline-none flex-1 text-lg">
             </div>
             <div class="flex items-center gap-3 bg-gray-100 rounded-xl px-4 py-4">
                 <i class="fa fa-link"></i>
-                <input type="url" name="km_link" placeholder="{{ _('Укажите ссылку на разработанный КМ') }}" class="bg-transparent outline-none flex-1 text-lg">
+                <input type="url" name="km_link" placeholder="{{ _('Укажите ссылку на разработанный КМ') }}" maxlength="200" class="bg-transparent outline-none flex-1 text-lg">
             </div>
             <div class="flex items-center gap-3">
                 <input type="checkbox" name="consent" required class="accent-[#ff590d] w-5 h-5">
@@ -260,40 +260,65 @@
 <section id="portfolio" class="mb-24">
     <h2 class="text-4xl font-extrabold mb-12 text-center text-[#123392]">НАШИ ВЫПОЛНЕННЫЕ ПРОЕКТЫ</h2>
     <div class="relative">
-        <div id="portfolio-slider-wrapper" class="relative">
-            <div id="portfolio-slider" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-center">
+        <!-- Swiper контейнер -->
+        <div class="swiper portfolio-swiper">
+            <div class="swiper-wrapper">
                 {% for item in portfolio_items %}
-                <div class="portfolio-item bg-white rounded-3xl shadow-2xl p-4 flex flex-col items-center border-t-4 border-[#ff590d] hover:scale-105 transition-transform cursor-pointer" data-title="{{ item.title }}" data-description="{{ item.description }}" data-images="{{ item.image_paths|default('[]') }}">
-                    {% set images = item.image_paths|from_json if item.image_paths else [] %}
-                    {% if images %}
-                    <img src="{{ images[0] }}" alt="{{ item.title }}" class="rounded-xl w-full h-48 object-cover mb-4 shadow-md">
-                    {% elif item.image_path %}
-                    <img src="{{ item.image_path }}" alt="{{ item.title }}" class="rounded-xl w-full h-48 object-cover mb-4 shadow-md">
-                    {% endif %}
-                    <div class="portfolio-desc text-xl font-bold text-[#123392] text-center">{{ item.title }}</div>
+                <div class="swiper-slide">
+                  <div class="portfolio-item bg-white rounded-3xl shadow-2xl p-4 flex flex-col items-center border-t-4 border-[#ff590d] hover:scale-105 transition-transform cursor-pointer" data-title="{{ item.title }}" data-description="{{ item.description }}" data-images="{{ item.image_paths|default('[]') }}">
+                      {% set images = item.image_paths|from_json if item.image_paths else [] %}
+                      {% if images %}
+                      <img src="{{ images[0] }}" alt="{{ item.title }}" class="rounded-xl w-full h-48 object-cover mb-4 shadow-md">
+                      {% elif item.image_path %}
+                      <img src="{{ item.image_path }}" alt="{{ item.title }}" class="rounded-xl w-full h-48 object-cover mb-4 shadow-md">
+                      {% endif %}
+                      <div class="portfolio-desc text-xl font-bold text-[#123392] text-center">{{ item.title }}</div>
+                  </div>
                 </div>
                 {% endfor %}
             </div>
         </div>
-        <div id="portfolio-dots" class="flex justify-center gap-2 mt-4"></div>
     </div>
 </section>
+<!-- Swiper.js CDN -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  new Swiper('.portfolio-swiper', {
+    slidesPerView: 1,
+    spaceBetween: 24,
+    breakpoints: {
+      768: { slidesPerView: 2 },
+      1024: { slidesPerView: 3 }
+    },
+    loop: true,
+    autoplay: { delay: 6000, disableOnInteraction: false },
+    grabCursor: true,
+    simulateTouch: true,
+    allowTouchMove: true,
+    // Без стрелок и точек
+    navigation: false,
+    pagination: false
+  });
+});
+</script>
 
 <!-- Модальное окно портфолио -->
 <div id="portfolio-modal" class="fixed inset-0 bg-black/60 z-50 flex items-center justify-center hidden">
-    <div class="relative bg-white rounded-3xl shadow-2xl max-w-4xl w-full mx-4 flex flex-col md:flex-row overflow-hidden animate-fade-in">
-        <button id="portfolio-modal-close" class="absolute top-4 right-4 text-3xl text-gray-400 hover:text-[#ff590d] transition-colors focus:outline-none">&times;</button>
-        <div class="flex-1 p-8 flex flex-col justify-center min-w-[250px]">
-            <div id="portfolio-modal-title" class="text-2xl font-extrabold mb-4 text-[#123392]"></div>
-            <div id="portfolio-modal-description" class="text-gray-700 text-lg"></div>
+    <div class="relative bg-white rounded-3xl shadow-2xl w-[95%] max-w-6xl mx-4 flex flex-col md:flex-row overflow-hidden animate-fade-in">
+        <button id="portfolio-modal-close" class="absolute top-6 right-6 text-4xl text-gray-400 hover:text-[#ff590d] transition-colors focus:outline-none z-10">&times;</button>
+        <div class="flex-1 p-10 flex flex-col justify-center min-w-[300px]">
+            <div id="portfolio-modal-title" class="text-3xl font-extrabold mb-6 text-[#123392]"></div>
+            <div id="portfolio-modal-description" class="text-gray-700 text-xl leading-relaxed"></div>
         </div>
-        <div class="flex-1 bg-gray-50 flex flex-col items-center justify-center p-8 min-w-[300px]">
-            <div class="relative w-full max-w-md">
-                <img id="portfolio-modal-image" src="" alt="" class="rounded-xl w-full h-72 object-contain shadow-md bg-white">
-                <button id="portfolio-modal-prev" class="absolute left-0 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-[#ff590d] text-[#123392] hover:text-white rounded-full w-10 h-10 flex items-center justify-center shadow transition"><i class="fa fa-chevron-left"></i></button>
-                <button id="portfolio-modal-next" class="absolute right-0 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-[#ff590d] text-[#123392] hover:text-white rounded-full w-10 h-10 flex items-center justify-center shadow transition"><i class="fa fa-chevron-right"></i></button>
+        <div class="flex-1 bg-gray-50 flex flex-col items-center justify-center p-10 min-w-[400px]">
+            <div class="relative w-full">
+                <img id="portfolio-modal-image" src="" alt="" class="rounded-xl w-full h-[500px] object-contain shadow-md bg-white">
+                <button id="portfolio-modal-prev" class="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-[#ff590d] text-[#123392] hover:text-white rounded-full w-12 h-12 flex items-center justify-center shadow transition"><i class="fa fa-chevron-left text-xl"></i></button>
+                <button id="portfolio-modal-next" class="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-[#ff590d] text-[#123392] hover:text-white rounded-full w-12 h-12 flex items-center justify-center shadow transition"><i class="fa fa-chevron-right text-xl"></i></button>
             </div>
-            <div id="portfolio-modal-dots" class="flex justify-center gap-2 mt-4"></div>
+            <div id="portfolio-modal-dots" class="flex justify-center gap-2 mt-6"></div>
         </div>
     </div>
 </div>
@@ -351,22 +376,24 @@
 
 <section id="contacts" class="mb-24">
     <h2 class="text-4xl font-extrabold mb-12 text-center text-[#123392]">{{ _('Контакты') }}</h2>
-    <div class="max-w-3xl mx-auto bg-white rounded-3xl shadow-xl p-10 text-lg border-t-4 border-[#123392] flex flex-col items-start mb-8">
-        <div class="flex flex-col md:flex-row md:items-center md:gap-12 w-full">
-            <div class="flex-1 mb-6 md:mb-0">
+    <div class="max-w-6xl mx-auto bg-white rounded-3xl shadow-xl p-10 text-lg border-t-4 border-[#123392] flex flex-col items-start mb-8">
+        <div class="flex flex-col md:flex-row md:items-start md:gap-12 w-full">
+            <div class="md:order-2 md:w-1/2 w-full mb-6 md:mb-0">
                 <div class="flex items-center gap-3 mb-4 text-2xl font-bold text-[#123392]"><i class="fa fa-map-marker-alt text-[#ff590d]"></i> Свердловская область,<br>г. Екатеринбург, Первомайская 56</div>
                 <div class="flex items-center gap-3 mb-2"><i class="fa fa-phone text-[#ff590d]"></i> <a href="tel:+79995274210" class="hover:text-[#ff590d] font-semibold">+7 (999) 527-42-10</a></div>
                 <div class="flex items-center gap-3 mb-2"><i class="fa fa-envelope text-[#ff590d]"></i> <a href="mailto:info@metallmod.ru" class="hover:text-[#ff590d] font-semibold">info@metallmod.ru</a></div>
                 <div class="flex items-center gap-3 mb-2"><i class="fa fa-clock text-[#ff590d]"></i> <span class="font-semibold">Пн-Пт: 9:00 — 18:00</span></div>
                 <div class="text-gray-400 text-sm mt-2">Поддержка: 24/7</div>
+                <div class="flex flex-col gap-4 w-full md:w-auto mt-6">
+                    <a href="#calcForm" class="bg-[#ff590d] hover:bg-orange-600 transition px-8 py-4 rounded-2xl text-xl font-bold text-white shadow-lg flex items-center gap-2 justify-center"><i class="fa fa-paper-plane"></i> Оставить заявку</a>
+                </div>
             </div>
-            <div class="flex flex-col gap-4 w-full md:w-auto">
-                <a href="#calcForm" class="bg-[#ff590d] hover:bg-orange-600 transition px-8 py-4 rounded-2xl text-xl font-bold text-white shadow-lg flex items-center gap-2 justify-center"><i class="fa fa-paper-plane"></i> Оставить заявку</a>
+            <div class="md:order-1 md:w-1/2 w-full">
+                <div class="w-full flex justify-center items-center">
+                    <div id="yandex-map" class="rounded-3xl shadow-md w-full h-[320px] md:h-[480px]"></div>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="w-screen flex justify-center items-center relative left-1/2 right-1/2 -translate-x-1/2" style="left:50%;right:50%;transform:translateX(-50%);">
-        <div id="yandex-map" class="rounded-3xl shadow-md w-full h-[320px] md:h-[480px]"></div>
     </div>
 </section>
 
@@ -395,13 +422,13 @@
         получите расчет вашего проекта<br>в течение <span class="font-bold text-[#ff590d]">24 часов</span>
       </div>
     </div>
-    <form class="flex flex-col gap-6">
-      <input type="text" placeholder="Имя" class="border-b border-gray-300 py-2 px-0 focus:outline-none focus:border-[#ff590d] text-lg" />
-      <input type="tel" placeholder="+7 (999) 999-99-99" class="border-b border-gray-300 py-2 px-0 focus:outline-none focus:border-[#ff590d] text-lg" />
-      <input type="email" placeholder="Почта" class="border-b border-gray-300 py-2 px-0 focus:outline-none focus:border-[#ff590d] text-lg" />
-      <input type="url" placeholder="Укажите ссылку на разработанный КМ" class="border-b border-gray-300 py-2 px-0 focus:outline-none focus:border-[#ff590d] text-lg" />
+    <form id="kmForm" method="post" action="/send-km-form" class="flex flex-col gap-6">
+      <input type="text" name="name" placeholder="Имя" class="border-b border-gray-300 py-2 px-0 focus:outline-none focus:border-[#ff590d] text-lg" />
+      <input type="tel" name="phone" placeholder="+7 (999) 999-99-99" class="border-b border-gray-300 py-2 px-0 focus:outline-none focus:border-[#ff590d] text-lg" />
+      <input type="email" name="email" placeholder="Почта" class="border-b border-gray-300 py-2 px-0 focus:outline-none focus:border-[#ff590d] text-lg" />
+      <input type="url" name="km_link" placeholder="Укажите ссылку на разработанный КМ" class="border-b border-gray-300 py-2 px-0 focus:outline-none focus:border-[#ff590d] text-lg" />
       <div class="flex items-start gap-2">
-        <input type="checkbox" id="consent" class="accent-[#ff590d] w-5 h-5 mt-1" required />
+        <input type="checkbox" id="consent" name="consent" class="accent-[#ff590d] w-5 h-5 mt-1" required />
         <label for="consent" class="text-sm text-gray-700">Даю <a href="/consent" target="_blank" class="underline text-[#ff590d]">Согласие на обработку персональных данных</a> и принимаю <a href="/policy" target="_blank" class="underline text-[#ff590d]">Политику в отношении обработки персональных данных</a></label>
       </div>
       <button type="submit" class="bg-[#ff590d] hover:bg-orange-600 transition w-full py-4 rounded-2xl text-xl font-bold text-white shadow-lg flex items-center gap-2 justify-center focus:outline-none focus:ring-4 focus:ring-[#ff590d]/30 mt-2">Отправить</button>
@@ -410,6 +437,7 @@
 </div>
 
 <script type="text/javascript" src="https://api-maps.yandex.ru/2.1/?lang=ru_RU"></script>
+<script src="https://unpkg.com/imask"></script>
 <script>
 // Popup при попытке ухода со страницы
 let popupShown = false;
@@ -426,9 +454,29 @@ document.getElementById('popup-close').onclick = function() {
 if (document.getElementById('calcForm')) {
     document.getElementById('calcForm').onsubmit = async function(e) {
         e.preventDefault();
-        var form = document.getElementById('calcForm');
-        var formData = new FormData(form);
-        showToast('{{ _('Отправка...') }}', 'success');
+        var name = document.getElementById('calcForm').elements['name'].value.trim();
+        var phone = document.getElementById('calcForm').elements['phone'].value.trim();
+        var email = document.getElementById('calcForm').elements['email'].value.trim();
+        var consent = document.getElementById('consent').checked;
+        var phonePattern = /^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$/;
+        if (!name || name.length < 2) {
+            showToast('Введите корректное имя (минимум 2 буквы)', 'error');
+            return false;
+        }
+        if (!phonePattern.test(phone)) {
+            showToast('Введите телефон в формате +7 (999) 999-99-99', 'error');
+            return false;
+        }
+        if (!email || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+            showToast('Введите корректный email', 'error');
+            return false;
+        }
+        if (!consent) {
+            showToast('Необходимо согласие на обработку данных', 'error');
+            return false;
+        }
+        var formData = new FormData(document.getElementById('calcForm'));
+        showToast('Отправка...', 'success');
         try {
             let resp = await fetch('/send-calc-form', {
                 method: 'POST',
@@ -436,8 +484,8 @@ if (document.getElementById('calcForm')) {
             });
             let data = await resp.json();
             if (data.success) {
-                showToast(data.message, 'success');
-                form.reset();
+                showToast('Заявка принята! С вами свяжется менеджер в ближайшее время.', 'success');
+                document.getElementById('calcForm').reset();
             } else {
                 showToast(data.message || 'Ошибка отправки', 'error');
             }
@@ -605,6 +653,137 @@ document.addEventListener('DOMContentLoaded', function() {
     closeBtn.onclick = function() { modal.classList.add('hidden'); };
     modal.onclick = function(e) {
       if (e.target === modal) modal.classList.add('hidden');
+    };
+  }
+  // Маска для телефона в kmForm
+  var kmPhoneInput = document.querySelector('#kmForm input[name="phone"]');
+  if (kmPhoneInput && window.IMask) {
+    var mask = IMask(kmPhoneInput, {
+      mask: '+{7} (000) 000-00-00',
+      lazy: true
+    });
+    kmPhoneInput.addEventListener('focus', function() {
+      if (!kmPhoneInput.value || kmPhoneInput.value === '+7') {
+        mask.value = '+7 (';
+        setTimeout(function() {
+          kmPhoneInput.setSelectionRange(4, 4);
+        }, 0);
+      }
+    });
+  }
+  // Обработка формы kmForm
+  var kmForm = document.getElementById('kmForm');
+  if (kmForm) {
+    kmForm.onsubmit = async function(e) {
+      e.preventDefault();
+      var name = kmForm.querySelector('[name="name"]');
+      var phone = kmForm.querySelector('[name="phone"]');
+      var email = kmForm.querySelector('[name="email"]');
+      var km_link = kmForm.querySelector('[name="km_link"]');
+      var consent = kmForm.querySelector('[name="consent"]');
+      var phonePattern = /^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$/;
+      if (!name.value.trim() || name.value.trim().length < 2) {
+        showToast('Введите корректное имя (минимум 2 буквы)', 'error');
+        return false;
+      }
+      if (!phonePattern.test(phone.value.trim())) {
+        showToast('Введите телефон в формате +7 (999) 999-99-99', 'error');
+        return false;
+      }
+      if (!email.value.trim() || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email.value.trim())) {
+        showToast('Введите корректный email', 'error');
+        return false;
+      }
+      if (km_link && km_link.value && km_link.value.length > 0 && !/^https?:\/\//.test(km_link.value)) {
+        showToast('Ссылка должна начинаться с http:// или https://', 'error');
+        return false;
+      }
+      if (!consent.checked) {
+        showToast('Необходимо согласие на обработку данных', 'error');
+        return false;
+      }
+      var formData = new FormData(kmForm);
+      showToast('Отправка...', 'success');
+      try {
+        let resp = await fetch('/send-km-form', {
+          method: 'POST',
+          body: formData
+        });
+        let data = await resp.json();
+        if (data.success) {
+          showToast('Заявка принята! С вами свяжется менеджер в ближайшее время.', 'success');
+          kmForm.reset();
+          setTimeout(function() {
+            var modal = document.getElementById('km-modal');
+            if (modal) modal.classList.add('hidden');
+          }, 2500);
+        } else {
+          showToast(data.message || 'Ошибка отправки', 'error');
+        }
+      } catch (err) {
+        showToast('Ошибка отправки', 'error');
+      }
+    };
+  }
+  // Маска для телефона (строгий контроль)
+  var phoneInput = document.getElementById('calcFormPhone');
+  if (phoneInput && window.IMask) {
+    var mask = IMask(phoneInput, {
+      mask: '+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$',
+      lazy: true
+    });
+    phoneInput.addEventListener('focus', function() {
+      if (!phoneInput.value || phoneInput.value === '+7') {
+        mask.value = '+7 (';
+        setTimeout(function() {
+          phoneInput.setSelectionRange(4, 4);
+        }, 0);
+      }
+    });
+  }
+  // Обработка формы calcForm
+  var calcForm = document.getElementById('calcForm');
+  if (calcForm) {
+    calcForm.onsubmit = async function(e) {
+      e.preventDefault();
+      var name = calcForm.querySelector('[name="name"]');
+      var phone = calcForm.querySelector('[name="phone"]');
+      var email = calcForm.querySelector('[name="email"]');
+      var consent = calcForm.querySelector('[name="consent"]');
+      var phonePattern = /^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$/;
+      if (!name.value.trim() || name.value.trim().length < 2) {
+        showToast('Введите корректное имя (минимум 2 буквы)', 'error');
+        return false;
+      }
+      if (!phonePattern.test(phone.value.trim())) {
+        showToast('Введите телефон в формате +7 (999) 999-99-99', 'error');
+        return false;
+      }
+      if (!email.value.trim() || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email.value.trim())) {
+        showToast('Введите корректный email', 'error');
+        return false;
+      }
+      if (!consent.checked) {
+        showToast('Необходимо согласие на обработку данных', 'error');
+        return false;
+      }
+      var formData = new FormData(calcForm);
+      showToast('Отправка...', 'success');
+      try {
+        let resp = await fetch('/send-calc-form', {
+          method: 'POST',
+          body: formData
+        });
+        let data = await resp.json();
+        if (data.success) {
+          showToast('Заявка принята! С вами свяжется менеджер в ближайшее время.', 'success');
+          calcForm.reset();
+        } else {
+          showToast(data.message || 'Ошибка отправки', 'error');
+        }
+      } catch (err) {
+        showToast('Ошибка отправки', 'error');
+      }
     };
   }
 });

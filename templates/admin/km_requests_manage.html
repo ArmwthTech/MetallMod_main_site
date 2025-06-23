@@ -1,0 +1,78 @@
+{% extends 'admin/admin_base.html' %}
+{% block admin_title %}Заявки на расчет КМ{% endblock %}
+{% block admin_content %}
+<form method="get" class="mb-6 flex flex-wrap gap-4 items-end">
+  <input type="text" name="name" value="{{ filters.name|default('') }}" placeholder="Имя" class="bg-gray-100 rounded-xl px-4 py-2 outline-none text-base">
+  <input type="text" name="phone" value="{{ filters.phone|default('') }}" placeholder="Телефон" class="bg-gray-100 rounded-xl px-4 py-2 outline-none text-base">
+  <input type="email" name="email" value="{{ filters.email|default('') }}" placeholder="Email" class="bg-gray-100 rounded-xl px-4 py-2 outline-none text-base">
+  <input type="text" name="km_link" value="{{ filters.km_link|default('') }}" placeholder="Ссылка на КМ" class="bg-gray-100 rounded-xl px-4 py-2 outline-none text-base">
+  <input type="date" name="date" value="{{ filters.date|default('') }}" class="bg-gray-100 rounded-xl px-4 py-2 outline-none text-base">
+  <select name="processed" class="bg-gray-100 rounded-xl px-4 py-2 outline-none text-base">
+    <option value="">Статус</option>
+    <option value="1" {% if filters.processed == '1' %}selected{% endif %}>Обработано</option>
+    <option value="0" {% if filters.processed == '0' %}selected{% endif %}>Не обработано</option>
+  </select>
+  <label class="flex items-center gap-2 text-base font-medium text-gray-700">
+    Отображать по:
+    <select name="per_page" class="bg-gray-100 rounded-xl px-4 py-2 outline-none text-base">
+      <option value="10" {% if per_page == 10 %}selected{% endif %}>10</option>
+      <option value="25" {% if per_page == 25 %}selected{% endif %}>25</option>
+      <option value="30" {% if per_page == 30 %}selected{% endif %}>30</option>
+      <option value="50" {% if per_page == 50 %}selected{% endif %}>50</option>
+      <option value="100" {% if per_page == 100 %}selected{% endif %}>100</option>
+    </select>
+  </label>
+  <button type="submit" class="bg-[#123392] hover:bg-blue-900 text-white px-6 py-2 rounded-xl font-bold">Фильтровать</button>
+  <a href="/admin/km_requests" class="text-gray-500 underline ml-2">Сбросить</a>
+  <a href="/admin/km_requests/export_csv?name={{ filters.name|urlencode }}&phone={{ filters.phone|urlencode }}&email={{ filters.email|urlencode }}&km_link={{ filters.km_link|urlencode }}&date={{ filters.date|urlencode }}&processed={{ filters.processed|urlencode }}&per_page={{ per_page }}&page={{ page }}" class="ml-4 bg-[#ff590d] hover:bg-orange-600 text-white px-6 py-2 rounded-xl font-bold">Экспорт в CSV</a>
+</form>
+<div class="flex-1">
+  <table class="min-w-full bg-white rounded-xl shadow overflow-hidden">
+    <thead>
+      <tr class="bg-gray-100 text-left">
+        <th class="py-2 px-4">ID</th>
+        <th class="py-2 px-4">Имя</th>
+        <th class="py-2 px-4">Телефон</th>
+        <th class="py-2 px-4">Email</th>
+        <th class="py-2 px-4">Ссылка на КМ</th>
+        <th class="py-2 px-4">Дата</th>
+        <th class="py-2 px-4">Обработано</th>
+        <th class="py-2 px-4">Действия</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for req in items %}
+      <tr class="border-b">
+        <td class="py-2 px-4">{{ req.id }}</td>
+        <td class="py-2 px-4">{{ req.name }}</td>
+        <td class="py-2 px-4">{{ req.phone }}</td>
+        <td class="py-2 px-4">{{ req.email }}</td>
+        <td class="py-2 px-4"><a href="{{ req.km_link }}" target="_blank" class="text-blue-600 underline">Ссылка</a></td>
+        <td class="py-2 px-4">{{ req.created_at.strftime('%d.%m.%Y %H:%M') if req.created_at else '' }}</td>
+        <td class="py-2 px-4 text-center">
+          <form method="post" action="/admin/km_requests/toggle_processed/{{ req.id }}" style="display:inline;">
+            <input type="checkbox" name="processed" onchange="this.form.submit()" {% if req.processed %}checked{% endif %}>
+          </form>
+        </td>
+        <td class="py-2 px-4">
+          <form method="post" action="/admin/km_requests/delete/{{ req.id }}" style="display:inline;">
+            <button type="submit" onclick="return confirm('Удалить заявку?')" class="text-red-600 hover:underline">Удалить</button>
+          </form>
+        </td>
+      </tr>
+      {% else %}
+      <tr><td colspan="8" class="py-4 px-4 text-center text-gray-500">Нет заявок</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% if pages > 1 %}
+  <div class="flex flex-wrap gap-2 mt-6 justify-center items-center">
+    {% for p in range(1, pages+1) %}
+      {% set url_params = filters.copy() %}
+      {% set url_params = url_params.update({'page': p, 'per_page': per_page}) or url_params %}
+      <a href="?{{ url_params|urlencode }}" class="px-3 py-1 rounded-lg border text-base font-bold {% if p == page %}bg-[#123392] text-white{% else %}bg-white text-[#123392] border-[#123392] hover:bg-[#ff590d] hover:text-white{% endif %}">{{ p }}</a>
+    {% endfor %}
+  </div>
+  {% endif %}
+</div>
+{% endblock %} 

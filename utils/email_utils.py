@@ -72,3 +72,39 @@ async def send_calc_form_email(name: str, phone: str, file_data: bytes, file_nam
         print(f"Ошибка отправки email: {e}")
         # В реальном приложении здесь можно добавить логику повторной отправки
         # или уведомление администратора.
+
+
+async def send_km_form_email(name: str, phone: str, email: str, km_link: str):
+    """
+    Формирует и отправляет email с данными из формы КМ.
+    """
+    if not MAIL_USER or not MAIL_PASS:
+        print("Ошибка: MAIL_USER или MAIL_PASS не установлены. Письмо не будет отправлено.")
+        return
+
+    msg = EmailMessage()
+    msg['From'] = MAIL_USER
+    msg['To'] = MAIL_TO
+    msg['Subject'] = 'Новая заявка на расчет КМ с сайта МеталлМод'
+
+    body = f"""
+    Новая заявка на расчет КМ с сайта МеталлМод:
+
+    Имя: {name}
+    Телефон: {phone}
+    Email: {email}
+    Ссылка на КМ: {km_link}
+    """
+    msg.set_content(body)
+
+    try:
+        await aiosmtplib.send(
+            msg,
+            hostname=MAIL_HOST,
+            port=MAIL_PORT,
+            username=MAIL_USER,
+            password=MAIL_PASS,
+            use_tls=True
+        )
+    except Exception as e:
+        print(f"Ошибка отправки email: {e}")

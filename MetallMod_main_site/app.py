@@ -4,21 +4,24 @@
 """
 
 from fastapi import FastAPI, Request, Form, UploadFile, File, Query, Depends, Body
-from fastapi.responses import HTMLResponse, RedirectResponse, JSONResponse
+from fastapi.responses import HTMLResponse, RedirectResponse, JSONResponse, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 import os
 import json
 from pathlib import Path
-from utils.email_utils import send_calc_form_email
+from utils.email_utils import send_calc_form_email, send_km_form_email
 import aiofiles
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import sessionmaker, scoped_session
 from models.popup_email import Base, PopupEmail
 from email_validator import validate_email, EmailNotValidError
 from models.portfolio import Base as PortfolioBase, Portfolio
 from models.review import Base as ReviewBase, Review
 from utils.auth_utils import authenticate_admin, set_admin_session, is_admin_authenticated, logout_admin
+from models.km_request import Base as KmRequestBase, KmRequest
+import csv
+from io import StringIO
 
 from dotenv import load_dotenv
 load_dotenv()
@@ -40,16 +43,30 @@ templates = Jinja2Templates(directory='templates')
 # Добавляем кастомный фильтр в Jinja2 для работы с JSON-строками в шаблонах
 templates.env.filters['from_json'] = lambda s: json.loads(s) if s else []
 
-# Инициализация SQLite
-DB_URL = 'sqlite:///popup_emails.db'
-engine = create_engine(DB_URL, connect_args={"check_same_thread": False})
+# --- Инициализация отдельных баз данных ---
+DB_PORTFOLIO = 'sqlite:///portfolio.db'
+DB_REVIEWS = 'sqlite:///reviews.db'
+DB_KM_REQUESTS = 'sqlite:///km_requests.db'
+DB_POPUP_EMAILS = 'sqlite:///popup_emails.db'
 
-# Создание таблиц, если они не существуют
-Base.metadata.create_all(engine)
-PortfolioBase.metadata.create_all(engine)
-ReviewBase.metadata.create_all(engine)
+engine_portfolio = create_engine(DB_PORTFOLIO, connect_args={
+                                 "check_same_thread": False})
+engine_reviews = create_engine(DB_REVIEWS, connect_args={
+                               "check_same_thread": False})
+engine_km_requests = create_engine(DB_KM_REQUESTS, connect_args={
+                                   "check_same_thread": False})
+engine_popup_emails = create_engine(DB_POPUP_EMAILS, connect_args={
+                                    "check_same_thread": False})
 
-SessionLocal = sessionmaker(bind=engine)
+PortfolioBase.metadata.create_all(engine_portfolio)
+ReviewBase.metadata.create_all(engine_reviews)
+KmRequestBase.metadata.create_all(engine_km_requests)
+Base.metadata.create_all(engine_popup_emails)
+
+SessionPortfolio = scoped_session(sessionmaker(bind=engine_portfolio))
+SessionReviews = scoped_session(sessionmaker(bind=engine_reviews))
+SessionKmRequests = scoped_session(sessionmaker(bind=engine_km_requests))
+SessionPopupEmails = scoped_session(sessionmaker(bind=engine_popup_emails))
 
 # --- Утилиты и зависимости ---
 
@@ -90,13 +107,15 @@ def index(request: Request):
     def translate(key):
         return _(key, translations)
 
-    db = SessionLocal()
+    db_portfolio = SessionPortfolio()
+    db_reviews = SessionReviews()
     try:
-        portfolio_items = db.query(Portfolio).order_by(
-            Portfolio.id.desc()).all()
-        reviews = db.query(Review).order_by(Review.id.desc()).all()
+        portfolio_items = db_portfolio.query(
+            Portfolio).order_by(Portfolio.id.desc()).all()
+        reviews = db_reviews.query(Review).order_by(Review.id.desc()).all()
     finally:
-        db.close()
+        db_portfolio.close()
+        db_reviews.close()
 
     return templates.TemplateResponse('index.html', {
         'request': request,
@@ -109,21 +128,21 @@ def index(request: Request):
 
 
 @app.post('/send-calc-form')
-async def send_calc_form(name: str = Form(...), phone: str = Form(...), file: UploadFile = File(...)):
+async def send_calc_form(name: str = Form(...), phone: str = Form(...), file: UploadFile = File(None)):
     """
     Принимает данные из формы калькулятора, сохраняет файл и отправляет email.
     """
-    save_dir = 'static/uploads'
-    os.makedirs(save_dir, exist_ok=True)
-    file_path = os.path.join(save_dir, file.filename)
-
-    async with aiofiles.open(file_path, 'wb') as out_file:
-        content = await file.read()
-        await out_file.write(content)
-
-    file_url = f'/static/uploads/{file.filename}'
-    await send_calc_form_email(name, phone, content, file.filename, file_url=file_url)
-
+    if file:
+        save_dir = 'static/uploads'
+        os.makedirs(save_dir, exist_ok=True)
+        file_path = os.path.join(save_dir, file.filename)
+        async with aiofiles.open(file_path, 'wb') as out_file:
+            content = await file.read()
+            await out_file.write(content)
+        file_url = f'/static/uploads/{file.filename}'
+        await send_calc_form_email(name, phone, content, file.filename, file_url=file_url)
+    else:
+        await send_calc_form_email(name, phone, None, None, file_url=None)
     return JSONResponse({'success': True, 'message': 'Заявка отправлена!'})
 
 
@@ -136,19 +155,45 @@ async def popup_email(email: str = Form(...)):
         validate_email(email)
     except EmailNotValidError:
         return JSONResponse({'success': False, 'message': 'Некорректный email'})
-
-    db = SessionLocal()
+    db = SessionPopupEmails()
     try:
         if db.query(PopupEmail).filter_by(email=email).first():
             return JSONResponse({'success': True, 'message': 'Email уже сохранён'})
-
         new_popup_email = PopupEmail(email=email)
         db.add(new_popup_email)
         db.commit()
     finally:
         db.close()
-
     return JSONResponse({'success': True, 'message': 'Email сохранён'})
+
+
+@app.post('/send-km-form')
+async def send_km_form(
+    name: str = Form(...),
+    phone: str = Form(...),
+    email: str = Form(...),
+    km_link: str = Form(None),
+    consent: str = Form(...)
+):
+    """
+    Принимает данные из формы КМ, сохраняет в БД и отправляет email админу.
+    """
+    db = SessionKmRequests()
+    try:
+        km_request = KmRequest(
+            name=name,
+            phone=phone,
+            email=email,
+            km_link=km_link
+        )
+        db.add(km_request)
+        db.commit()
+    finally:
+        db.close()
+
+    await send_km_form_email(name, phone, email, km_link)
+
+    return JSONResponse({'success': True, 'message': 'Заявка отправлена!'})
 
 # --- Админка: Портфолио ---
 
@@ -166,13 +211,11 @@ def admin_portfolio(request: Request):
     """Страница управления портфолио (только для авторизованных админов)."""
     if not is_admin_authenticated(request):
         return RedirectResponse('/admin/login', status_code=303)
-
-    db = SessionLocal()
+    db = SessionPortfolio()
     try:
         items = db.query(Portfolio).order_by(Portfolio.id.desc()).all()
     finally:
         db.close()
-
     return templates.TemplateResponse('admin/portfolio_manage.html', {'request': request, 'items': items})
 
 
@@ -181,7 +224,7 @@ async def add_portfolio(request: Request, title: str = Form(...), description: s
     """Добавляет новый проект в портфолио."""
     if not is_admin_authenticated(request):
         return RedirectResponse('/admin/login', status_code=303)
-    db = SessionLocal()
+    db = SessionPortfolio()
     image_paths = []
     img_dir = 'static/uploads/portfolio_img'
     os.makedirs(img_dir, exist_ok=True)
@@ -210,7 +253,7 @@ def delete_portfolio(request: Request, item_id: int):
     """Удаляет проект из портфолио."""
     if not is_admin_authenticated(request):
         return RedirectResponse('/admin/login', status_code=303)
-    db = SessionLocal()
+    db = SessionPortfolio()
     item = db.query(Portfolio).filter_by(id=item_id).first()
     if item:
         db.delete(item)
@@ -225,7 +268,7 @@ def update_portfolio_images(request: Request, item_id: int, data: dict = Body(..
     if not is_admin_authenticated(request):
         return JSONResponse({'success': False, 'message': 'Not authenticated'})
     images = data.get('images', [])
-    db = SessionLocal()
+    db = SessionPortfolio()
     item = db.query(Portfolio).filter_by(id=item_id).first()
     if not item:
         db.close()
@@ -244,7 +287,7 @@ def admin_reviews(request: Request):
     """Страница управления отзывами (только для авторизованных админов)."""
     if not is_admin_authenticated(request):
         return RedirectResponse('/admin/login', status_code=303)
-    db = SessionLocal()
+    db = SessionReviews()
     items = db.query(Review).order_by(Review.id.desc()).all()
     db.close()
     return templates.TemplateResponse('admin/reviews_manage.html', {'request': request, 'items': items})
@@ -255,7 +298,7 @@ async def add_review(request: Request, client_name: str = Form(...), text: str =
     """Добавляет новый отзыв."""
     if not is_admin_authenticated(request):
         return RedirectResponse('/admin/login', status_code=303)
-    db = SessionLocal()
+    db = SessionReviews()
     logo_path = None
     if logo and getattr(logo, 'filename', None):
         logo_dir = 'static/uploads/review_logo'
@@ -277,7 +320,7 @@ def delete_review(request: Request, item_id: int):
     """Удаляет отзыв."""
     if not is_admin_authenticated(request):
         return RedirectResponse('/admin/login', status_code=303)
-    db = SessionLocal()
+    db = SessionReviews()
     item = db.query(Review).filter_by(id=item_id).first()
     if item:
         db.delete(item)
@@ -328,5 +371,142 @@ def consent_page(request: Request):
 def policy_page(request: Request):
     """Страница "Политика в отношении обработки персональных данных"."""
     return templates.TemplateResponse('policy.html', {'request': request})
+
+# --- Админка: Заявки КМ ---
+
+
+@app.get('/admin/km_requests', response_class=HTMLResponse)
+def admin_km_requests(request: Request, name: str = '', phone: str = '', email: str = '', km_link: str = '', date: str = '', processed: str = '', page: int = 1, per_page: int = 25):
+    """Страница управления заявками КМ с фильтрацией и пагинацией (только для авторизованных админов)."""
+    if not is_admin_authenticated(request):
+        return RedirectResponse('/admin/login', status_code=303)
+    db = SessionKmRequests()
+    query = db.query(KmRequest)
+    filters = {
+        'name': name,
+        'phone': phone,
+        'email': email,
+        'km_link': km_link,
+        'date': date,
+        'processed': processed
+    }
+    if name:
+        query = query.filter(KmRequest.name.ilike(f'%{name}%'))
+    if phone:
+        query = query.filter(KmRequest.phone.ilike(f'%{phone}%'))
+    if email:
+        query = query.filter(KmRequest.email.ilike(f'%{email}%'))
+    if km_link:
+        query = query.filter(KmRequest.km_link.ilike(f'%{km_link}%'))
+    if date:
+        from datetime import datetime, timedelta
+        try:
+            date_obj = datetime.strptime(date, '%Y-%m-%d')
+            next_day = date_obj + timedelta(days=1)
+            query = query.filter(KmRequest.created_at >=
+                                 date_obj, KmRequest.created_at < next_day)
+        except Exception:
+            pass
+    if processed == '1':
+        query = query.filter(KmRequest.processed == True)
+    elif processed == '0':
+        query = query.filter(KmRequest.processed == False)
+    total = query.count()
+    per_page = max(10, min(per_page, 100))
+    pages = (total + per_page - 1) // per_page
+    page = max(1, min(page, pages if pages else 1))
+    items = query.order_by(KmRequest.id.desc()).offset(
+        (page-1)*per_page).limit(per_page).all()
+    db.close()
+    return templates.TemplateResponse('admin/km_requests_manage.html', {
+        'request': request,
+        'items': items,
+        'filters': filters,
+        'page': page,
+        'per_page': per_page,
+        'pages': pages,
+        'total': total
+    })
+
+
+@app.post('/admin/km_requests/delete/{item_id}')
+def delete_km_request(request: Request, item_id: int):
+    """Удаляет заявку КМ по id (только для авторизованных админов)."""
+    if not is_admin_authenticated(request):
+        return RedirectResponse('/admin/login', status_code=303)
+    db = SessionKmRequests()
+    item = db.query(KmRequest).filter_by(id=item_id).first()
+    if item:
+        db.delete(item)
+        db.commit()
+    db.close()
+    return RedirectResponse('/admin/km_requests', status_code=303)
+
+
+@app.post('/admin/km_requests/toggle_processed/{item_id}')
+def toggle_km_request_processed(request: Request, item_id: int, processed: str = Form(None)):
+    """Переключает статус 'Обработано' у заявки КМ (только для авторизованных админов)."""
+    if not is_admin_authenticated(request):
+        return RedirectResponse('/admin/login', status_code=303)
+    db = SessionKmRequests()
+    item = db.query(KmRequest).filter_by(id=item_id).first()
+    if item:
+        item.processed = bool(processed)
+        db.commit()
+    db.close()
+    return RedirectResponse('/admin/km_requests', status_code=303)
+
+
+@app.get('/admin/km_requests/export_csv')
+def export_km_requests_csv(request: Request, name: str = '', phone: str = '', email: str = '', km_link: str = '', date: str = '', processed: str = ''):
+    """Экспортирует заявки КМ в CSV с учётом фильтров (только для авторизованных админов)."""
+    if not is_admin_authenticated(request):
+        return RedirectResponse('/admin/login', status_code=303)
+    db = SessionKmRequests()
+    query = db.query(KmRequest)
+    if name:
+        query = query.filter(KmRequest.name.ilike(f'%{name}%'))
+    if phone:
+        query = query.filter(KmRequest.phone.ilike(f'%{phone}%'))
+    if email:
+        query = query.filter(KmRequest.email.ilike(f'%{email}%'))
+    if km_link:
+        query = query.filter(KmRequest.km_link.ilike(f'%{km_link}%'))
+    if date:
+        from datetime import datetime, timedelta
+        try:
+            date_obj = datetime.strptime(date, '%Y-%m-%d')
+            next_day = date_obj + timedelta(days=1)
+            query = query.filter(KmRequest.created_at >=
+                                 date_obj, KmRequest.created_at < next_day)
+        except Exception:
+            pass
+    if processed == '1':
+        query = query.filter(KmRequest.processed == True)
+    elif processed == '0':
+        query = query.filter(KmRequest.processed == False)
+    items = query.order_by(KmRequest.id.desc()).all()
+    db.close()
+
+    def generate():
+        output = StringIO()
+        output.write('\ufeff')  # BOM для UTF-8
+        writer = csv.writer(output)
+        writer.writerow(['ID', 'Имя', 'Телефон', 'Email',
+                        'Ссылка на КМ', 'Дата', 'Обработано'])
+        for req in items:
+            writer.writerow([
+                req.id,
+                req.name,
+                req.phone,
+                req.email,
+                req.km_link,
+                req.created_at.strftime(
+                    '%d.%m.%Y %H:%M') if req.created_at else '',
+                'Да' if req.processed else 'Нет'
+            ])
+        output.seek(0)
+        yield output.read()
+    return StreamingResponse(generate(), media_type='text/csv', headers={"Content-Disposition": "attachment; filename=km_requests.csv"})
 
 # TODO: добавить остальные маршруты, мультиязычность, обработку форм, email, портфолио, отзывы, калькулятор, попап, админку
