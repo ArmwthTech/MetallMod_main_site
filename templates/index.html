@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
-<section class="hero bg-white py-20 mb-16 shadow-none rounded-b-3xl flex flex-col items-center justify-center text-center relative overflow-hidden">
-    <h1 class="text-5xl md:text-7xl font-extrabold mb-8 text-[#123392] leading-tight z-10">{{ _('Профессиональные чертежи КМД за 5 дней')|safe }}</h1>
+<section class="hero bg-white h-screen mb-16 shadow-none rounded-b-3xl flex flex-col items-center justify-center text-center relative overflow-hidden">
+    <img src="/static/uploads/portfolio_img/kmd_3d_model.png" alt="3D модель КМД" class="absolute inset-0 w-full h-full object-cover opacity-30 pointer-events-none select-none z-0">
+    <h1 class="text-4xl md:text-5xl lg:text-7xl font-extrabold mb-8 text-[#123392] leading-tight z-10">{{ _('Надёжные чертежи КМД,') }}<br>{{ _('с которыми стройка не встанет') }}</h1>
     <div class="z-10 px-4 md:px-8">
       <p class="text-2xl md:text-3xl text-gray-700 mb-6 text-left">{{ _('Разрабатываем точные чертежи металлоконструкций любой сложности для строительных компаний и инженерных проектов') }}</p>
       <div class="flex flex-col md:flex-row gap-6 z-10 mb-10">
@@ -23,8 +24,6 @@
         <button id="open-km-modal" class="bg-[#ff590d] hover:bg-orange-600 transition px-6 md:px-12 py-4 md:py-5 rounded-2xl text-xl md:text-2xl font-bold shadow-xl focus:outline-none focus:ring-4 focus:ring-[#ff590d]/30 text-white whitespace-nowrap">Отправить КМ на расчет</button>
         <a href="https://t.me/metallmod_bot" target="_blank" class="bg-[#123392] hover:bg-blue-900 transition px-6 md:px-12 py-4 md:py-5 rounded-2xl text-xl md:text-2xl font-bold text-white flex items-center gap-3 shadow-xl border border-[#123392] focus:outline-none focus:ring-4 focus:ring-[#123392]/20 whitespace-nowrap"><i class="fab fa-telegram-plane text-2xl md:text-3xl"></i>{{ _('Написать в Telegram') }}</a>
     </div>
-    <!-- Картинка-подложка -->
-    <img src="/static/uploads/portfolio_img/1624569746_razrabotka-variantov-mostovogo-sooruzheniya.jpg" alt="КМД чертеж" class="absolute inset-0 w-full h-full object-cover opacity-20 pointer-events-none select-none z-0" style="max-height: 100%;">
 </section>
 
 <section class="advantages mb-20">
@@ -124,11 +123,11 @@
         <form id="miniCalcForm" class="flex flex-col gap-6" action="#">
             <div class="flex items-center gap-3 bg-gray-100 rounded-xl px-4 py-4">
                 <i class="fa fa-weight-hanging"></i>
-                <input type="number" name="tons" min="1" step="1" placeholder="{{ _('Тоннаж, т') }}" required class="bg-transparent outline-none flex-1 text-lg">
+                <input type="number" name="tons" min="1" step="1" placeholder="{{ _('Тоннаж, т') }}" required class="bg-transparent outline-none flex-1 text-base md:text-lg">
             </div>
             <div class="flex items-center gap-3 bg-gray-100 rounded-xl px-4 py-4">
                 <i class="fa fa-layer-group"></i>
-                <select name="difficulty" required class="bg-transparent outline-none flex-1 text-lg">
+                <select name="difficulty" required class="bg-transparent outline-none flex-1 text-base md:text-lg">
                     <option value="1.8">{{ _('Обычная сложность') }}</option>
                     <option value="2">{{ _('Средняя сложность') }}</option>
                     <option value="2.3">{{ _('Высокая сложность') }}</option>
@@ -145,19 +144,19 @@
         <form id="calcForm" method="post" enctype="multipart/form-data" action="/send-calc-form" class="flex flex-col gap-6">
             <div class="flex items-center gap-3 bg-gray-100 rounded-xl px-4 py-4">
                 <i class="fa fa-user"></i>
-                <input type="text" name="name" placeholder="{{ _('Имя') }}" required minlength="2" maxlength="50" pattern="^[А-Яа-яA-Za-z\-\s]+$" class="bg-transparent outline-none flex-1 text-lg">
+                <input type="text" name="name" placeholder="{{ _('Имя') }}" required minlength="2" maxlength="50" pattern="^[А-Яа-яA-Za-z\-\s]+$" class="bg-transparent outline-none flex-1 text-base md:text-lg">
             </div>
             <div class="flex items-center gap-3 bg-gray-100 rounded-xl px-4 py-4">
                 <i class="fa fa-phone"></i>
-                <input type="tel" name="phone" id="calcFormPhone" placeholder="+7 (999) 999-99-99" required pattern="^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$" maxlength="18" class="bg-transparent outline-none flex-1 text-lg">
+                <input type="tel" name="phone" id="calcFormPhone" placeholder="+7 (999) 999-99-99" required pattern="^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$" maxlength="18" class="bg-transparent outline-none flex-1 text-base md:text-lg">
             </div>
             <div class="flex items-center gap-3 bg-gray-100 rounded-xl px-4 py-4">
                 <i class="fa fa-envelope"></i>
-                <input type="email" name="email" placeholder="{{ _('Почта') }}" required maxlength="100" class="bg-transparent outline-none flex-1 text-lg">
+                <input type="email" name="email" placeholder="{{ _('Почта') }}" required maxlength="100" class="bg-transparent outline-none flex-1 text-base md:text-lg">
             </div>
             <div class="flex items-center gap-3 bg-gray-100 rounded-xl px-4 py-4">
                 <i class="fa fa-link"></i>
-                <input type="url" name="km_link" placeholder="{{ _('Укажите ссылку на разработанный КМ') }}" maxlength="200" class="bg-transparent outline-none flex-1 text-lg">
+                <input type="url" name="km_link" placeholder="Укажите ссылку на разработанный КМ (Google Drive, Яндекс.Диск, Dropbox и т.д.)" maxlength="200" class="block w-full max-w-none bg-gray-100 rounded-xl px-4 py-4 outline-none text-base md:text-lg">
             </div>
             <div class="flex items-center gap-3">
                 <input type="checkbox" name="consent" required class="accent-[#ff590d] w-5 h-5">
@@ -264,8 +263,8 @@
         <div class="swiper portfolio-swiper">
             <div class="swiper-wrapper">
                 {% for item in portfolio_items %}
-                <div class="swiper-slide">
-                  <div class="portfolio-item bg-white rounded-3xl shadow-2xl p-4 flex flex-col items-center border-t-4 border-[#ff590d] hover:scale-105 transition-transform cursor-pointer" data-title="{{ item.title }}" data-description="{{ item.description }}" data-images="{{ item.image_paths|default('[]') }}">
+                <div class="swiper-slide overflow-visible group">
+                  <div class="portfolio-item bg-white rounded-3xl shadow-2xl p-4 flex flex-col items-center border-t-4 border-[#ff590d] transition-transform duration-300 group-hover:scale-110 group-hover:shadow-3xl cursor-pointer" data-title="{{ item.title }}" data-description="{{ item.description }}" data-images="{{ item.image_paths|default('[]') }}">
                       {% set images = item.image_paths|from_json if item.image_paths else [] %}
                       {% if images %}
                       <img src="{{ images[0] }}" alt="{{ item.title }}" class="rounded-xl w-full h-48 object-cover mb-4 shadow-md">
@@ -301,6 +300,58 @@ document.addEventListener('DOMContentLoaded', function() {
     navigation: false,
     pagination: false
   });
+
+  // Portfolio modal logic
+  const modal = document.getElementById('portfolio-modal');
+  const closeBtn = document.getElementById('portfolio-modal-close');
+  const imgEl = document.getElementById('portfolio-modal-image');
+  const titleEl = document.getElementById('portfolio-modal-title');
+  const descEl = document.getElementById('portfolio-modal-description');
+  const prevBtn = document.getElementById('portfolio-modal-prev');
+  const nextBtn = document.getElementById('portfolio-modal-next');
+  const dotsEl = document.getElementById('portfolio-modal-dots');
+  let images = [], current = 0;
+  function show(idx) {
+    if (!images.length) return;
+    imgEl.src = images[idx];
+    dotsEl.innerHTML = '';
+    images.forEach((_, i) => {
+      const dot = document.createElement('button');
+      dot.className = 'w-3 h-3 rounded-full ' + (i === idx ? 'bg-[#ff590d]' : 'bg-gray-300') + ' mx-1';
+      dot.onclick = () => { current = i; show(current); };
+      dotsEl.appendChild(dot);
+    });
+  }
+  function openModal() {
+    modal.classList.remove('hidden');
+    modal.classList.remove('portfolio-modal-animate-in');
+    void modal.offsetWidth; // reflow
+    modal.classList.add('portfolio-modal-animate-in');
+  }
+  function closeModal() {
+    modal.classList.remove('portfolio-modal-animate-in');
+    modal.classList.add('animate-fade-out');
+    setTimeout(() => {
+      modal.classList.add('hidden');
+      modal.classList.remove('animate-fade-out');
+    }, 300);
+  }
+  document.querySelectorAll('.portfolio-item').forEach(item => {
+    item.addEventListener('click', function() {
+      titleEl.textContent = item.dataset.title;
+      descEl.textContent = item.dataset.description;
+      try {
+        images = JSON.parse(item.dataset.images);
+      } catch { images = []; }
+      if (!images.length && item.querySelector('img')) images = [item.querySelector('img').src];
+      current = 0;
+      show(current);
+      openModal();
+    });
+  });
+  closeBtn.addEventListener('click', closeModal);
+  modal.onclick = e => { if (e.target === modal) closeModal(); };
+  document.addEventListener('keydown', e => { if (!modal.classList.contains('hidden') && e.key === 'Escape') closeModal(); });
 });
 </script>
 
@@ -324,7 +375,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 
 <section id="steps" class="mb-24">
-    <h2 class="text-4xl font-extrabold mb-12 text-center text-[#123392]">{{ _('Как мы работаем') }}</h2>
+    <h2 class="text-3xl md:text-4xl font-extrabold mb-12 text-center text-[#123392]">{{ _('Как мы работаем') }}</h2>
     <div class="flex flex-wrap justify-center gap-10">
         <div class="bg-white rounded-3xl shadow-xl p-8 flex flex-col items-center min-w-[200px] border-t-4 border-[#123392]">
             <span class="text-4xl font-extrabold text-[#ff590d] mb-2">1</span>
@@ -402,7 +453,7 @@ document.addEventListener('DOMContentLoaded', function() {
         <button id="popup-close" class="absolute top-4 right-4 text-3xl text-gray-400 hover:text-[#ff590d] transition-colors focus:outline-none">&times;</button>
         <h3 class="text-2xl font-extrabold mb-6 text-[#123392] flex items-center gap-3 justify-center"><i class="fa fa-gift text-[#ff590d] text-3xl"></i> {{ _('Напиши нам о своем проекте и получи 10% скидку на первый заказ!') }}</h3>
         <form id="popupForm" action="#" class="flex flex-col gap-6">
-            <input type="email" name="email" placeholder="Email" required class="bg-gray-100 rounded-xl px-5 py-4 outline-none text-lg">
+            <input type="email" name="email" placeholder="Email" required class="bg-gray-100 rounded-xl px-5 py-4 outline-none text-base md:text-lg">
             <button type="submit" class="bg-[#ff590d] hover:bg-orange-600 transition px-8 py-4 rounded-2xl text-xl font-bold text-white shadow-lg flex items-center gap-2 justify-center focus:outline-none focus:ring-4 focus:ring-[#ff590d]/30"><i class="fa fa-percent"></i> {{ _('Получить скидку') }}</button>
         </form>
     </div>
@@ -423,10 +474,10 @@ document.addEventListener('DOMContentLoaded', function() {
       </div>
     </div>
     <form id="kmForm" method="post" action="/send-km-form" class="flex flex-col gap-6">
-      <input type="text" name="name" placeholder="Имя" class="border-b border-gray-300 py-2 px-0 focus:outline-none focus:border-[#ff590d] text-lg" />
-      <input type="tel" name="phone" placeholder="+7 (999) 999-99-99" class="border-b border-gray-300 py-2 px-0 focus:outline-none focus:border-[#ff590d] text-lg" />
-      <input type="email" name="email" placeholder="Почта" class="border-b border-gray-300 py-2 px-0 focus:outline-none focus:border-[#ff590d] text-lg" />
-      <input type="url" name="km_link" placeholder="Укажите ссылку на разработанный КМ" class="border-b border-gray-300 py-2 px-0 focus:outline-none focus:border-[#ff590d] text-lg" />
+      <input type="text" name="name" placeholder="Имя" class="border-b border-gray-300 py-2 px-0 focus:outline-none focus:border-[#ff590d] text-base md:text-lg" />
+      <input type="tel" name="phone" placeholder="+7 (999) 999-99-99" class="border-b border-gray-300 py-2 px-0 focus:outline-none focus:border-[#ff590d] text-base md:text-lg" />
+      <input type="email" name="email" placeholder="Почта" class="border-b border-gray-300 py-2 px-0 focus:outline-none focus:border-[#ff590d] text-base md:text-lg" />
+      <input type="url" name="km_link" placeholder="Укажите ссылку на разработанный КМ (Google Drive, Яндекс.Диск, Dropbox и т.д.)" maxlength="200" class="block w-full max-w-none bg-gray-100 rounded-xl px-4 py-4 outline-none text-base md:text-lg">
       <div class="flex items-start gap-2">
         <input type="checkbox" id="consent" name="consent" class="accent-[#ff590d] w-5 h-5 mt-1" required />
         <label for="consent" class="text-sm text-gray-700">Даю <a href="/consent" target="_blank" class="underline text-[#ff590d]">Согласие на обработку персональных данных</a> и принимаю <a href="/policy" target="_blank" class="underline text-[#ff590d]">Политику в отношении обработки персональных данных</a></label>
@@ -602,47 +653,6 @@ if (document.getElementById('yandex-map')) {
     slider.style.opacity = '1';
     renderPage(false);
 })();
-// Portfolio modal logic
-(function() {
-    const modal = document.getElementById('portfolio-modal');
-    const closeBtn = document.getElementById('portfolio-modal-close');
-    const imgEl = document.getElementById('portfolio-modal-image');
-    const titleEl = document.getElementById('portfolio-modal-title');
-    const descEl = document.getElementById('portfolio-modal-description');
-    const prevBtn = document.getElementById('portfolio-modal-prev');
-    const nextBtn = document.getElementById('portfolio-modal-next');
-    const dotsEl = document.getElementById('portfolio-modal-dots');
-    let images = [], current = 0;
-    function show(idx) {
-        if (!images.length) return;
-        imgEl.src = images[idx];
-        dotsEl.innerHTML = '';
-        images.forEach((_, i) => {
-            const dot = document.createElement('button');
-            dot.className = 'w-3 h-3 rounded-full ' + (i === idx ? 'bg-[#ff590d]' : 'bg-gray-300') + ' mx-1';
-            dot.onclick = () => { current = i; show(current); };
-            dotsEl.appendChild(dot);
-        });
-    }
-    document.querySelectorAll('.portfolio-item').forEach(item => {
-        item.onclick = function() {
-            titleEl.textContent = item.dataset.title;
-            descEl.textContent = item.dataset.description;
-            try {
-                images = JSON.parse(item.dataset.images);
-            } catch { images = []; }
-            if (!images.length && item.querySelector('img')) images = [item.querySelector('img').src];
-            current = 0;
-            show(current);
-            modal.classList.remove('hidden');
-        };
-    });
-    closeBtn.onclick = () => modal.classList.add('hidden');
-    prevBtn.onclick = () => { if (images.length) { current = (current-1+images.length)%images.length; show(current); } };
-    nextBtn.onclick = () => { if (images.length) { current = (current+1)%images.length; show(current); } };
-    modal.onclick = e => { if (e.target === modal) modal.classList.add('hidden'); };
-    document.addEventListener('keydown', e => { if (!modal.classList.contains('hidden')) { if (e.key === 'Escape') modal.classList.add('hidden'); if (e.key === 'ArrowLeft') prevBtn.click(); if (e.key === 'ArrowRight') nextBtn.click(); } });
-})();
 // Открытие/закрытие модального окна КМ
 document.addEventListener('DOMContentLoaded', function() {
   var openBtn = document.getElementById('open-km-modal');
@@ -725,67 +735,48 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     };
   }
-  // Маска для телефона (строгий контроль)
-  var phoneInput = document.getElementById('calcFormPhone');
-  if (phoneInput && window.IMask) {
-    var mask = IMask(phoneInput, {
-      mask: '+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$',
-      lazy: true
-    });
-    phoneInput.addEventListener('focus', function() {
-      if (!phoneInput.value || phoneInput.value === '+7') {
-        mask.value = '+7 (';
-        setTimeout(function() {
-          phoneInput.setSelectionRange(4, 4);
-        }, 0);
-      }
-    });
-  }
-  // Обработка формы calcForm
-  var calcForm = document.getElementById('calcForm');
-  if (calcForm) {
-    calcForm.onsubmit = async function(e) {
+  // Маска для телефона (IMask.js)
+  document.querySelectorAll('input[type="tel"]').forEach(function(input) {
+    IMask(input, { mask: '+{7} (000) 000-00-00' });
+  });
+  // Открытие модального окна КМ по всем кнопкам с классом open-km-modal
+  const kmModal = document.getElementById('km-modal');
+  const openKmBtns = document.querySelectorAll('.open-km-modal');
+  const closeKmBtn = document.getElementById('close-km-modal');
+  openKmBtns.forEach(btn => {
+    btn.addEventListener('click', function(e) {
       e.preventDefault();
-      var name = calcForm.querySelector('[name="name"]');
-      var phone = calcForm.querySelector('[name="phone"]');
-      var email = calcForm.querySelector('[name="email"]');
-      var consent = calcForm.querySelector('[name="consent"]');
-      var phonePattern = /^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$/;
-      if (!name.value.trim() || name.value.trim().length < 2) {
-        showToast('Введите корректное имя (минимум 2 буквы)', 'error');
-        return false;
-      }
-      if (!phonePattern.test(phone.value.trim())) {
-        showToast('Введите телефон в формате +7 (999) 999-99-99', 'error');
-        return false;
-      }
-      if (!email.value.trim() || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email.value.trim())) {
-        showToast('Введите корректный email', 'error');
-        return false;
-      }
-      if (!consent.checked) {
-        showToast('Необходимо согласие на обработку данных', 'error');
-        return false;
-      }
-      var formData = new FormData(calcForm);
-      showToast('Отправка...', 'success');
-      try {
-        let resp = await fetch('/send-calc-form', {
-          method: 'POST',
-          body: formData
-        });
-        let data = await resp.json();
-        if (data.success) {
-          showToast('Заявка принята! С вами свяжется менеджер в ближайшее время.', 'success');
-          calcForm.reset();
-        } else {
-          showToast(data.message || 'Ошибка отправки', 'error');
-        }
-      } catch (err) {
-        showToast('Ошибка отправки', 'error');
-      }
-    };
-  }
+      kmModal.classList.remove('hidden');
+    });
+  });
+  closeKmBtn.addEventListener('click', function() {
+    kmModal.classList.add('hidden');
+  });
+  kmModal.onclick = e => { if (e.target === kmModal) kmModal.classList.add('hidden'); };
 });
 </script>
+<style>
+.swiper,
+.swiper-wrapper,
+.swiper-slide {
+  overflow: visible !important;
+}
+html, body {
+  overflow-x: hidden;
+}
+@keyframes modal-fade-in {
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
+}
+.portfolio-modal-animate-in {
+  animation: modal-fade-in 0.35s cubic-bezier(.4,2,.6,1) both;
+}
+@keyframes fade-out {
+  from { opacity: 1; transform: scale(1); }
+  to   { opacity: 0; transform: scale(0.95); }
+}
+.animate-fade-out {
+  animation: fade-out 0.3s cubic-bezier(.4,2,.6,1) both;
+}
+</style>
 {% endblock %} 

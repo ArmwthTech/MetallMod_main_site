@@ -28,42 +28,72 @@
 <body class="bg-[#F5F5F5] text-[#123392] font-sans">
     <!-- Toast notifications -->
     <div id="toast-container" class="fixed top-6 right-6 z-[100] flex flex-col gap-3 items-end"></div>
-    <header class="bg-white shadow-lg sticky top-0 z-50 py-6 px-4">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+    <header class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto flex items-center justify-between p-4">
             <div class="flex items-center gap-4 cursor-pointer" id="logo-scroll-top">
                 <img src="/static/logo.jpg" alt="Логотип" class="h-12 w-12 object-contain rounded-full" style="min-width:48px;">
                 <span class="text-3xl font-extrabold tracking-tight" style="font-family: 'Baron Neue', Arial, sans-serif; text-shadow: 0 0 2px #fff, 0 0 6px #fff;">
                     <span class="text-[#123392]">Металл</span><span class="text-[#ff590d]">Мод</span>
                 </span>
             </div>
-            <nav class="flex flex-wrap gap-6 text-lg font-medium items-center justify-start ml-8" id="main-nav">
-                <a href="#services" class="hover:text-[#ff590d] transition-colors">Услуги</a>
-                <a href="#portfolio" class="hover:text-[#ff590d] transition-colors">Портфолио</a>
-                <a href="#steps" class="hover:text-[#ff590d] transition-colors">Этапы</a>
-                <a href="#reviews" class="hover:text-[#ff590d] transition-colors">Отзывы</a>
-                <a href="#contacts" class="hover:text-[#ff590d] transition-colors">Контакты</a>
+
+            <!-- Меню для десктопа -->
+            <div class="hidden md:flex items-center gap-6">
+                <nav class="flex gap-6 text-lg font-medium items-center">
+                    <a href="#services" class="hover:text-[#ff590d] transition-colors">Услуги</a>
+                    <a href="#portfolio" class="hover:text-[#ff590d] transition-colors">Портфолио</a>
+                    <a href="#steps" class="hover:text-[#ff590d] transition-colors">Этапы</a>
+                    <a href="#reviews" class="hover:text-[#ff590d] transition-colors">Отзывы</a>
+                    <a href="#contacts" class="hover:text-[#ff590d] transition-colors">Контакты</a>
+                </nav>
+                <div class="flex items-center gap-x-4">
+                    <div class="text-right">
+                        <a href="tel:+79995274210" class="text-base font-bold hover:text-[#ff590d] transition-colors flex items-center justify-end gap-1.5">
+                            <i class="fa fa-phone text-base"></i>+7 (999) 527-42-10
+                        </a>
+                        <div class="text-xs text-gray-500 mt-0.5">Пн–Пт 9:00–18:00</div>
+                    </div>
+                    <div class="flex gap-2">
+                        <button id="header-km-modal-btn-desktop" class="bg-[#ff590d] hover:bg-orange-600 text-white px-3 py-1.5 rounded-xl font-semibold shadow-md transition whitespace-nowrap text-sm">Оставить заявку</button>
+                    </div>
+                    <div class="flex items-center gap-1 text-sm font-semibold">
+                        <a href="?lang=ru" class="hover:text-[#ff590d] transition-colors {{ 'font-bold underline' if lang == 'ru' else '' }}">RU</a>
+                        <span class="opacity-50">|</span>
+                        <a href="?lang=en" class="hover:text-[#ff590d] transition-colors {{ 'font-bold underline' if lang == 'en' else '' }}">EN</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Кнопка-бургер для мобильных -->
+            <button id="burger-btn" class="md:hidden text-2xl text-[#123392] focus:outline-none">
+                <i class="fa fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Мобильное меню -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200">
+            <nav class="flex flex-col items-center gap-4 p-4">
+                <a href="#services" class="mobile-menu-link text-lg hover:text-[#ff590d]">Услуги</a>
+                <a href="#portfolio" class="mobile-menu-link text-lg hover:text-[#ff590d]">Портфолио</a>
+                <a href="#steps" class="mobile-menu-link text-lg hover:text-[#ff590d]">Этапы</a>
+                <a href="#reviews" class="mobile-menu-link text-lg hover:text-[#ff590d]">Отзывы</a>
+                <a href="#contacts" class="mobile-menu-link text-lg hover:text-[#ff590d]">Контакты</a>
             </nav>
-            <div class="flex flex-col md:flex-row items-center justify-center md:justify-end gap-x-4 gap-y-2 mt-2 md:mt-0 flex-1">
-                <!-- Телефон и часы -->
-                <div class="text-center md:text-right">
-                    <a href="tel:+79995274210" class="text-base font-bold hover:text-[#ff590d] transition-colors flex items-center justify-center md:justify-end gap-1.5">
+            <div class="flex flex-col items-center gap-4 p-4 border-t border-gray-100">
+                 <div class="text-center">
+                    <a href="tel:+79995274210" class="text-base font-bold hover:text-[#ff590d] flex items-center justify-center gap-1.5">
                         <i class="fa fa-phone text-base"></i>+7 (999) 527-42-10
                     </a>
                     <div class="text-xs text-gray-500 mt-0.5">Пн–Пт 9:00–18:00</div>
                 </div>
-            
-                <!-- Кнопки -->
-                <div class="flex gap-2">
-                    <button id="header-km-modal-btn" class="flex-1 bg-[#ff590d] hover:bg-orange-600 text-white px-3 py-1.5 rounded-xl font-semibold shadow-md transition whitespace-nowrap text-xs md:text-sm flex items-center justify-center">Оставить заявку</button>
-                    <a href="https://t.me/metallmod_bot" target="_blank" class="flex-1 bg-[#123392] hover:bg-blue-900 text-white px-3 py-1.5 rounded-xl font-semibold shadow-md flex items-center justify-center gap-1.5 transition text-xs md:text-sm">
-                        <i class="fab fa-telegram-plane text-base"></i> Telegram
-                    </a>
-                </div>
-                <!-- Язык -->
-                <div class="flex items-center gap-1 text-sm font-semibold">
-                    <a href="?lang=ru" class="hover:text-[#ff590d] transition-colors {{ 'font-bold underline' if lang == 'ru' else '' }}">RU</a>
+                <button id="header-km-modal-btn-mobile" class="w-full bg-[#ff590d] hover:bg-orange-600 text-white px-4 py-2 rounded-xl font-semibold shadow-md">Оставить заявку</button>
+                <a href="https://t.me/metallmod_bot" target="_blank" class="w-full bg-[#123392] hover:bg-blue-900 text-white px-4 py-2 rounded-xl font-semibold shadow-md flex items-center justify-center gap-1.5">
+                    <i class="fab fa-telegram-plane"></i> Telegram
+                </a>
+                <div class="flex items-center gap-2 text-sm font-semibold">
+                    <a href="?lang=ru" class="hover:text-[#ff590d] {{ 'font-bold underline' if lang == 'ru' else '' }}">RU</a>
                     <span class="opacity-50">|</span>
-                    <a href="?lang=en" class="hover:text-[#ff590d] transition-colors {{ 'font-bold underline' if lang == 'en' else '' }}">EN</a>
+                    <a href="?lang=en" class="hover:text-[#ff590d] {{ 'font-bold underline' if lang == 'en' else '' }}">EN</a>
                 </div>
             </div>
         </div>
@@ -192,11 +222,32 @@
     })();
     // Открытие модального окна по кнопке в хедере
     document.addEventListener('DOMContentLoaded', function() {
-      var headerBtn = document.getElementById('header-km-modal-btn');
-      var modal = document.getElementById('km-modal');
-      if (headerBtn && modal) {
-        headerBtn.onclick = function() { modal.classList.remove('hidden'); };
+      function openKmModal() {
+          document.getElementById('km-modal').classList.remove('hidden');
       }
+
+      var desktopBtn = document.getElementById('header-km-modal-btn-desktop');
+      if(desktopBtn) desktopBtn.onclick = openKmModal;
+      
+      var mobileBtn = document.getElementById('header-km-modal-btn-mobile');
+      if(mobileBtn) mobileBtn.onclick = openKmModal;
+      
+      var burgerBtn = document.getElementById('burger-btn');
+      var mobileMenu = document.getElementById('mobile-menu');
+      if(burgerBtn && mobileMenu) {
+          burgerBtn.addEventListener('click', function() {
+              mobileMenu.classList.toggle('hidden');
+          });
+      }
+
+      var mobileMenuLinks = document.querySelectorAll('.mobile-menu-link');
+      mobileMenuLinks.forEach(function(link) {
+          link.addEventListener('click', function() {
+              if(!mobileMenu.classList.contains('hidden')) {
+                  mobileMenu.classList.add('hidden');
+              }
+          });
+      });
     });
     </script>
 </body>

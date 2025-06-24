@@ -1,39 +1,55 @@
 {% extends 'admin/admin_base.html' %}
 {% block admin_title %}Управление отзывами{% endblock %}
 {% block admin_content %}
-<div class="max-w-xl mx-auto mb-12">
-    <form method="post" action="/admin/reviews/add" enctype="multipart/form-data" class="bg-white rounded-2xl shadow-xl p-8 flex flex-col gap-6 border-t-4 border-[#ff590d]" id="reviewAddForm">
-        <div class="text-xl font-bold text-[#123392] mb-2 flex items-center gap-2"><i class="fa fa-plus-circle text-[#ff590d]"></i> Добавить отзыв</div>
-        <input type="text" name="client_name" placeholder="Имя клиента" required class="bg-gray-100 rounded-xl px-4 py-3 outline-none text-lg">
-        <input type="text" name="text" placeholder="Текст отзыва" required class="bg-gray-100 rounded-xl px-4 py-3 outline-none text-lg">
-        <label class="block text-left">Логотип:
-            <input type="file" name="logo" accept="image/*" class="mt-1">
-        </label>
-        <button type="submit" class="bg-[#ff590d] hover:bg-orange-600 transition px-8 py-3 rounded-xl text-lg font-bold text-white shadow-lg flex items-center gap-2 justify-center"><i class="fa fa-plus"></i> Добавить</button>
+<div class="px-4 md:px-0">
+  <div class="w-full max-w-xl mx-auto mb-8 md:mb-12">
+    <form method="post" action="/admin/reviews/add" enctype="multipart/form-data" class="bg-white rounded-2xl shadow-xl p-4 md:p-8 flex flex-col gap-4 md:gap-6 border-t-4 border-[#ff590d]" id="reviewAddForm">
+      <div class="text-lg md:text-xl font-bold text-[#123392] mb-2 flex items-center gap-2">
+        <i class="fa fa-plus-circle text-[#ff590d]"></i> Добавить отзыв
+      </div>
+      <input type="text" name="client_name" placeholder="Имя клиента" required class="bg-gray-100 rounded-xl px-4 py-3 outline-none text-base md:text-lg">
+      <input type="text" name="text" placeholder="Текст отзыва" required class="bg-gray-100 rounded-xl px-4 py-3 outline-none text-base md:text-lg">
+      <label class="block text-left text-sm md:text-base">
+        Логотип:
+        <input type="file" name="logo" accept="image/*" class="mt-1 text-sm md:text-base w-full">
+      </label>
+      <button type="submit" class="bg-[#ff590d] hover:bg-orange-600 transition px-6 md:px-8 py-3 rounded-xl text-base md:text-lg font-bold text-white shadow-lg flex items-center gap-2 justify-center">
+        <i class="fa fa-plus"></i> Добавить
+      </button>
     </form>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
     {% for item in items %}
-    <div class="bg-white rounded-2xl shadow-xl p-6 flex flex-col gap-3 border-t-4 border-[#123392]">
-        <div class="flex items-center gap-2 mb-2">
-            <span class="text-lg font-bold text-[#123392]">{{ item.client_name }}</span>
-        </div>
-        <div class="text-gray-600 text-base mb-2 italic">{{ item.text }}</div>
-        {% if item.logo_path %}
-        <img src="{{ item.logo_path }}" alt="logo" class="rounded-full w-20 h-20 object-contain mb-2 border-2 border-[#123392] shadow">
-        {% endif %}
-        <form method="post" action="/admin/reviews/delete/{{ item.id }}" class="mt-2">
-            <button type="submit" onclick="return confirm('Удалить?')" class="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-lg flex items-center gap-2"><i class="fa fa-trash"></i> Удалить</button>
-        </form>
+    <div class="bg-white rounded-2xl shadow-xl p-4 md:p-6 flex flex-col gap-3 border-t-4 border-[#123392]">
+      <div class="flex items-center gap-2 mb-2">
+        <span class="text-base md:text-lg font-bold text-[#123392]">{{ item.client_name }}</span>
+      </div>
+      <div class="text-gray-600 text-sm md:text-base mb-2 italic">{{ item.text }}</div>
+      {% if item.logo_path %}
+      <div class="flex justify-center">
+        <img src="{{ item.logo_path }}" alt="logo" class="rounded-full w-16 md:w-20 h-16 md:h-20 object-contain mb-2 border-2 border-[#123392] shadow">
+      </div>
+      {% endif %}
+      <form method="post" action="/admin/reviews/delete/{{ item.id }}" class="mt-2">
+        <button type="submit" onclick="return confirm('Удалить?')" class="bg-red-500 hover:bg-red-700 text-white px-3 md:px-4 py-2 rounded-lg text-sm md:text-base flex items-center gap-2 w-full justify-center">
+          <i class="fa fa-trash"></i> Удалить
+        </button>
+      </form>
     </div>
     {% endfor %}
+  </div>
 </div>
+
 <script>
-// Toast для добавления (пример, интеграция зависит от backend)
+// Toast для добавления
 if (document.getElementById('reviewAddForm')) {
     document.getElementById('reviewAddForm').onsubmit = function() {
         setTimeout(function(){ showToast('Отзыв добавлен!', 'success'); }, 300);
     };
 }
+
+console.log('btn:', btn);
+console.log('data-images:', btn.dataset.images);
 </script>
 {% endblock %} 

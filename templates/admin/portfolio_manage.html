@@ -1,47 +1,56 @@
 {% extends 'admin/admin_base.html' %}
 {% block admin_title %}Управление портфолио{% endblock %}
 {% block admin_content %}
-<div class="max-w-2xl mx-auto mb-12">
-    <form method="post" action="/admin/portfolio/add" enctype="multipart/form-data" class="bg-white rounded-2xl shadow-xl p-8 flex flex-col gap-6 border-t-4 border-[#ff590d]" id="portfolioAddForm">
-        <div class="text-xl font-bold text-[#123392] mb-2 flex items-center gap-2"><i class="fa fa-plus-circle text-[#ff590d]"></i> Добавить проект</div>
-        <input type="text" name="title" placeholder="Название" required class="bg-gray-100 rounded-xl px-4 py-3 outline-none text-lg">
-        <input type="text" name="description" placeholder="Описание" class="bg-gray-100 rounded-xl px-4 py-3 outline-none text-lg">
-        <label class="block text-left">Фотографии проекта:
-            <input type="file" name="images" accept="image/*" class="mt-1" multiple id="imagesInput">
-            <div id="drop-area" class="mt-2 p-4 border-2 border-dashed border-[#123392] rounded-xl text-center text-[#123392] cursor-pointer">Перетащите файлы сюда или кликните для выбора</div>
+<div class="w-full max-w-2xl mx-auto mb-8 md:mb-12 px-4 md:px-0">
+    <form method="post" action="/admin/portfolio/add" enctype="multipart/form-data" class="bg-white rounded-2xl shadow-xl p-4 md:p-8 flex flex-col gap-4 md:gap-6 border-t-4 border-[#ff590d]" id="portfolioAddForm">
+        <div class="text-lg md:text-xl font-bold text-[#123392] mb-2 flex items-center gap-2"><i class="fa fa-plus-circle text-[#ff590d]"></i> Добавить проект</div>
+        <input type="text" name="title" placeholder="Название" required class="bg-gray-100 rounded-xl px-4 py-3 outline-none text-base md:text-lg">
+        <input type="text" name="description" placeholder="Описание" class="bg-gray-100 rounded-xl px-4 py-3 outline-none text-base md:text-lg">
+        <label class="block text-left text-base md:text-lg">Фотографии проекта:
+            <input type="file" name="images" accept="image/*" class="mt-1 text-sm md:text-base" multiple id="imagesInput">
+            <div id="drop-area" class="mt-2 p-4 border-2 border-dashed border-[#123392] rounded-xl text-center text-[#123392] cursor-pointer text-sm md:text-base">Перетащите файлы сюда или кликните для выбора</div>
             <div id="preview-area" class="flex flex-wrap gap-2 mt-2"></div>
         </label>
-        <button type="submit" class="bg-[#ff590d] hover:bg-orange-600 transition px-8 py-3 rounded-xl text-lg font-bold text-white shadow-lg flex items-center gap-2 justify-center"><i class="fa fa-plus"></i> Добавить</button>
+        <button type="submit" class="bg-[#ff590d] hover:bg-orange-600 transition px-6 md:px-8 py-3 rounded-xl text-base md:text-lg font-bold text-white shadow-lg flex items-center gap-2 justify-center"><i class="fa fa-plus"></i> Добавить</button>
     </form>
 </div>
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8 px-4 md:px-0">
     {% for item in items %}
-    <div class="bg-white rounded-2xl shadow-xl p-6 flex flex-col gap-3 border-t-4 border-[#123392]">
+    <div class="bg-white rounded-2xl shadow-xl p-4 md:p-6 flex flex-col gap-3 border-t-4 border-[#123392]">
         <div class="flex items-center gap-2 mb-2">
-            <span class="text-lg font-bold text-[#123392]">{{ item.title }}</span>
+            <span class="text-base md:text-lg font-bold text-[#123392]">{{ item.title }}</span>
         </div>
-        <div class="text-gray-600 text-base mb-2">{{ item.description }}</div>
+        <div class="text-gray-600 text-sm md:text-base mb-2">{{ item.description }}</div>
         {% if item.image_paths %}
         <div class="flex flex-col gap-2">
             <div class="flex flex-wrap gap-2 sortable-images" data-item-id="{{ item.id }}">
                 {% for img in item.image_paths|from_json %}
                 <div class="relative draggable-image" draggable="true" data-img="{{ img }}">
-                    <img src="{{ img }}" alt="img" class="rounded-xl w-24 h-16 object-cover shadow">
-                    <button type="button" class="absolute top-0 right-0 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs delete-image" title="Удалить">&times;</button>
+                    <img src="{{ img }}" alt="img" class="rounded-xl w-20 md:w-24 h-14 md:h-16 object-cover shadow">
+                    <button type="button" class="absolute top-0 right-0 bg-red-500 text-white rounded-full w-5 md:w-6 h-5 md:h-6 flex items-center justify-center text-xs delete-image" title="Удалить">&times;</button>
                 </div>
                 {% endfor %}
             </div>
-            <button class="mt-2 bg-[#ff590d] hover:bg-orange-600 text-white px-4 py-2 rounded-xl font-bold shadow transition save-images-order" data-item-id="{{ item.id }}">Сохранить порядок</button>
         </div>
         {% elif item.image_path %}
-        <img src="{{ item.image_path }}" alt="img" class="rounded-xl w-24 h-16 object-cover shadow">
+        <img src="{{ item.image_path }}" alt="img" class="rounded-xl w-20 md:w-24 h-14 md:h-16 object-cover shadow">
         {% endif %}
-        <form method="post" action="/admin/portfolio/delete/{{ item.id }}" class="mt-2">
-            <button type="submit" onclick="return confirm('Удалить?')" class="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-lg flex items-center gap-2"><i class="fa fa-trash"></i> Удалить</button>
-        </form>
+        <div class="flex gap-2 mt-2 justify-center">
+          <button type="button" class="bg-blue-500 hover:bg-blue-700 text-white px-3 py-2 rounded-lg text-sm flex items-center gap-2 open-edit-modal"
+                  data-id="{{ item.id }}" data-title="{{ item.title }}" data-description="{{ item.description }}" data-images='{{ item.image_paths_json|safe }}'>
+            <i class="fa fa-edit"></i> Редактировать
+          </button>
+          <form method="post" action="/admin/portfolio/delete/{{ item.id }}">
+            <button type="submit" onclick="return confirm('Удалить?')" class="bg-red-500 hover:bg-red-700 text-white px-3 py-2 rounded-lg text-sm flex items-center gap-2">
+              <i class="fa fa-trash"></i> Удалить
+            </button>
+          </form>
+        </div>
     </div>
     {% endfor %}
 </div>
+
 <script>
 // Drag-n-drop + preview для добавления
 const dropArea = document.getElementById('drop-area');
@@ -131,5 +140,133 @@ if (document.getElementById('portfolioAddForm')) {
         setTimeout(function(){ showToast('Проект добавлен!', 'success'); }, 300);
     };
 }
+</script>
+
+<!-- Модальное окно для редактирования проекта -->
+<div id="editModal" class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 hidden">
+  <div class="bg-white rounded-2xl shadow-xl p-6 w-full max-w-md relative">
+    <button id="closeEditModal" class="absolute top-2 right-2 text-gray-400 hover:text-gray-700 text-2xl">&times;</button>
+    <form id="editPortfolioForm" method="post" enctype="multipart/form-data">
+      <input type="hidden" name="id" id="edit-id">
+      <input type="hidden" name="deleted_images" id="edit-deleted-images">
+      <input type="hidden" name="current_images_order" id="edit-current-images-order">
+      <div class="mb-4">
+        <label for="edit-title" class="block text-sm font-bold mb-1">Название</label>
+        <input type="text" name="title" id="edit-title" class="w-full bg-gray-100 rounded-xl px-4 py-3 outline-none text-base" required>
+      </div>
+      <div class="mb-4">
+        <label for="edit-description" class="block text-sm font-bold mb-1">Описание</label>
+        <input type="text" name="description" id="edit-description" class="w-full bg-gray-100 rounded-xl px-4 py-3 outline-none text-base">
+      </div>
+      <div class="mb-4">
+        <label class="block text-sm font-bold mb-1">Текущие фото</label>
+        <div id="edit-current-images" class="flex flex-wrap gap-2"></div>
+      </div>
+      <div class="mb-4">
+        <label for="edit-images" class="block text-sm font-bold mb-1">Добавить новые фото</label>
+        <input type="file" name="images" id="edit-images" multiple accept="image/*" class="block w-full text-sm">
+      </div>
+      <div class="flex gap-2 justify-end mt-6">
+        <button type="button" id="cancelEditModal" class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-lg">Закрыть</button>
+        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-lg">Сохранить</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+const editCurrentImages = document.getElementById('edit-current-images');
+const editDeletedImages = document.getElementById('edit-deleted-images');
+let currentImages = [];
+let deletedImages = [];
+
+function renderCurrentImages() {
+  editCurrentImages.innerHTML = '';
+  currentImages.forEach(img => {
+    const div = document.createElement('div');
+    div.className = 'relative';
+    div.style.display = 'inline-block';
+    div.innerHTML = `<img src="${img}" class='w-16 h-16 object-cover rounded shadow'><button type='button' class='absolute top-0 right-0 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs delete-edit-image' data-img='${img}' title='Удалить'>&times;</button>`;
+    editCurrentImages.appendChild(div);
+  });
+  // навесить обработчики на кнопки удаления
+  editCurrentImages.querySelectorAll('.delete-edit-image').forEach(btn => {
+    btn.onclick = function() {
+      const img = btn.dataset.img;
+      deletedImages.push(img);
+      currentImages = currentImages.filter(i => i !== img);
+      renderCurrentImages();
+      editDeletedImages.value = JSON.stringify(deletedImages);
+    };
+  });
+  enableEditModalSortableImages();
+}
+
+// Drag-n-drop сортировка миниатюр в модалке
+function enableEditModalSortableImages() {
+  let dragged = null;
+  editCurrentImages.querySelectorAll('div.relative').forEach(imgDiv => {
+    imgDiv.draggable = true;
+    imgDiv.ondragstart = e => { dragged = imgDiv; imgDiv.classList.add('opacity-50'); };
+    imgDiv.ondragend = e => { dragged = null; imgDiv.classList.remove('opacity-50'); };
+    imgDiv.ondragover = e => { e.preventDefault(); };
+    imgDiv.ondrop = e => {
+      e.preventDefault();
+      if (dragged && dragged !== imgDiv) {
+        if (imgDiv.nextSibling === dragged) {
+          imgDiv.parentNode.insertBefore(dragged, imgDiv);
+        } else {
+          imgDiv.parentNode.insertBefore(dragged, imgDiv.nextSibling);
+        }
+        // Обновляем порядок в массиве
+        currentImages = Array.from(editCurrentImages.querySelectorAll('img')).map(img => img.src.replace(window.location.origin, ''));
+      }
+    };
+  });
+}
+
+// Открытие модального окна редактирования
+const editModal = document.getElementById('editModal');
+const editForm = document.getElementById('editPortfolioForm');
+const editId = document.getElementById('edit-id');
+const editTitle = document.getElementById('edit-title');
+const editDescription = document.getElementById('edit-description');
+
+document.querySelectorAll('.open-edit-modal').forEach(btn => {
+  btn.addEventListener('click', function() {
+    editId.value = btn.dataset.id;
+    editTitle.value = btn.dataset.title;
+    editDescription.value = btn.dataset.description;
+    editForm.action = `/admin/portfolio/edit/${btn.dataset.id}`;
+    // ВРЕМЕННО: логируем, что приходит
+    console.log('data-images:', btn.dataset.images);
+    try {
+      currentImages = btn.dataset.images ? JSON.parse(btn.dataset.images) : [];
+    } catch (e) {
+      console.error('Ошибка парсинга data-images:', e, btn.dataset.images);
+      currentImages = [];
+    }
+    deletedImages = [];
+    renderCurrentImages();
+    editDeletedImages.value = '';
+    editModal.classList.remove('hidden');
+  });
+});
+
+document.getElementById('closeEditModal').onclick = closeEdit;
+document.getElementById('cancelEditModal').onclick = closeEdit;
+
+function closeEdit() {
+  editModal.classList.add('hidden');
+}
+// Закрытие по клику вне окна
+editModal.addEventListener('click', function(e) {
+  if (e.target === editModal) closeEdit();
+});
+
+// Перед отправкой формы сохраняем порядок фото
+editForm.onsubmit = function() {
+  document.getElementById('edit-current-images-order').value = JSON.stringify(currentImages);
+};
 </script>
 {% endblock %} 

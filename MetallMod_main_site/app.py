@@ -214,6 +214,12 @@ def admin_portfolio(request: Request):
     db = SessionPortfolio()
     try:
         items = db.query(Portfolio).order_by(Portfolio.id.desc()).all()
+        for item in items:
+            try:
+                item.image_paths_json = json.dumps(
+                    json.loads(item.image_paths or '[]'))
+            except Exception:
+                item.image_paths_json = '[]'
     finally:
         db.close()
     return templates.TemplateResponse('admin/portfolio_manage.html', {'request': request, 'items': items})
@@ -278,6 +284,71 @@ def update_portfolio_images(request: Request, item_id: int, data: dict = Body(..
     db.commit()
     db.close()
     return JSONResponse({'success': True})
+
+
+@app.post('/admin/portfolio/edit/{item_id}')
+async def edit_portfolio(
+    request: Request,
+    item_id: int,
+    title: str = Form(...),
+    description: str = Form(...),
+    images: list = File(None),
+    deleted_images: str = Form(None),
+    current_images_order: str = Form(None)
+):
+    if not is_admin_authenticated(request):
+        return RedirectResponse('/admin/login', status_code=303)
+    db = SessionPortfolio()
+    item = db.query(Portfolio).filter_by(id=item_id).first()
+    if not item:
+        db.close()
+        return RedirectResponse('/admin/portfolio', status_code=303)
+    # Обновляем текстовые поля
+    item.title = title
+    item.description = description
+
+    # Удаляем отмеченные фото
+    if deleted_images:
+        deleted = json.loads(deleted_images)
+        current = json.loads(item.image_paths or '[]')
+        current = [img for img in current if img not in deleted]
+        item.image_paths = json.dumps(current)
+        item.image_path = current[0] if current else None
+
+    # Добавляем новые фото
+    img_dir = 'static/uploads/portfolio_img'
+    os.makedirs(img_dir, exist_ok=True)
+    new_images = []
+    if images:
+        if not isinstance(images, list):
+            images = [images]
+        for image in images:
+            if getattr(image, 'filename', None):
+                img_path = os.path.join(img_dir, image.filename)
+                async with aiofiles.open(img_path, 'wb') as out_file:
+                    content = await image.read()
+                    await out_file.write(content)
+                image_url = f'/static/uploads/portfolio_img/{image.filename}'
+                new_images.append(image_url)
+    # Объединяем старые и новые фото
+    all_images = json.loads(item.image_paths or '[]') + new_images
+    # Если передан порядок, используем его
+    if current_images_order:
+        try:
+            order = json.loads(current_images_order)
+            # Добавляем новые фото, если их нет в порядке
+            for img in new_images:
+                if img not in order:
+                    order.append(img)
+            all_images = order
+        except Exception:
+            pass
+    item.image_paths = json.dumps(all_images)
+    item.image_path = all_images[0] if all_images else None
+
+    db.commit()
+    db.close()
+    return RedirectResponse('/admin/portfolio', status_code=303)
 
 # --- Админка: Отзывы ---
 
