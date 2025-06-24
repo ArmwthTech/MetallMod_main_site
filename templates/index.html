@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 <section class="hero bg-white h-screen mb-16 shadow-none rounded-b-3xl flex flex-col items-center justify-center text-center relative overflow-hidden">
-    <img src="/static/uploads/portfolio_img/kmd_3d_model.png" alt="3D модель КМД" class="absolute inset-0 w-full h-full object-cover opacity-30 pointer-events-none select-none z-0">
+    <img src="/static/uploads/portfolio_img/kmd_3d_model.png" alt="3D модель КМД — пример проекта МеталлМод" class="absolute inset-0 w-full h-full object-cover opacity-30 pointer-events-none select-none z-0">
     <h1 class="text-4xl md:text-5xl lg:text-7xl font-extrabold mb-8 text-[#123392] leading-tight z-10">{{ _('Надёжные чертежи КМД,') }}<br>{{ _('с которыми стройка не встанет') }}</h1>
     <div class="z-10 px-4 md:px-8">
       <p class="text-2xl md:text-3xl text-gray-700 mb-6 text-left">{{ _('Разрабатываем точные чертежи металлоконструкций любой сложности для строительных компаний и инженерных проектов') }}</p>
@@ -267,9 +267,9 @@
                   <div class="portfolio-item bg-white rounded-3xl shadow-2xl p-4 flex flex-col items-center border-t-4 border-[#ff590d] transition-transform duration-300 group-hover:scale-110 group-hover:shadow-3xl cursor-pointer" data-title="{{ item.title }}" data-description="{{ item.description }}" data-images="{{ item.image_paths|default('[]') }}">
                       {% set images = item.image_paths|from_json if item.image_paths else [] %}
                       {% if images %}
-                      <img src="{{ images[0] }}" alt="{{ item.title }}" class="rounded-xl w-full h-48 object-cover mb-4 shadow-md">
+                      <img src="{{ images[0] }}" alt="{{ item.title }} — проект МеталлМод" class="rounded-xl w-full h-48 object-cover mb-4 shadow-md">
                       {% elif item.image_path %}
-                      <img src="{{ item.image_path }}" alt="{{ item.title }}" class="rounded-xl w-full h-48 object-cover mb-4 shadow-md">
+                      <img src="{{ item.image_path }}" alt="{{ item.title }} — проект МеталлМод" class="rounded-xl w-full h-48 object-cover mb-4 shadow-md">
                       {% endif %}
                       <div class="portfolio-desc text-xl font-bold text-[#123392] text-center">{{ item.title }}</div>
                   </div>

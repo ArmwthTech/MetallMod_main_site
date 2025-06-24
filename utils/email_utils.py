@@ -3,15 +3,14 @@
 """
 import aiosmtplib
 from email.message import EmailMessage
-import os
+import logging
+from config import MAIL_HOST, MAIL_PORT, MAIL_USER, MAIL_PASS, MAIL_TO
+
+logger = logging.getLogger("metallmod.email")
 
 # --- Настройки SMTP ---
-MAIL_HOST = os.getenv('MAIL_HOST', 'smtp.mail.ru')
-MAIL_PORT = int(os.getenv('MAIL_PORT', 465))
-MAIL_USER = os.getenv('MAIL_USER', 'test_sender@metallmod.ru')
-MAIL_PASS = os.getenv('MAIL_PASS')
 # TODO: заменить на production email
-MAIL_TO = os.getenv('MAIL_TO', 'test_receiver@metallmod.ru')
+MAIL_TO = MAIL_TO
 
 
 async def send_calc_form_email(name: str, phone: str, file_data: bytes, file_name: str, file_url: str = None):
@@ -30,7 +29,8 @@ async def send_calc_form_email(name: str, phone: str, file_data: bytes, file_nam
     """
     if not MAIL_USER or not MAIL_PASS:
         # В реальном проекте здесь лучше использовать logging вместо print
-        print("Ошибка: MAIL_USER или MAIL_PASS не установлены. Письмо не будет отправлено.")
+        logger.error(
+            "Ошибка: MAIL_USER или MAIL_PASS не установлены. Письмо не будет отправлено.")
         # Можно либо выбросить исключение, либо просто выйти, чтобы не ломать приложение
         # raise ValueError("MAIL_USER and MAIL_PASS environment variables must be set.")
         return
@@ -69,7 +69,7 @@ async def send_calc_form_email(name: str, phone: str, file_data: bytes, file_nam
         )
     except Exception as e:
         # Логгирование ошибки отправки
-        print(f"Ошибка отправки email: {e}")
+        logger.error(f"Ошибка отправки email: {e}")
         # В реальном приложении здесь можно добавить логику повторной отправки
         # или уведомление администратора.
 
@@ -79,7 +79,8 @@ async def send_km_form_email(name: str, phone: str, email: str, km_link: str):
     Формирует и отправляет email с данными из формы КМ.
     """
     if not MAIL_USER or not MAIL_PASS:
-        print("Ошибка: MAIL_USER или MAIL_PASS не установлены. Письмо не будет отправлено.")
+        logger.error(
+            "Ошибка: MAIL_USER или MAIL_PASS не установлены. Письмо не будет отправлено.")
         return
 
     msg = EmailMessage()
@@ -107,4 +108,4 @@ async def send_km_form_email(name: str, phone: str, email: str, km_link: str):
             use_tls=True
         )
     except Exception as e:
-        print(f"Ошибка отправки email: {e}")
+        logger.error(f"Ошибка отправки email: {e}")

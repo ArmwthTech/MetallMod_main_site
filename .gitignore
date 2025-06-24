@@ -1,0 +1,23 @@
+# Игнорировать виртуальное окружение и кэш
+.venv/
+__pycache__/
+.pytest_cache/
+
+# Игнорировать базы данных
+*.db
+
+# Игнорировать все загружаемые медиафайлы
+static/uploads/*
+static/uploads/portfolio_img/*
+static/uploads/portfolio_files/*
+static/uploads/review_logo/*
+
+# Оставлять структуру папок (если нужно)
+!static/uploads/.gitkeep
+!static/uploads/portfolio_img/.gitkeep
+!static/uploads/portfolio_files/.gitkeep
+!static/uploads/review_logo/.gitkeep
+
+# Игнорировать временные файлы
+*.tmp
+*.log 

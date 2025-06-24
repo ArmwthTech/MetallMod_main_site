@@ -6,16 +6,12 @@ from passlib.context import CryptContext
 from fastapi import Request
 import os
 import time
+from config import ADMIN_LOGIN, ADMIN_PASSWORD_HASH, ADMIN_SESSION_VALUE, SESSION_COOKIE
 
 # --- Настройки аутентификации ---
 # Пример: логин admin, пароль admin (замените хеш на свой через bcrypt)
 # Для генерации нового хеша:
 # from passlib.context import CryptContext; print(CryptContext(schemes=["bcrypt"]).hash('ВАШ_ПАРОЛЬ'))
-ADMIN_LOGIN = os.getenv('ADMIN_LOGIN', 'admin')
-ADMIN_PASSWORD_HASH = os.getenv(
-    # хеш для пароля 'admin'
-    'ADMIN_PASSWORD_HASH', '$2b$12$tIRqINWexvSTylVDOd/xTu5x5le9/o.GODN0/4Gax8rkr8Plip1Ga')
-
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 # --- Настройки защиты от брутфорса ---
@@ -76,9 +72,7 @@ def authenticate_admin(login: str, password: str, request: Request = None) -> (b
 
 
 # --- Управление сессией через Cookies ---
-SESSION_COOKIE = 'admin_session'
-SESSION_VALUE = os.getenv('ADMIN_SESSION_VALUE',
-                          'supersecret_change_in_production')
+SESSION_VALUE = ADMIN_SESSION_VALUE
 
 
 def set_admin_session(response):

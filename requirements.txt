@@ -11,4 +11,5 @@ aiosmtplib
 SQLAlchemy
 Babel
 Pillow
-python-dotenv 
+python-dotenv
+pytest 
