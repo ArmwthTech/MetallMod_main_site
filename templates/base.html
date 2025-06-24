@@ -12,9 +12,9 @@
     <!-- FontAwesome CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <!-- Подключение шрифтов -->
-    <link href="https://fonts.googleapis.com/css?family=Arial:400,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Inter:400,700&display=swap" rel="stylesheet">
     <link href="https://fonts-online.ru/fonts/baron-neue" rel="stylesheet">
-    <!-- <link rel="stylesheet" href="/static/css/style.css"> -->
+    <link rel="stylesheet" href="/static/css/style.css">
     <link rel="icon" type="image/png" href="/static/logo-favicon.png">
     <!-- Open Graph -->
     <meta property="og:title" content="{{ title or 'МеталлМод — чертежи КМД и металлоконструкций' }}">
@@ -46,6 +46,10 @@
         .desktop-header-menu { display: flex !important; }
         .burger-header-btn { display: none !important; }
       }
+      [data-theme="dark"] #logo-title,
+      [data-theme="dark"] #footer-logo-title {
+        text-shadow: none !important;
+      }
     </style>
     <script type="application/ld+json">
     {
@@ -70,15 +74,15 @@
     }
     </script>
 </head>
-<body class="bg-[#F5F5F5] text-[#123392] font-sans">
+<body style="background:var(--color-bg);color:var(--color-text);" class="font-sans">
     <!-- Toast notifications -->
     <div id="toast-container" class="fixed top-6 right-6 z-[100] flex flex-col gap-3 items-end"></div>
-    <header class="bg-white shadow-lg sticky top-0 z-50">
+    <header style="background:var(--color-header);color:var(--color-header-text);" class="shadow-lg sticky top-0 z-50">
         <div class="max-w-7xl mx-auto flex items-center justify-between p-4">
             <div class="flex items-center gap-4 cursor-pointer justify-center min-h-12" id="logo-scroll-top" style="min-width: 0;">
                 <img src="/static/logo.jpg" alt="Логотип МеталлМод — чертежи КМД и металлоконструкций" class="h-12 w-12 object-contain rounded-full align-middle translate-y-1" style="min-width:48px;">
-                <span class="text-3xl font-extrabold tracking-tight flex items-center align-middle" style="font-family: 'Baron Neue', Arial, sans-serif; text-shadow: 0 0 2px #fff, 0 0 6px #fff;">
-                    <span class="text-[#123392]">Металл</span><span class="text-[#ff590d]">Мод</span>
+                <span class="text-3xl font-extrabold tracking-tight flex items-center align-middle" style="font-family: 'Baron Neue', Inter, sans-serif; text-shadow: 0 0 2px #fff, 0 0 6px #fff;" id="logo-title">
+                    <span style="color:var(--color-text);">Металл</span><span style="color:var(--color-accent);">Мод</span>
                 </span>
             </div>
 
@@ -105,6 +109,9 @@
                         <a href="?lang=ru" class="hover:text-[#ff590d] transition-colors {{ 'font-bold underline' if lang == 'ru' else '' }}">RU</a>
                         <span class="opacity-50">|</span>
                         <a href="?lang=en" class="hover:text-[#ff590d] transition-colors {{ 'font-bold underline' if lang == 'en' else '' }}">EN</a>
+                        <button id="theme-toggle-btn" title="Переключить тему" class="ml-2 text-xl focus:outline-none" style="background:none; border:none; cursor:pointer;">
+                            <i id="theme-toggle-icon" class="fa fa-moon"></i>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -116,29 +123,25 @@
         </div>
 
         <!-- Мобильное меню -->
-        <div id="mobile-menu" class="hidden bg-white border-t border-gray-200">
+        <div id="mobile-menu" class="hidden border-t border-gray-200" style="background:var(--color-block);color:var(--color-text);">
             <nav class="flex flex-col items-center gap-4 p-4">
-                <a href="#services" class="mobile-menu-link text-lg hover:text-[#ff590d]">Услуги</a>
-                <a href="#portfolio" class="mobile-menu-link text-lg hover:text-[#ff590d]">Портфолио</a>
-                <a href="#steps" class="mobile-menu-link text-lg hover:text-[#ff590d]">Этапы</a>
-                <a href="#reviews" class="mobile-menu-link text-lg hover:text-[#ff590d]">Отзывы</a>
-                <a href="#contacts" class="mobile-menu-link text-lg hover:text-[#ff590d]">Контакты</a>
+                <a href="#services" class="mobile-menu-link text-lg" style="color:var(--color-text);">Услуги</a>
+                <a href="#portfolio" class="mobile-menu-link text-lg" style="color:var(--color-text);">Портфолио</a>
+                <a href="#steps" class="mobile-menu-link text-lg" style="color:var(--color-text);">Этапы</a>
+                <a href="#reviews" class="mobile-menu-link text-lg" style="color:var(--color-text);">Отзывы</a>
+                <a href="#contacts" class="mobile-menu-link text-lg" style="color:var(--color-text);">Контакты</a>
             </nav>
             <div class="flex flex-col items-center gap-4 p-4 border-t border-gray-100">
                  <div class="text-center">
-                    <a href="tel:+79995274210" class="text-base font-bold hover:text-[#ff590d] flex items-center justify-center gap-1.5">
-                        <i class="fa fa-phone text-base"></i>+7 (999) 527-42-10
-                    </a>
-                    <div class="text-xs text-gray-500 mt-0.5">Пн–Пт 9:00–18:00</div>
+                    <a href="tel:+79995274210" class="text-base font-bold flex items-center justify-center gap-1.5" style="color:var(--color-text);"> <i class="fa fa-phone text-base"></i>+7 (999) 527-42-10</a>
+                    <div class="text-xs mt-0.5" style="color:var(--color-secondary);">Пн–Пт 9:00–18:00</div>
                 </div>
-                <button id="header-km-modal-btn-mobile" class="w-full bg-[#ff590d] hover:bg-orange-600 text-white px-4 py-2 rounded-xl font-semibold shadow-md">Оставить заявку</button>
-                <a href="https://t.me/metallmod_bot" target="_blank" class="w-full bg-[#123392] hover:bg-blue-900 text-white px-4 py-2 rounded-xl font-semibold shadow-md flex items-center justify-center gap-1.5">
-                    <i class="fab fa-telegram-plane"></i> Telegram
-                </a>
+                <button id="header-km-modal-btn-mobile" class="w-full rounded-xl font-semibold shadow-md" style="background:var(--color-accent);color:#fff;">Оставить заявку</button>
+                <a href="https://t.me/metallmod_bot" target="_blank" class="w-full rounded-xl font-semibold shadow-md flex items-center justify-center gap-1.5" style="background:var(--color-header);color:var(--color-header-text);"><i class="fab fa-telegram-plane"></i> Telegram</a>
                 <div class="flex items-center gap-2 text-sm font-semibold">
-                    <a href="?lang=ru" class="hover:text-[#ff590d] {{ 'font-bold underline' if lang == 'ru' else '' }}">RU</a>
+                    <a href="?lang=ru" style="color:var(--color-text);" class="hover:text-[#ff590d] {{ 'font-bold underline' if lang == 'ru' else '' }}">RU</a>
                     <span class="opacity-50">|</span>
-                    <a href="?lang=en" class="hover:text-[#ff590d] {{ 'font-bold underline' if lang == 'en' else '' }}">EN</a>
+                    <a href="?lang=en" style="color:var(--color-text);" class="hover:text-[#ff590d] {{ 'font-bold underline' if lang == 'en' else '' }}">EN</a>
                 </div>
             </div>
         </div>
@@ -147,13 +150,13 @@
         {% block content %}{% endblock %}
     </main>
     {% block footer %}
-    <footer class="bg-[#123392] text-white py-10 px-4 mt-16">
+    <footer style="background:var(--color-footer);color:var(--color-footer-text);" class="py-10 px-4 mt-16">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start gap-8">
             <div class="flex flex-col gap-3 mb-6 md:mb-0">
                 <div class="flex items-center gap-3">
                     <img src="/static/logo.jpg" alt="Логотип" class="h-10 w-10 object-contain rounded-full" style="min-width:40px;">
-                    <span class="text-2xl font-extrabold tracking-tight" style="font-family: 'Baron Neue', Arial, sans-serif; text-shadow: 0 0 2px #fff, 0 0 6px #fff;">
-                        <span class="text-[#123392]">Металл</span><span class="text-[#ff590d]">Мод</span>
+                    <span class="text-2xl font-extrabold tracking-tight" style="font-family: 'Baron Neue', Inter, sans-serif;" id="footer-logo-title">
+                        <span style="color:#fff;">Металл</span><span style="color:var(--color-accent);">Мод</span>
                     </span>
                 </div>
                 <span class="text-sm opacity-80">Профессиональная разработка чертежей КМД для металлоконструкций любой сложности</span>
@@ -166,7 +169,7 @@
                 <a href="/#contacts" class="footer-anchor hover:text-[#ff590d] transition-colors">Контакты</a>
             </div>
             <div class="flex flex-col gap-2 text-lg">
-                <div class="flex items-center gap-2"><i class="fa fa-map-marker-alt"></i> Свердловская область,<br>г. Екатеринбург, Первомайская 56</div>
+                <div class="flex items-center gap-2"><i class="fa fa-map-marker-alt"></i>Свердловская область,<br>г. Екатеринбург, Первомайская 56</div>
                 <div class="flex items-center gap-2"><i class="fa fa-phone"></i> <a href="tel:+79995274210" target="_blank" class="hover:text-[#ff590d] transition-colors"> +7 (999) 527-42-10</a></div>
                 <div class="flex items-center gap-2"><i class="fa fa-envelope"></i> <a href="mailto:info@metallmod.ru" target="_blank" class="hover:text-[#ff590d] transition-colors"> info@metallmod.ru</a></div>
                 <div class="flex items-center gap-2"><i class="fab fa-telegram-plane"></i> <a href="https://t.me/metallmod_bot" target="_blank" class="hover:text-[#ff590d] transition-colors">Telegram</a></div>
@@ -293,6 +296,25 @@
               }
           });
       });
+    });
+    // --- Theme toggle ---
+    document.addEventListener('DOMContentLoaded', function() {
+        const html = document.documentElement;
+        const btn = document.getElementById('theme-toggle-btn');
+        const icon = document.getElementById('theme-toggle-icon');
+        function setTheme(theme) {
+            html.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+            if (icon) icon.className = theme === 'dark' ? 'fa fa-sun' : 'fa fa-moon';
+        }
+        function toggleTheme() {
+            const current = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            setTheme(current);
+        }
+        if (btn) btn.addEventListener('click', toggleTheme);
+        // Инициализация
+        const saved = localStorage.getItem('theme');
+        setTheme(saved === 'dark' ? 'dark' : 'light');
     });
     </script>
 </body>

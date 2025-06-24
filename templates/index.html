@@ -1,107 +1,107 @@
 {% extends 'base.html' %}
 {% block content %}
-<section class="hero bg-white h-screen mb-16 shadow-none rounded-b-3xl flex flex-col items-center justify-center text-center relative overflow-hidden">
+<section class="hero h-screen mb-16 shadow-none rounded-b-3xl flex flex-col items-center justify-center text-center relative overflow-hidden" style="background:var(--color-bg);">
     <img src="/static/uploads/portfolio_img/kmd_3d_model.png" alt="3D модель КМД — пример проекта МеталлМод" class="absolute inset-0 w-full h-full object-cover opacity-30 pointer-events-none select-none z-0">
-    <h1 class="text-4xl md:text-5xl lg:text-7xl font-extrabold mb-8 text-[#123392] leading-tight z-10">{{ _('Надёжные чертежи КМД,') }}<br>{{ _('с которыми стройка не встанет') }}</h1>
+    <h1 class="text-4xl md:text-5xl lg:text-7xl font-extrabold mb-8 leading-tight z-10" style="color:var(--color-text);">{{ _('Надёжные чертежи КМД,') }}<br>{{ _('с которыми стройка не встанет') }}</h1>
     <div class="z-10 px-4 md:px-8">
-      <p class="text-2xl md:text-3xl text-gray-700 mb-6 text-left">{{ _('Разрабатываем точные чертежи металлоконструкций любой сложности для строительных компаний и инженерных проектов') }}</p>
+      <p class="text-2xl md:text-3xl mb-6 text-left" style="color:var(--color-text);">{{ _('Разрабатываем точные чертежи металлоконструкций любой сложности для строительных компаний и инженерных проектов') }}</p>
       <div class="flex flex-col md:flex-row gap-6 z-10 mb-10">
-        <div class="flex-1 bg-black/60 rounded-2xl p-4 md:p-8 flex items-center gap-4 shadow-xl">
-          <span class="inline-block w-3 h-3 bg-[#ff590d] rounded-sm"></span>
-          <span class="text-xl md:text-2xl font-extrabold text-white">ОТ 700 Р/ТОННА</span>
+        <div class="flex-1 rounded-2xl p-4 md:p-8 flex items-center gap-4 shadow-xl" style="background:var(--color-block);border-top-color:var(--color-accent);">
+          <span class="inline-block w-3 h-3 rounded-sm" style="background:var(--color-accent);"></span>
+          <span class="text-xl md:text-2xl font-extrabold hero-card-text" style="color:var(--color-text);">ОТ 700 Р/ТОННА</span>
         </div>
-        <div class="flex-1 bg-black/60 rounded-2xl p-4 md:p-8 flex items-center gap-4 shadow-xl">
-          <span class="inline-block w-3 h-3 bg-[#ff590d] rounded-sm"></span>
-          <span class="text-xl md:text-2xl font-extrabold text-white">ОТ 5 РАБОЧИХ ДНЕЙ</span>
+        <div class="flex-1 rounded-2xl p-4 md:p-8 flex items-center gap-4 shadow-xl" style="background:var(--color-block);border-top-color:var(--color-accent);">
+          <span class="inline-block w-3 h-3 rounded-sm" style="background:var(--color-accent);"></span>
+          <span class="text-xl md:text-2xl font-extrabold hero-card-text" style="color:var(--color-text);">ОТ 5 РАБОЧИХ ДНЕЙ</span>
         </div>
-        <div class="flex-1 bg-black/60 rounded-2xl p-4 md:p-8 flex items-center gap-4 shadow-xl">
-          <span class="inline-block w-3 h-3 bg-[#ff590d] rounded-sm"></span>
-          <span class="text-xl md:text-2xl font-extrabold text-white">РАСЧЕТ ЗА 1 ДЕНЬ</span>
+        <div class="flex-1 rounded-2xl p-4 md:p-8 flex items-center gap-4 shadow-xl" style="background:var(--color-block);border-top-color:var(--color-accent);">
+          <span class="inline-block w-3 h-3 rounded-sm" style="background:var(--color-accent);"></span>
+          <span class="text-xl md:text-2xl font-extrabold hero-card-text" style="color:var(--color-text);">РАСЧЕТ ЗА 1 ДЕНЬ</span>
         </div>
       </div>
     </div>
     <div class="flex flex-col sm:flex-row gap-6 justify-center mb-4 z-10">
-        <button id="open-km-modal" class="bg-[#ff590d] hover:bg-orange-600 transition px-6 md:px-12 py-4 md:py-5 rounded-2xl text-xl md:text-2xl font-bold shadow-xl focus:outline-none focus:ring-4 focus:ring-[#ff590d]/30 text-white whitespace-nowrap">Отправить КМ на расчет</button>
-        <a href="https://t.me/metallmod_bot" target="_blank" class="bg-[#123392] hover:bg-blue-900 transition px-6 md:px-12 py-4 md:py-5 rounded-2xl text-xl md:text-2xl font-bold text-white flex items-center gap-3 shadow-xl border border-[#123392] focus:outline-none focus:ring-4 focus:ring-[#123392]/20 whitespace-nowrap"><i class="fab fa-telegram-plane text-2xl md:text-3xl"></i>{{ _('Написать в Telegram') }}</a>
+        <button id="open-km-modal" class="transition px-6 md:px-12 py-4 md:py-5 rounded-2xl text-xl md:text-2xl font-bold shadow-xl focus:outline-none focus:ring-4 whitespace-nowrap" style="background:var(--color-accent);color:var(--color-btn-text);">Отправить КМ на расчет</button>
+        <a href="https://t.me/metallmod_bot" target="_blank" class="transition px-6 md:px-12 py-4 md:py-5 rounded-2xl text-xl md:text-2xl font-bold flex items-center gap-3 shadow-xl border focus:outline-none focus:ring-4 whitespace-nowrap" style="background:var(--color-text);color:#fff;border:1px solid var(--color-text);"><i class="fab fa-telegram-plane text-2xl md:text-3xl"></i>{{ _('Написать в Telegram') }}</a>
     </div>
 </section>
 
 <section class="advantages mb-20">
-  <h2 class="text-4xl font-extrabold mb-12 text-center text-[#123392]">Почему нас выбирают?</h2>
+  <h2 class="text-4xl font-extrabold mb-12 text-center" style="color:var(--color-text);">Почему нас выбирают?</h2>
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 px-4 max-w-7xl mx-auto">
     <!-- Карточка 1 -->
-    <div class="bg-white rounded-3xl shadow-xl min-h-[260px] grid grid-rows-[80px_64px_48px] px-8 py-10 border-t-4 border-[#ff590d]">
+    <div class="rounded-3xl shadow-xl min-h-[260px] grid grid-rows-[80px_64px_48px] px-8 py-10 border-t-4" style="background:var(--color-block);border-top-color:var(--color-accent);">
       <div class="flex items-center justify-center">
-        <i class="fa fa-check-circle text-5xl text-[#123392]"></i>
+        <i class="fa fa-check-circle text-5xl" style="color:var(--color-text);"></i>
       </div>
       <div class="flex items-center justify-center h-16">
-        <span class="text-3xl font-bold text-[#123392] text-center">100+</span>
+        <span class="text-3xl font-bold text-center" style="color:var(--color-text);">100+</span>
       </div>
       <div class="flex items-start justify-center">
-        <span class="text-lg text-gray-500 text-center">Более 100 реализованных проектов</span>
+        <span class="text-lg text-center" style="color:var(--color-text);opacity:0.7;">Более 100 реализованных проектов</span>
       </div>
     </div>
     <!-- Карточка 2 -->
-    <div class="bg-white rounded-3xl shadow-xl min-h-[260px] grid grid-rows-[80px_64px_48px] px-8 py-10 border-t-4 border-[#ff590d]">
+    <div class="rounded-3xl shadow-xl min-h-[260px] grid grid-rows-[80px_64px_48px] px-8 py-10 border-t-4" style="background:var(--color-block);border-top-color:var(--color-accent);">
       <div class="flex items-center justify-center">
-        <i class="fa fa-clock text-5xl text-[#123392]"></i>
+        <i class="fa fa-clock text-5xl" style="color:var(--color-text);"></i>
       </div>
       <div class="flex items-center justify-center h-16">
-        <span class="text-3xl font-bold text-[#123392] text-center">от 5 дней</span>
+        <span class="text-3xl font-bold text-center" style="color:var(--color-text);">от 5 дней</span>
       </div>
       <div class="flex items-start justify-center">
-        <span class="text-lg text-gray-500 text-center">на разработку</span>
+        <span class="text-lg text-center" style="color:var(--color-text);opacity:0.7;">на разработку</span>
       </div>
     </div>
     <!-- Карточка 3 -->
-    <div class="bg-white rounded-3xl shadow-xl min-h-[260px] grid grid-rows-[80px_64px_48px] px-8 py-10 border-t-4 border-[#ff590d]">
+    <div class="rounded-3xl shadow-xl min-h-[260px] grid grid-rows-[80px_64px_48px] px-8 py-10 border-t-4" style="background:var(--color-block);border-top-color:var(--color-accent);">
       <div class="flex items-center justify-center">
-        <i class="fa fa-shield-alt text-5xl text-[#123392]"></i>
+        <i class="fa fa-shield-alt text-5xl" style="color:var(--color-text);"></i>
       </div>
       <div class="flex items-center justify-center h-16">
-        <span class="text-xl font-bold text-[#123392] text-center leading-tight">Гарантия качества<br>и соблюдение сроков</span>
+        <span class="text-xl font-bold text-center leading-tight" style="color:var(--color-text);">Гарантия качества<br>и соблюдение сроков</span>
       </div>
       <div class="flex items-start justify-center">
-        <span class="text-base text-gray-500 text-center">указанных в договоре</span>
+        <span class="text-base text-center" style="color:var(--color-text);opacity:0.7;">указанных в договоре</span>
       </div>
     </div>
     <!-- Карточка 4 -->
-    <div class="bg-white rounded-3xl shadow-xl min-h-[260px] grid grid-rows-[80px_64px_48px] px-8 py-10 border-t-4 border-[#ff590d]">
+    <div class="rounded-3xl shadow-xl min-h-[260px] grid grid-rows-[80px_64px_48px] px-8 py-10 border-t-4" style="background:var(--color-block);border-top-color:var(--color-accent);">
       <div class="flex items-center justify-center">
-        <i class="fa fa-users text-5xl text-[#123392]"></i>
+        <i class="fa fa-users text-5xl" style="color:var(--color-text);"></i>
       </div>
       <div class="flex items-center justify-center h-16">
-        <span class="text-3xl font-bold text-[#123392] text-center">&gt; 90% клиентов</span>
+        <span class="text-3xl font-bold text-center" style="color:var(--color-text);">&gt; 90% клиентов</span>
       </div>
       <div class="flex items-start justify-center">
-        <span class="text-lg text-gray-500 text-center">обращаются повторно</span>
+        <span class="text-lg text-center" style="color:var(--color-text);opacity:0.7;">обращаются повторно</span>
       </div>
     </div>
   </div>
 </section>
 
 <section id="services" class="mb-20 px-4 md:px-8">
-    <h2 class="text-4xl font-extrabold mb-12 text-center text-[#123392]">{{ _('Наши услуги') }}</h2>
+    <h2 class="text-4xl font-extrabold mb-12 text-center" style="color:var(--color-text);">{{ _('Наши услуги') }}</h2>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 justify-center">
-        <div class="bg-white rounded-3xl shadow-xl p-8 flex flex-col items-center border-t-4 border-[#123392] text-center">
-            <i class="fa fa-drafting-compass text-4xl text-[#ff590d] mb-4"></i>
+        <div class="rounded-3xl shadow-xl p-8 flex flex-col items-center border-t-4 text-center" style="background:var(--color-block);border-top-color:var(--color-accent);color:var(--color-text);">
+            <i class="fa fa-drafting-compass text-4xl mb-4" style="color:var(--color-accent);"></i>
             <div class="text-2xl font-bold mb-2">{{ _('Разработка КМД') }}</div>
-            <div class="text-gray-600 text-lg">{{ _('Полный комплект чертежей конструкций металлических деталей по вашим проектам и спецификациям') }}</div>
+            <div class="text-lg" style="color:var(--color-secondary);">{{ _('Полный комплект чертежей конструкций металлических деталей по вашим проектам и спецификациям') }}</div>
         </div>
-        <div class="bg-white rounded-3xl shadow-xl p-8 flex flex-col items-center border-t-4 border-[#123392] text-center">
-            <i class="fa fa-tools text-4xl text-[#ff590d] mb-4"></i>
+        <div class="rounded-3xl shadow-xl p-8 flex flex-col items-center border-t-4 text-center" style="background:var(--color-block);border-top-color:var(--color-accent);color:var(--color-text);">
+            <i class="fa fa-tools text-4xl mb-4" style="color:var(--color-accent);"></i>
             <div class="text-2xl font-bold mb-2">{{ _('Адаптация проектов') }}</div>
-            <div class="text-gray-600 text-lg">{{ _('Доработка и адаптация существующих проектов под новые требования и стандарты') }}</div>
+            <div class="text-lg" style="color:var(--color-secondary);">{{ _('Доработка и адаптация существующих проектов под новые требования и стандарты') }}</div>
         </div>
-        <div class="bg-white rounded-3xl shadow-xl p-8 flex flex-col items-center border-t-4 border-[#123392] text-center">
-            <i class="fa fa-cubes text-4xl text-[#ff590d] mb-4"></i>
+        <div class="rounded-3xl shadow-xl p-8 flex flex-col items-center border-t-4 text-center" style="background:var(--color-block);border-top-color:var(--color-accent);color:var(--color-text);">
+            <i class="fa fa-cubes text-4xl mb-4" style="color:var(--color-accent);"></i>
             <div class="text-2xl font-bold mb-2">{{ _('BIM-моделирование') }}</div>
-            <div class="text-gray-600 text-lg">{{ _('Создание информационных 3D-моделей металлоконструкций с полной детализацией') }}</div>
+            <div class="text-lg" style="color:var(--color-secondary);">{{ _('Создание информационных 3D-моделей металлоконструкций с полной детализацией') }}</div>
         </div>
-        <div class="bg-white rounded-3xl shadow-xl p-8 flex flex-col items-center border-t-4 border-[#123392] text-center">
-            <i class="fa fa-clipboard-check text-4xl text-[#ff590d] mb-4"></i>
+        <div class="rounded-3xl shadow-xl p-8 flex flex-col items-center border-t-4 text-center" style="background:var(--color-block);border-top-color:var(--color-accent);color:var(--color-text);">
+            <i class="fa fa-clipboard-check text-4xl mb-4" style="color:var(--color-accent);"></i>
             <div class="text-2xl font-bold mb-2">{{ _('Проверка по ГОСТ') }}</div>
-            <div class="text-gray-600 text-lg">{{ _('Экспертиза и корректировка проектов на соответствие актуальным нормативам и стандартам') }}</div>
+            <div class="text-lg" style="color:var(--color-secondary);">{{ _('Экспертиза и корректировка проектов на соответствие актуальным нормативам и стандартам') }}</div>
         </div>
     </div>
 </section>
@@ -109,147 +109,147 @@
 <!-- Блок с текстами -->
 <section class="mb-10">
     <div class="max-w-2xl mx-auto text-center">
-        <h2 class="text-3xl md:text-4xl font-extrabold mb-4 text-[#123392]">Подготовим расчет стоимости и сроков за 1 рабочий день</h2>
-        <div class="text-xl md:text-2xl text-gray-700 mb-2">Позвоните для консультации</div>
-        <div class="text-lg text-gray-500 mb-2">*Работаем по будням с 9 до 18*</div>
-        <div class="text-xl font-bold text-[#ff590d] mb-2">Оставьте заявку, и менеджер свяжется с вами в течение 30 минут</div>
-        <div class="text-2xl font-extrabold text-[#123392]">+7 4922 22-19-12</div>
+        <h2 class="text-3xl md:text-4xl font-extrabold mb-4" style="color:var(--color-text);">Подготовим расчет стоимости и сроков за 1 рабочий день</h2>
+        <div class="text-xl md:text-2xl mb-2" style="color:var(--color-text);">Позвоните для консультации</div>
+        <div class="text-lg mb-2" style="color:var(--color-secondary);">*Работаем по будням с 9 до 18*</div>
+        <div class="text-xl font-bold mb-2" style="color:var(--color-accent);">Оставьте заявку, и менеджер свяжется с вами в течение 30 минут</div>
+        <div class="text-2xl font-extrabold" style="color:var(--color-text);">+7 4922 22-19-12</div>
     </div>
 </section>
 
 <section class="flex flex-col lg:flex-row gap-10 justify-center items-start mb-20">
-    <div class="mini-calc max-w-md w-full bg-white rounded-3xl shadow-2xl p-10 border-t-4 border-[#123392] mb-10 lg:mb-0">
-        <h2 class="text-2xl font-bold mb-8 text-center flex items-center gap-3 text-[#123392]"><i class="fa fa-balance-scale"></i> {{ _('Мини-калькулятор') }}</h2>
+    <div class="mini-calc max-w-md w-full rounded-3xl shadow-2xl p-10 border-t-4 mb-10 lg:mb-0" style="background:var(--color-block);border-top-color:var(--color-accent);color:var(--color-text);">
+        <h2 class="text-2xl font-bold mb-8 text-center flex items-center gap-3" style="color:var(--color-text);"><i class="fa fa-balance-scale"></i> {{ _('Мини-калькулятор') }}</h2>
         <form id="miniCalcForm" class="flex flex-col gap-6" action="#">
-            <div class="flex items-center gap-3 bg-gray-100 rounded-xl px-4 py-4">
+            <div class="flex items-center gap-3 rounded-xl px-4 py-4" style="background:var(--color-block);">
                 <i class="fa fa-weight-hanging"></i>
-                <input type="number" name="tons" min="1" step="1" placeholder="{{ _('Тоннаж, т') }}" required class="bg-transparent outline-none flex-1 text-base md:text-lg">
+                <input type="number" name="tons" min="1" step="1" placeholder="{{ _('Тоннаж, т') }}" required class="bg-transparent outline-none flex-1 text-base md:text-lg" style="color:var(--color-text);">
             </div>
-            <div class="flex items-center gap-3 bg-gray-100 rounded-xl px-4 py-4">
+            <div class="flex items-center gap-3 rounded-xl px-4 py-4" style="background:var(--color-block);">
                 <i class="fa fa-layer-group"></i>
-                <select name="difficulty" required class="bg-transparent outline-none flex-1 text-base md:text-lg">
+                <select name="difficulty" required class="bg-transparent outline-none flex-1 text-base md:text-lg" style="color:var(--color-text);">
                     <option value="1.8">{{ _('Обычная сложность') }}</option>
                     <option value="2">{{ _('Средняя сложность') }}</option>
                     <option value="2.3">{{ _('Высокая сложность') }}</option>
                 </select>
             </div>
-            <button type="submit" class="bg-[#ff590d] hover:bg-orange-600 transition px-10 py-4 rounded-2xl text-xl font-bold text-white shadow-lg flex items-center gap-2 justify-center focus:outline-none focus:ring-4 focus:ring-[#ff590d]/30"><i class="fa fa-equals"></i> {{ _('Рассчитать') }}</button>
+            <button type="submit" class="transition px-10 py-4 rounded-2xl text-xl font-bold shadow-lg flex items-center gap-2 justify-center focus:outline-none focus:ring-4 whitespace-nowrap" style="background:var(--color-accent);color:#fff;"><i class="fa fa-equals"></i> {{ _('Рассчитать') }}</button>
         </form>
         <div id="miniCalcResult" class="mt-6 text-center">
             <!-- Здесь будет результат -->
         </div>
     </div>
-    <div class="calc-form max-w-md w-full bg-white rounded-3xl shadow-2xl p-10 border-t-4 border-[#ff590d]">
-        <h2 class="text-2xl font-bold mb-8 text-center flex items-center gap-3 text-[#123392]"><i class="fa fa-clipboard-list text-[#ff590d]"></i> {{ _('Оставить заявку') }}</h2>
+    <div class="calc-form max-w-md w-full rounded-3xl shadow-2xl p-10 border-t-4" style="background:var(--color-block);border-top-color:var(--color-accent);color:var(--color-text);">
+        <h2 class="text-2xl font-bold mb-8 text-center flex items-center gap-3" style="color:var(--color-text);"><i class="fa fa-clipboard-list" style="color:var(--color-accent);"></i> {{ _('Оставить заявку') }}</h2>
         <form id="calcForm" method="post" enctype="multipart/form-data" action="/send-calc-form" class="flex flex-col gap-6">
-            <div class="flex items-center gap-3 bg-gray-100 rounded-xl px-4 py-4">
+            <div class="flex items-center gap-3 rounded-xl px-4 py-4" style="background:var(--color-block);">
                 <i class="fa fa-user"></i>
-                <input type="text" name="name" placeholder="{{ _('Имя') }}" required minlength="2" maxlength="50" pattern="^[А-Яа-яA-Za-z\-\s]+$" class="bg-transparent outline-none flex-1 text-base md:text-lg">
+                <input type="text" name="name" placeholder="{{ _('Имя') }}" required minlength="2" maxlength="50" pattern="^[А-Яа-яA-Za-z\-\s]+$" class="bg-transparent outline-none flex-1 text-base md:text-lg" style="color:var(--color-text);">
             </div>
-            <div class="flex items-center gap-3 bg-gray-100 rounded-xl px-4 py-4">
+            <div class="flex items-center gap-3 rounded-xl px-4 py-4" style="background:var(--color-block);">
                 <i class="fa fa-phone"></i>
-                <input type="tel" name="phone" id="calcFormPhone" placeholder="+7 (999) 999-99-99" required pattern="^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$" maxlength="18" class="bg-transparent outline-none flex-1 text-base md:text-lg">
+                <input type="tel" name="phone" id="calcFormPhone" placeholder="+7 (999) 999-99-99" required pattern="^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$" maxlength="18" class="bg-transparent outline-none flex-1 text-base md:text-lg" style="color:var(--color-text);">
             </div>
-            <div class="flex items-center gap-3 bg-gray-100 rounded-xl px-4 py-4">
+            <div class="flex items-center gap-3 rounded-xl px-4 py-4" style="background:var(--color-block);">
                 <i class="fa fa-envelope"></i>
-                <input type="email" name="email" placeholder="{{ _('Почта') }}" required maxlength="100" class="bg-transparent outline-none flex-1 text-base md:text-lg">
+                <input type="email" name="email" placeholder="{{ _('Почта') }}" required maxlength="100" class="bg-transparent outline-none flex-1 text-base md:text-lg" style="color:var(--color-text);">
             </div>
-            <div class="flex items-center gap-3 bg-gray-100 rounded-xl px-4 py-4">
+            <div class="flex items-center gap-3 rounded-xl px-4 py-4" style="background:var(--color-block);">
                 <i class="fa fa-link"></i>
-                <input type="url" name="km_link" placeholder="Укажите ссылку на разработанный КМ (Google Drive, Яндекс.Диск, Dropbox и т.д.)" maxlength="200" class="block w-full max-w-none bg-gray-100 rounded-xl px-4 py-4 outline-none text-base md:text-lg">
+                <input type="url" name="km_link" placeholder="Укажите ссылку на разработанный КМ (Google Drive, Яндекс.Диск, Dropbox и т.д.)" maxlength="200" class="block w-full max-w-none bg-gray-100 rounded-xl px-4 py-4 outline-none text-base md:text-lg" style="background:var(--color-block);color:var(--color-text);">
             </div>
             <div class="flex items-center gap-3">
-                <input type="checkbox" name="consent" required class="accent-[#ff590d] w-5 h-5">
-                <label class="text-sm text-gray-700">Даю <a href="/consent" target="_blank" class="underline text-[#ff590d]">Согласие на обработку персональных данных</a> и принимаю <a href="/policy" target="_blank" class="underline text-[#ff590d]">Политику в отношении обработки персональных данных</a></label>
+                <input type="checkbox" name="consent" required class="accent-[#ff590d] w-5 h-5" style="background:var(--color-block);color:var(--color-text);">
+                <label class="text-sm" style="color:var(--color-secondary);">Даю <a href="/consent" target="_blank" class="underline" style="color:var(--color-accent);">Согласие на обработку персональных данных</a> и принимаю <a href="/policy" target="_blank" class="underline" style="color:var(--color-accent);">Политику в отношении обработки персональных данных</a></label>
             </div>
-            <button type="submit" class="bg-[#ff590d] hover:bg-orange-600 transition px-10 py-4 rounded-2xl text-xl font-bold text-white shadow-lg flex items-center gap-2 justify-center focus:outline-none focus:ring-4 focus:ring-[#ff590d]/30"><i class="fa fa-paper-plane"></i> {{ _('Оставить заявку') }}</button>
+            <button type="submit" class="transition px-10 py-4 rounded-2xl text-xl font-bold shadow-lg flex items-center gap-2 justify-center focus:outline-none focus:ring-4 whitespace-nowrap" style="background:var(--color-accent);color:#fff;"><i class="fa fa-paper-plane"></i> {{ _('Оставить заявку') }}</button>
         </form>
     </div>
 </section>
 
 <!-- В состав чертежей входит -->
 <section class="mb-20">
-    <h2 class="text-4xl font-extrabold mb-10 text-center text-[#123392]">В состав чертежей входит</h2>
+    <h2 class="text-4xl font-extrabold mb-10 text-center" style="color:var(--color-text);">В состав чертежей входит</h2>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-5xl mx-auto">
-        <div class="bg-white rounded-2xl shadow-xl p-8 flex flex-col items-center border-t-4 border-[#ff590d]">
-            <i class="fa fa-file-alt text-4xl text-[#123392] mb-4"></i>
+        <div class="rounded-2xl shadow-xl p-8 flex flex-col items-center border-t-4" style="background:var(--color-block);border-top-color:var(--color-accent);color:var(--color-text);">
+            <i class="fa fa-file-alt text-4xl mb-4" style="color:var(--color-accent);"></i>
             <div class="text-xl font-bold mb-2">Общие данные</div>
-            <div class="text-gray-600 text-center">Пояснительная записка, спецификации, ведомости</div>
+            <div class="text-center" style="color:var(--color-secondary);">Пояснительная записка, спецификации, ведомости</div>
         </div>
-        <div class="bg-white rounded-2xl shadow-xl p-8 flex flex-col items-center border-t-4 border-[#ff590d]">
-            <i class="fa fa-project-diagram text-4xl text-[#123392] mb-4"></i>
+        <div class="rounded-2xl shadow-xl p-8 flex flex-col items-center border-t-4" style="background:var(--color-block);border-top-color:var(--color-accent);color:var(--color-text);">
+            <i class="fa fa-project-diagram text-4xl mb-4" style="color:var(--color-accent);"></i>
             <div class="text-xl font-bold mb-2">Сборочные чертежи</div>
-            <div class="text-gray-600 text-center">Общий вид, схемы расположения элементов, монтажные схемы</div>
+            <div class="text-center" style="color:var(--color-secondary);">Общий вид, схемы расположения элементов, монтажные схемы</div>
         </div>
-        <div class="bg-white rounded-2xl shadow-xl p-8 flex flex-col items-center border-t-4 border-[#ff590d]">
-            <i class="fa fa-cogs text-4xl text-[#123392] mb-4"></i>
+        <div class="rounded-2xl shadow-xl p-8 flex flex-col items-center border-t-4" style="background:var(--color-block);border-top-color:var(--color-accent);color:var(--color-text);">
+            <i class="fa fa-cogs text-4xl mb-4" style="color:var(--color-accent);"></i>
             <div class="text-xl font-bold mb-2">Деталировка</div>
-            <div class="text-gray-600 text-center">Чертежи деталей, спецификации металла, ведомости расхода</div>
+            <div class="text-center" style="color:var(--color-secondary);">Чертежи деталей, спецификации металла, ведомости расхода</div>
         </div>
-        <div class="bg-white rounded-2xl shadow-xl p-8 flex flex-col items-center border-t-4 border-[#ff590d]">
-            <i class="fa fa-list-alt text-4xl text-[#123392] mb-4"></i>
+        <div class="rounded-2xl shadow-xl p-8 flex flex-col items-center border-t-4" style="background:var(--color-block);border-top-color:var(--color-accent);color:var(--color-text);">
+            <i class="fa fa-list-alt text-4xl mb-4" style="color:var(--color-accent);"></i>
             <div class="text-xl font-bold mb-2">Ведомости и спецификации</div>
-            <div class="text-gray-600 text-center">Ведомости деталей, метизов, спецификации изделий и материалов</div>
+            <div class="text-center" style="color:var(--color-secondary);">Ведомости деталей, метизов, спецификации изделий и материалов</div>
         </div>
     </div>
 </section>
 
 <!-- СТОИМОСТЬ -->
 <section class="mb-20">
-    <h2 class="text-4xl font-extrabold mb-10 text-center text-[#123392]">Стоимость</h2>
+    <h2 class="text-4xl font-extrabold mb-10 text-center" style="color:var(--color-text);">Стоимость</h2>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
-        <div class="bg-white rounded-2xl shadow-xl p-8 flex flex-col items-center border-t-4 border-[#ff590d]">
-            <div class="w-16 h-16 flex items-center justify-center rounded-full bg-[#ff590d]/10 mb-4 shadow"><i class="fa fa-balance-scale text-3xl text-[#ff590d]"></i></div>
-            <div class="text-3xl font-extrabold text-[#123392] mb-2">от 600 р/тонна</div>
-            <div class="text-gray-600 text-center">Проекты 10–200 тонн</div>
+        <div class="rounded-2xl shadow-xl p-8 flex flex-col items-center border-t-4" style="background:var(--color-block);border-top-color:var(--color-accent);color:var(--color-text);">
+            <div class="w-16 h-16 flex items-center justify-center rounded-full mb-4 shadow" style="background:var(--color-accent);opacity:0.1;"><i class="fa fa-balance-scale text-3xl" style="color:var(--color-accent);"></i></div>
+            <div class="text-3xl font-extrabold mb-2">от 600 р/тонна</div>
+            <div class="text-center" style="color:var(--color-secondary);">Проекты 10–200 тонн</div>
         </div>
-        <div class="bg-white rounded-2xl shadow-xl p-8 flex flex-col items-center border-t-4 border-[#ff590d]">
-            <div class="w-16 h-16 flex items-center justify-center rounded-full bg-[#123392]/10 mb-4 shadow"><i class="fa fa-stairs text-3xl text-[#123392]"></i></div>
-            <div class="text-3xl font-extrabold text-[#123392] mb-2">от 650 р/тонна</div>
-            <div class="text-gray-600 text-center">Легкие конструкции (лестницы, площадки)</div>
+        <div class="rounded-2xl shadow-xl p-8 flex flex-col items-center border-t-4" style="background:var(--color-block);border-top-color:var(--color-accent);color:var(--color-text);">
+            <div class="w-16 h-16 flex items-center justify-center rounded-full mb-4 shadow" style="background:var(--color-accent);opacity:0.1;"><i class="fa fa-stairs text-3xl" style="color:var(--color-accent);"></i></div>
+            <div class="text-3xl font-extrabold mb-2">от 650 р/тонна</div>
+            <div class="text-center" style="color:var(--color-secondary);">Легкие конструкции (лестницы, площадки)</div>
         </div>
-        <div class="bg-white rounded-2xl shadow-xl p-8 flex flex-col items-center border-t-4 border-[#ff590d]">
-            <div class="w-16 h-16 flex items-center justify-center rounded-full bg-[#ff590d]/10 mb-4 shadow"><i class="fa fa-cogs text-3xl text-[#ff590d]"></i></div>
-            <div class="text-3xl font-extrabold text-[#123392] mb-2">от 700 р/тонна</div>
-            <div class="text-gray-600 text-center">Сложные/нестандартные конструкции</div>
+        <div class="rounded-2xl shadow-xl p-8 flex flex-col items-center border-t-4" style="background:var(--color-block);border-top-color:var(--color-accent);color:var(--color-text);">
+            <div class="w-16 h-16 flex items-center justify-center rounded-full mb-4 shadow" style="background:var(--color-accent);opacity:0.1;"><i class="fa fa-cogs text-3xl" style="color:var(--color-accent);"></i></div>
+            <div class="text-3xl font-extrabold mb-2">от 700 р/тонна</div>
+            <div class="text-center" style="color:var(--color-secondary);">Сложные/нестандартные конструкции</div>
         </div>
-        <div class="bg-white rounded-2xl shadow-xl p-8 flex flex-col items-center border-t-4 border-[#ff590d]">
-            <div class="w-16 h-16 flex items-center justify-center rounded-full bg-[#123392]/10 mb-4 shadow"><i class="fa fa-warehouse text-3xl text-[#123392]"></i></div>
-            <div class="text-3xl font-extrabold text-[#123392] mb-2">от 250 р/тонна</div>
-            <div class="text-gray-600 text-center">Простые сооружения &gt;200 тонн</div>
+        <div class="rounded-2xl shadow-xl p-8 flex flex-col items-center border-t-4" style="background:var(--color-block);border-top-color:var(--color-accent);color:var(--color-text);">
+            <div class="w-16 h-16 flex items-center justify-center rounded-full mb-4 shadow" style="background:var(--color-accent);opacity:0.1;"><i class="fa fa-warehouse text-3xl" style="color:var(--color-accent);"></i></div>
+            <div class="text-3xl font-extrabold mb-2">от 250 р/тонна</div>
+            <div class="text-center" style="color:var(--color-secondary);">Простые сооружения &gt;200 тонн</div>
         </div>
     </div>
 </section>
 
 <!-- Форма выдачи КМД -->
 <section class="mb-20">
-    <h2 class="text-4xl font-extrabold mb-10 text-center text-[#123392]">Форма выдачи КМД</h2>
-    <div class="max-w-6xl mx-auto bg-white rounded-3xl shadow-2xl p-8 border-t-4 border-[#ff590d]">
+    <h2 class="text-4xl font-extrabold mb-10 text-center" style="color:var(--color-text);">Форма выдачи КМД</h2>
+    <div class="max-w-6xl mx-auto rounded-3xl shadow-2xl p-8 border-t-4" style="background:var(--color-block);border-top-color:var(--color-accent);color:var(--color-text);">
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 justify-center items-stretch">
             <div class="flex flex-col items-center text-center gap-4">
-                <div class="w-24 h-24 flex items-center justify-center rounded-full bg-[#123392]/10 mb-2 shadow-lg"><i class="fa fa-file-pdf text-5xl text-[#ff590d]"></i></div>
+                <div class="w-24 h-24 flex items-center justify-center rounded-full mb-2 shadow-lg" style="background:var(--color-header);"><i class="fa fa-file-pdf text-5xl" style="color:var(--color-accent);"></i></div>
                 <div class="text-xl font-bold">PDF</div>
-                <div class="text-gray-600 text-base">Для просмотра и печати</div>
+                <div class="text-base" style="color:var(--color-secondary);">Для просмотра и печати</div>
             </div>
             <div class="flex flex-col items-center text-center gap-4">
-                <div class="w-24 h-24 flex items-center justify-center rounded-full bg-[#123392]/10 mb-2 shadow-lg"><i class="fa fa-file-archive text-5xl text-[#123392]"></i></div>
+                <div class="w-24 h-24 flex items-center justify-center rounded-full mb-2 shadow-lg" style="background:var(--color-header);"><i class="fa fa-file-archive text-5xl" style="color:var(--color-text);"></i></div>
                 <div class="text-xl font-bold">DWG</div>
-                <div class="text-gray-600 text-base">Для производства (AutoCAD)</div>
+                <div class="text-base" style="color:var(--color-secondary);">Для производства (AutoCAD)</div>
             </div>
             <div class="flex flex-col items-center text-center gap-4">
-                <div class="w-24 h-24 flex items-center justify-center rounded-full bg-[#ff590d]/10 mb-2 shadow-lg"><i class="fa fa-file-archive text-5xl text-[#ff590d]"></i></div>
+                <div class="w-24 h-24 flex items-center justify-center rounded-full mb-2 shadow-lg" style="background:var(--color-header);"><i class="fa fa-file-archive text-5xl" style="color:var(--color-accent);"></i></div>
                 <div class="text-xl font-bold">DXF</div>
-                <div class="text-gray-600 text-base">Для станков и ЧПУ</div>
+                <div class="text-base" style="color:var(--color-secondary);">Для станков и ЧПУ</div>
             </div>
             <div class="flex flex-col items-center text-center gap-4">
-                <div class="w-24 h-24 flex items-center justify-center rounded-full bg-[#123392]/10 mb-2 shadow-lg"><i class="fa fa-file-image text-5xl text-[#123392]"></i></div>
+                <div class="w-24 h-24 flex items-center justify-center rounded-full mb-2 shadow-lg" style="background:var(--color-header);"><i class="fa fa-file-image text-5xl" style="color:var(--color-text);"></i></div>
                 <div class="text-xl font-bold">JPG/PNG</div>
-                <div class="text-gray-600 text-base">Для быстрой отправки и просмотра</div>
+                <div class="text-base" style="color:var(--color-secondary);">Для быстрой отправки и просмотра</div>
             </div>
             <div class="flex flex-col items-center text-center gap-4">
-                <div class="w-24 h-24 flex items-center justify-center rounded-full bg-[#ff590d]/10 mb-2 shadow-lg"><i class="fa fa-file-excel text-5xl text-[#ff590d]"></i></div>
+                <div class="w-24 h-24 flex items-center justify-center rounded-full mb-2 shadow-lg" style="background:var(--color-header);"><i class="fa fa-file-excel text-5xl" style="color:var(--color-accent);"></i></div>
                 <div class="text-xl font-bold">Excel</div>
-                <div class="text-gray-600 text-base">Спецификации и ведомости</div>
+                <div class="text-base" style="color:var(--color-secondary);">Спецификации и ведомости</div>
             </div>
         </div>
     </div>
@@ -257,21 +257,21 @@
 
 <!-- НАШИ ВЫПОЛНЕННЫЕ ПРОЕКТЫ -->
 <section id="portfolio" class="mb-24">
-    <h2 class="text-4xl font-extrabold mb-12 text-center text-[#123392]">НАШИ ВЫПОЛНЕННЫЕ ПРОЕКТЫ</h2>
+    <h2 class="text-4xl font-extrabold mb-12 text-center" style="color:var(--color-text);">НАШИ ВЫПОЛНЕННЫЕ ПРОЕКТЫ</h2>
     <div class="relative">
         <!-- Swiper контейнер -->
         <div class="swiper portfolio-swiper">
             <div class="swiper-wrapper">
                 {% for item in portfolio_items %}
                 <div class="swiper-slide overflow-visible group">
-                  <div class="portfolio-item bg-white rounded-3xl shadow-2xl p-4 flex flex-col items-center border-t-4 border-[#ff590d] transition-transform duration-300 group-hover:scale-110 group-hover:shadow-3xl cursor-pointer" data-title="{{ item.title }}" data-description="{{ item.description }}" data-images="{{ item.image_paths|default('[]') }}">
+                  <div class="portfolio-item rounded-3xl shadow-2xl p-4 flex flex-col items-center border-t-4 transition-transform duration-300 group-hover:scale-110 group-hover:shadow-3xl cursor-pointer" style="background:var(--color-block);border-top-color:var(--color-accent);color:var(--color-text);">
                       {% set images = item.image_paths|from_json if item.image_paths else [] %}
                       {% if images %}
                       <img src="{{ images[0] }}" alt="{{ item.title }} — проект МеталлМод" class="rounded-xl w-full h-48 object-cover mb-4 shadow-md">
                       {% elif item.image_path %}
                       <img src="{{ item.image_path }}" alt="{{ item.title }} — проект МеталлМод" class="rounded-xl w-full h-48 object-cover mb-4 shadow-md">
                       {% endif %}
-                      <div class="portfolio-desc text-xl font-bold text-[#123392] text-center">{{ item.title }}</div>
+                      <div class="portfolio-desc text-xl font-bold text-center" style="color:var(--color-text);">{{ item.title }}</div>
                   </div>
                 </div>
                 {% endfor %}
@@ -375,48 +375,48 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 
 <section id="steps" class="mb-24">
-    <h2 class="text-3xl md:text-4xl font-extrabold mb-12 text-center text-[#123392]">{{ _('Как мы работаем') }}</h2>
+    <h2 class="text-3xl md:text-4xl font-extrabold mb-12 text-center" style="color:var(--color-text);">{{ _('Как мы работаем') }}</h2>
     <div class="flex flex-wrap justify-center gap-10">
-        <div class="bg-white rounded-3xl shadow-xl p-8 flex flex-col items-center min-w-[200px] border-t-4 border-[#123392]">
-            <span class="text-4xl font-extrabold text-[#ff590d] mb-2">1</span>
+        <div class="rounded-3xl shadow-xl p-8 flex flex-col items-center min-w-[200px] border-t-4" style="background:var(--color-block);border-top-color:var(--color-accent);color:var(--color-text);">
+            <span class="text-4xl font-extrabold mb-2" style="color:var(--color-accent);">1</span>
             <span class="text-xl font-bold mb-2">{{ _('Заявка') }}</span>
-            <span class="text-gray-600 text-center">{{ _('Оставьте заявку через сайт или Telegram-бот с описанием проекта') }}</span>
+            <span class="text-center" style="color:var(--color-secondary);">{{ _('Оставьте заявку через сайт или Telegram-бот с описанием проекта') }}</span>
         </div>
-        <div class="bg-white rounded-3xl shadow-xl p-8 flex flex-col items-center min-w-[200px] border-t-4 border-[#123392]">
-            <span class="text-4xl font-extrabold text-[#ff590d] mb-2">2</span>
+        <div class="rounded-3xl shadow-xl p-8 flex flex-col items-center min-w-[200px] border-t-4" style="background:var(--color-block);border-top-color:var(--color-accent);color:var(--color-text);">
+            <span class="text-4xl font-extrabold mb-2" style="color:var(--color-accent);">2</span>
             <span class="text-xl font-bold mb-2">{{ _('Обсуждение') }}</span>
-            <span class="text-gray-600 text-center">{{ _('Согласовываем технические детали и требования к проекту') }}</span>
+            <span class="text-center" style="color:var(--color-secondary);">{{ _('Согласовываем технические детали и требования к проекту') }}</span>
         </div>
-        <div class="bg-white rounded-3xl shadow-xl p-8 flex flex-col items-center min-w-[200px] border-t-4 border-[#123392]">
-            <span class="text-4xl font-extrabold text-[#ff590d] mb-2">3</span>
+        <div class="rounded-3xl shadow-xl p-8 flex flex-col items-center min-w-[200px] border-t-4" style="background:var(--color-block);border-top-color:var(--color-accent);color:var(--color-text);">
+            <span class="text-4xl font-extrabold mb-2" style="color:var(--color-accent);">3</span>
             <span class="text-xl font-bold mb-2">{{ _('Оплата') }}</span>
-            <span class="text-gray-600 text-center">{{ _('Заключаем договор и вносите предоплату 50% от стоимости') }}</span>
+            <span class="text-center" style="color:var(--color-secondary);">{{ _('Заключаем договор и вносите предоплату 50% от стоимости') }}</span>
         </div>
-        <div class="bg-white rounded-3xl shadow-xl p-8 flex flex-col items-center min-w-[200px] border-t-4 border-[#123392]">
-            <span class="text-4xl font-extrabold text-[#ff590d] mb-2">4</span>
+        <div class="rounded-3xl shadow-xl p-8 flex flex-col items-center min-w-[200px] border-t-4" style="background:var(--color-block);border-top-color:var(--color-accent);color:var(--color-text);">
+            <span class="text-4xl font-extrabold mb-2" style="color:var(--color-accent);">4</span>
             <span class="text-xl font-bold mb-2">{{ _('Разработка') }}</span>
-            <span class="text-gray-600 text-center">{{ _('Выполняем проектирование согласно техническому заданию') }}</span>
+            <span class="text-center" style="color:var(--color-secondary);">{{ _('Выполняем проектирование согласно техническому заданию') }}</span>
         </div>
-        <div class="bg-white rounded-3xl shadow-xl p-8 flex flex-col items-center min-w-[200px] border-t-4 border-[#123392]">
-            <span class="text-4xl font-extrabold text-[#ff590d] mb-2">5</span>
+        <div class="rounded-3xl shadow-xl p-8 flex flex-col items-center min-w-[200px] border-t-4" style="background:var(--color-block);border-top-color:var(--color-accent);color:var(--color-text);">
+            <span class="text-4xl font-extrabold mb-2" style="color:var(--color-accent);">5</span>
             <span class="text-xl font-bold mb-2">{{ _('Сдача проекта') }}</span>
-            <span class="text-gray-600 text-center">{{ _('Передаем готовые чертежи и документацию после финальной оплаты') }}</span>
+            <span class="text-center" style="color:var(--color-secondary);">{{ _('Передаем готовые чертежи и документацию после финальной оплаты') }}</span>
         </div>
     </div>
 </section>
 
 <section id="reviews" class="mb-24">
-    <h2 class="text-4xl font-extrabold mb-12 text-center text-[#123392]">{{ _('Отзывы наших клиентов') }}</h2>
+    <h2 class="text-4xl font-extrabold mb-12 text-center" style="color:var(--color-text);">{{ _('Отзывы наших клиентов') }}</h2>
     <div class="relative">
         <div id="reviews-slider-wrapper" class="relative">
             <div id="reviews-slider" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-center opacity-100 transition-opacity duration-500">
                 {% for review in reviews %}
-                <div class="review-item bg-white rounded-2xl shadow-xl p-5 flex flex-col items-center border-t-4 border-[#ff590d] hover:scale-105 transition-transform w-96 max-w-md h-64 min-h-64 max-h-64 mx-auto">
+                <div class="review-item rounded-2xl shadow-xl p-5 flex flex-col items-center border-t-4 hover:scale-105 transition-transform w-96 max-w-md h-64 min-h-64 max-h-64 mx-auto" style="background:var(--color-block);border-top-color:var(--color-accent);color:var(--color-text);">
                     {% if review.logo_path %}
-                    <img src="{{ review.logo_path }}" alt="logo" class="review-logo rounded-full w-12 h-12 object-contain mb-3 border-2 border-[#123392] shadow-md">
+                    <img src="{{ review.logo_path }}" alt="logo" class="review-logo rounded-full w-12 h-12 object-contain mb-3 border-2" style="border-color:var(--color-text);box-shadow:0 2px 8px rgba(18,51,146,0.15);">
                     {% endif %}
-                    <div class="review-text text-base italic mb-2 text-[#123392] text-center">{{ review.text }}</div>
-                    <div class="text-gray-500 flex items-center gap-2 text-sm mt-auto"><i class="fa fa-user-tie"></i> {{ review.client_name }}</div>
+                    <div class="review-text text-base italic mb-2 text-center" style="color:var(--color-text);">{{ review.text }}</div>
+                    <div class="flex items-center gap-2 text-sm mt-auto" style="color:var(--color-secondary);"><i class="fa fa-user-tie"></i> {{ review.client_name }}</div>
                 </div>
                 {% endfor %}
             </div>
@@ -426,17 +426,17 @@ document.addEventListener('DOMContentLoaded', function() {
 </section>
 
 <section id="contacts" class="mb-24">
-    <h2 class="text-4xl font-extrabold mb-12 text-center text-[#123392]">{{ _('Контакты') }}</h2>
-    <div class="max-w-6xl mx-auto bg-white rounded-3xl shadow-xl p-10 text-lg border-t-4 border-[#123392] flex flex-col items-start mb-8">
+    <h2 class="text-4xl font-extrabold mb-12 text-center" style="color:var(--color-text);">{{ _('Контакты') }}</h2>
+    <div class="max-w-6xl mx-auto rounded-3xl shadow-xl p-10 text-lg border-t-4 flex flex-col items-start mb-8" style="background:var(--color-block);border-top-color:var(--color-accent);color:var(--color-text);">
         <div class="flex flex-col md:flex-row md:items-start md:gap-12 w-full">
             <div class="md:order-2 md:w-1/2 w-full mb-6 md:mb-0">
-                <div class="flex items-center gap-3 mb-4 text-2xl font-bold text-[#123392]"><i class="fa fa-map-marker-alt text-[#ff590d]"></i> Свердловская область,<br>г. Екатеринбург, Первомайская 56</div>
-                <div class="flex items-center gap-3 mb-2"><i class="fa fa-phone text-[#ff590d]"></i> <a href="tel:+79995274210" class="hover:text-[#ff590d] font-semibold">+7 (999) 527-42-10</a></div>
-                <div class="flex items-center gap-3 mb-2"><i class="fa fa-envelope text-[#ff590d]"></i> <a href="mailto:info@metallmod.ru" class="hover:text-[#ff590d] font-semibold">info@metallmod.ru</a></div>
-                <div class="flex items-center gap-3 mb-2"><i class="fa fa-clock text-[#ff590d]"></i> <span class="font-semibold">Пн-Пт: 9:00 — 18:00</span></div>
-                <div class="text-gray-400 text-sm mt-2">Поддержка: 24/7</div>
+                <div class="flex items-center gap-3 mb-4 text-2xl font-bold" style="color:var(--color-text);"><i class="fa fa-map-marker-alt" style="color:var(--color-accent);"></i> Свердловская область,<br>г. Екатеринбург, Первомайская 56</div>
+                <div class="flex items-center gap-3 mb-2"><i class="fa fa-phone" style="color:var(--color-accent);"></i> <a href="tel:+79995274210" class="font-semibold" style="color:var(--color-text);">+7 (999) 527-42-10</a></div>
+                <div class="flex items-center gap-3 mb-2"><i class="fa fa-envelope" style="color:var(--color-accent);"></i> <a href="mailto:info@metallmod.ru" class="font-semibold" style="color:var(--color-text);">info@metallmod.ru</a></div>
+                <div class="flex items-center gap-3 mb-2"><i class="fa fa-clock" style="color:var(--color-accent);"></i> <span class="font-semibold" style="color:var(--color-text);">Пн-Пт: 9:00 — 18:00</span></div>
+                <div class="text-sm mt-2" style="color:var(--color-secondary);">Поддержка: 24/7</div>
                 <div class="flex flex-col gap-4 w-full md:w-auto mt-6">
-                    <a href="#calcForm" class="bg-[#ff590d] hover:bg-orange-600 transition px-8 py-4 rounded-2xl text-xl font-bold text-white shadow-lg flex items-center gap-2 justify-center"><i class="fa fa-paper-plane"></i> Оставить заявку</a>
+                    <a href="#calcForm" class="rounded-2xl text-xl font-bold shadow-lg flex items-center gap-2 justify-center" style="background:var(--color-accent);color:#fff;"> <i class="fa fa-paper-plane"></i> Оставить заявку</a>
                 </div>
             </div>
             <div class="md:order-1 md:w-1/2 w-full">
@@ -449,7 +449,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </section>
 
 <div id="popup-overlay" style="display:none;" class="fixed inset-0 bg-black/40 z-50 flex items-center justify-center">
-    <div class="relative bg-white rounded-3xl shadow-2xl p-10 max-w-sm w-full mx-4 text-center border-t-4 border-[#ff590d] animate-fade-in">
+    <div class="relative rounded-3xl shadow-2xl p-10 max-w-sm w-full mx-4 text-center border-t-4 animate-fade-in" style="background:var(--color-block);border-top-color:var(--color-accent);color:var(--color-text);">
         <button id="popup-close" class="absolute top-4 right-4 text-3xl text-gray-400 hover:text-[#ff590d] transition-colors focus:outline-none">&times;</button>
         <h3 class="text-2xl font-extrabold mb-6 text-[#123392] flex items-center gap-3 justify-center"><i class="fa fa-gift text-[#ff590d] text-3xl"></i> {{ _('Напиши нам о своем проекте и получи 10% скидку на первый заказ!') }}</h3>
         <form id="popupForm" action="#" class="flex flex-col gap-6">
@@ -461,7 +461,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <!-- Модальное окно для отправки КМ на расчет -->
 <div id="km-modal" class="fixed inset-0 bg-black/90 z-50 flex items-center justify-center hidden">
-  <div class="relative bg-white rounded-3xl shadow-2xl max-w-lg w-full mx-4 p-10 flex flex-col animate-fade-in">
+  <div class="relative rounded-3xl shadow-2xl max-w-lg w-full mx-4 p-10 flex flex-col animate-fade-in" style="background:var(--color-block);color:var(--color-text);">
     <button id="close-km-modal" class="absolute top-4 right-4 text-3xl text-gray-400 hover:text-[#ff590d] transition-colors focus:outline-none">&times;</button>
     <div class="mb-6 text-center">
       <div class="text-2xl md:text-3xl font-extrabold leading-tight mb-2">
@@ -474,20 +474,20 @@ document.addEventListener('DOMContentLoaded', function() {
       </div>
     </div>
     <form id="kmForm" method="post" action="/send-km-form" class="flex flex-col gap-6">
-      <input type="text" name="name" placeholder="Имя" class="border-b border-gray-300 py-2 px-0 focus:outline-none focus:border-[#ff590d] text-base md:text-lg" />
-      <input type="tel" name="phone" placeholder="+7 (999) 999-99-99" class="border-b border-gray-300 py-2 px-0 focus:outline-none focus:border-[#ff590d] text-base md:text-lg" />
-      <input type="email" name="email" placeholder="Почта" class="border-b border-gray-300 py-2 px-0 focus:outline-none focus:border-[#ff590d] text-base md:text-lg" />
-      <input type="url" name="km_link" placeholder="Укажите ссылку на разработанный КМ (Google Drive, Яндекс.Диск, Dropbox и т.д.)" maxlength="200" class="block w-full max-w-none bg-gray-100 rounded-xl px-4 py-4 outline-none text-base md:text-lg">
+      <input type="text" name="name" placeholder="Имя" class="border-b border-gray-300 py-2 px-0 focus:outline-none focus:border-[#ff590d] text-base md:text-lg" style="background:var(--color-block);color:var(--color-text);border-bottom:1px solid var(--color-secondary);">
+      <input type="tel" name="phone" placeholder="+7 (999) 999-99-99" class="border-b border-gray-300 py-2 px-0 focus:outline-none focus:border-[#ff590d] text-base md:text-lg" style="background:var(--color-block);color:var(--color-text);border-bottom:1px solid var(--color-secondary);">
+      <input type="email" name="email" placeholder="Почта" class="border-b border-gray-300 py-2 px-0 focus:outline-none focus:border-[#ff590d] text-base md:text-lg" style="background:var(--color-block);color:var(--color-text);border-bottom:1px solid var(--color-secondary);">
+      <input type="url" name="km_link" placeholder="Укажите ссылку на разработанный КМ (Google Drive, Яндекс.Диск, Dropbox и т.д.)" maxlength="200" class="block w-full max-w-none bg-gray-100 rounded-xl px-4 py-4 outline-none text-base md:text-lg" style="background:var(--color-block);color:var(--color-text);">
       <div class="flex items-start gap-2">
-        <input type="checkbox" id="consent" name="consent" class="accent-[#ff590d] w-5 h-5 mt-1" required />
-        <label for="consent" class="text-sm text-gray-700">Даю <a href="/consent" target="_blank" class="underline text-[#ff590d]">Согласие на обработку персональных данных</a> и принимаю <a href="/policy" target="_blank" class="underline text-[#ff590d]">Политику в отношении обработки персональных данных</a></label>
+        <input type="checkbox" id="consent" name="consent" class="accent-[#ff590d] w-5 h-5 mt-1" required style="background:var(--color-block);color:var(--color-text);">
+        <label for="consent" class="text-sm text-gray-700" style="color:var(--color-secondary);">Даю <a href="/consent" target="_blank" class="underline text-[#ff590d]">Согласие на обработку персональных данных</a> и принимаю <a href="/policy" target="_blank" class="underline text-[#ff590d]">Политику в отношении обработки персональных данных</a></label>
       </div>
       <button type="submit" class="bg-[#ff590d] hover:bg-orange-600 transition w-full py-4 rounded-2xl text-xl font-bold text-white shadow-lg flex items-center gap-2 justify-center focus:outline-none focus:ring-4 focus:ring-[#ff590d]/30 mt-2">Отправить</button>
     </form>
   </div>
 </div>
 
-<script type="text/javascript" src="https://api-maps.yandex.ru/2.1/?lang=ru_RU"></script>
+<script type="text/javascript" src="https://api-maps.yandex.ru/2.1/?apikey=2d05412d-0f13-4f36-befd-1b58a575f7f5&lang=ru_RU"></script>
 <script src="https://unpkg.com/imask"></script>
 <script>
 // Popup при попытке ухода со страницы

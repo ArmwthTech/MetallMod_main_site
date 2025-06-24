@@ -1,21 +1,55 @@
+:root {
+    --color-bg: #F5F5F5;
+    --color-text: #123392;
+    --color-accent: #ff590d;
+    --color-block: #fff;
+    --color-secondary: #6b7280;
+    --color-secondary-dark: #374151;
+    --color-header: #fff;
+    --color-header-text: #123392;
+    --color-footer: #123392;
+    --color-footer-text: #fff;
+    --color-hero-card-text: #123392;
+    --color-btn-orange: #ff590d;
+    --color-btn-blue: #123392;
+    --color-btn-text: #fff;
+}
+
+[data-theme="dark"] {
+    --color-bg: #181818;
+    --color-text: #fff;
+    --color-accent: #ffb347;
+    --color-block: #222c3a;
+    --color-secondary: #b0b8c1;
+    --color-secondary-dark: #8a94a6;
+    --color-header: #222c3a;
+    --color-header-text: #fff;
+    --color-footer: #222c3a;
+    --color-footer-text: #fff;
+    --color-hero-card-text: #fff;
+    --color-btn-orange: #ffb347;
+    --color-btn-blue: #222c3a;
+    --color-btn-text: #fff;
+}
+
 body {
-    font-family: 'Arial', 'Baron Neue', sans-serif;
-    background: #F5F5F5;
-    color: #123392;
+    font-family: 'Inter', 'Baron Neue', sans-serif;
+    background: var(--color-bg);
+    color: var(--color-text);
     margin: 0;
     padding: 0;
 }
 
 header,
 footer {
-    background: #123392;
-    color: #fff;
+    background: var(--color-block);
+    color: var(--color-text);
     padding: 10px 0;
     text-align: center;
 }
 
 .btn-orange {
-    background: #ff590d;
+    background: var(--color-accent);
     color: #fff;
     border: none;
     padding: 12px 24px;
@@ -26,8 +60,8 @@ footer {
 }
 
 .btn-blue {
-    background: #123392;
-    color: #fff;
+    background: var(--color-btn-blue);
+    color: var(--color-btn-text);
     border: none;
     padding: 12px 24px;
     border-radius: 4px;
@@ -36,8 +70,8 @@ footer {
 }
 
 .hero {
-    background: #123392;
-    color: #fff;
+    background: var(--color-bg);
+    color: var(--color-text);
     padding: 60px 20px;
     text-align: center;
 }
@@ -254,4 +288,16 @@ footer {
         padding: 16px 4px;
         max-width: 98vw;
     }
+}
+
+.text-secondary {
+    color: var(--color-secondary);
+}
+
+.text-secondary-dark {
+    color: var(--color-secondary-dark);
+}
+
+.hero-card-text {
+    color: var(--color-hero-card-text) !important;
 }
